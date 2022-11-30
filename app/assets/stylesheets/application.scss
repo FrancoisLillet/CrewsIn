@@ -10,3 +10,18 @@
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
+
+
+
+.page-container {
+  margin: 32px auto;
+  padding: 16px 16px;
+  max-width: 1024px;
+  background-color: rgb(255, 139, 247);
+}
+
+.results-header {
+  position: relative;
+  border-bottom: 1px solid #000000;
+  padding: 8px;
+}
