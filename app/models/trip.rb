@@ -10,5 +10,5 @@ class Trip < ApplicationRecord
   validates :end_date, presence: true
   validates :starting_point, presence: true
   validates :creator_id, presence: true
-  validates :max_capacity, presence: true, :numericality { only_integer: true }
+  validates :max_capacity, presence: true, numericality: { only_integer: true }
 end
