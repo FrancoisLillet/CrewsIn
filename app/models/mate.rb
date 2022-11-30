@@ -9,7 +9,7 @@ class Mate < ApplicationRecord
   validates :date_of_birth, presence: true
   validates :address, presence: true
   validates :nationality, presence: true
-  validates :country_of_residence, presence: true
+  # validates :country_of_residence, presence: true
   validates :passport_number, presence: true
   validates :expiration_date, presence: true
 end
