@@ -115,8 +115,10 @@ User.all.each do |user|
   end
 end
 
-User.first.email = "123@123.com"
-User.first.password = "123123"
+user = User.first
+user.email = "123@123.com"
+user.password = "123123"
+user.save!
 
 puts "------------------------------"
 puts "|      SEEDING FINISHED!     |"
