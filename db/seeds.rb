@@ -115,7 +115,17 @@ User.all.each do |user|
   end
 end
 
+User.first.email = "123@123.com"
+User.first.password = "123123"
 
 puts "------------------------------"
 puts "|      SEEDING FINISHED!     |"
 puts "------------------------------"
+puts ""
+puts ""
+puts "Your test credentials are:"
+puts "------------------------------"
+puts "login:       #{User.first.email}"
+puts "password:    123123"
+puts ""
+puts "Enjoying your Crewsin !"
