@@ -21,7 +21,7 @@ puts "Creating fake users"
 puts "___________________"
 
 number.times do
-  user = User.new(email: Faker::Internet.email, password: "123456", nautical_bio: Faker::Quotes::Shakespeare.hamlet_quote)
+  user = User.new(email: Faker::Internet.email, nickname: Faker::Name.first_name, password: "123456", nautical_bio: Faker::Quotes::Shakespeare.hamlet_quote)
   user.save!
 end
 
@@ -72,7 +72,7 @@ puts "Creating fake trips"
 puts "___________________"
 
 User.all.each do |user|
-  rand(0..5).times do
+  rand(2..5).times do
     start_date = Faker::Date.in_date_period(year: rand(2022..2023))
     trip = Trip.new(
       country: Faker::Address.country, start_date: start_date, end_date: (start_date + rand(7..21)), starting_point: Faker::Address.full_address,
@@ -90,7 +90,7 @@ puts "___________________"
 User.all.each do |user|
   unless user.created_trips.empty?
     rand(2..5).times do
-      receiver = User.new(email: Faker::Internet.email, password: "123456", nautical_bio: Faker::Quotes::Shakespeare.hamlet_quote)
+      receiver = User.new(email: Faker::Internet.email, nickname: Faker::Name.first_name, password: "123456", nautical_bio: Faker::Quotes::Shakespeare.hamlet_quote)
       receiver.save!
       invitation = Invitation.new(sender_id: user.id, receiver_id: receiver.id, trip_id: user.created_trips.sample.id)
       invitation.save!
