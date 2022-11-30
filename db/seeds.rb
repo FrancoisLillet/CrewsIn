@@ -76,8 +76,13 @@ User.all.each do |user|
     start_date = Faker::Date.in_date_period(year: rand(2022..2023))
     trip = Trip.new(
       country: Faker::Address.country, start_date: start_date, end_date: (start_date + rand(7..21)), starting_point: Faker::Address.full_address,
-      skipper_id: user.id, max_capacity: rand()
+      skipper_id: user.id, max_capacity: rand(6..10), creator_id: user.id
     )
+    trip.save!
+  end
+end
+
+
 
 
 puts "------------------------------"
