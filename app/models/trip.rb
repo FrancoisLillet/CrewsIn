@@ -1,6 +1,6 @@
 class Trip < ApplicationRecord
-  has_one_attached: :photo
-  has_one_attached: :summary_file
+  has_one_attached :photo
+  has_one_attached :summary_file
 
   belongs_to :skipper, class_name: "User"
   belongs_to :creator, class_name: "User"
