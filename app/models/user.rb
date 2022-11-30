@@ -1,6 +1,6 @@
 class User < ApplicationRecord
-  has_one_attached: :photo
-  has_one_attached: :skipper_license
+  has_one_attached :photo
+  has_one_attached :skipper_license
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   has_many :skipper_trips, class_name: "Trip", foreign_key: "skipper_id"
