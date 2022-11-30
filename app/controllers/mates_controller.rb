@@ -56,6 +56,6 @@ class MatesController < ApplicationController
   end
 
   def mate_params
-    params.require(:mate).permit(:first_name, :last_name, :date_of_birth, :address, :nationality, :passport_number, :expiration_date)
+    params.require(:mate).permit(:first_name, :last_name, :date_of_birth, :address, :nationality, :passport_number, :expiration_date, :country_of_residence)
   end
 end
