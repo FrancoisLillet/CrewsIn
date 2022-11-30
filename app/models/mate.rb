@@ -1,5 +1,6 @@
 class Mate < ApplicationRecord
   belongs_to :user
+  has_many :enrollments
   has_many :trips, through: :enrollments
 
   validates :user_id, presence: true

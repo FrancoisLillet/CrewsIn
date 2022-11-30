@@ -56,7 +56,7 @@ puts "Creating fake mates"
 puts "___________________"
 
 User.all.each do |user|
-  rand(0..5).times do
+  rand(2..5).times do
     mate = Mate.new(
       user_id: user.id, is_user: [true, false].sample, first_name: Faker::Name.first_name , last_name: Faker::Name.last_name, date_of_birth: Faker::Date.in_date_period(year: rand(1638..2000)),
       address: Faker::Address.full_address, nationality: Faker::Address.country, country_of_residence: Faker::Address.country, passport_number: Faker::IDNumber.valid,
@@ -68,7 +68,7 @@ end
 
 # Trips
 
-puts "Creating fake mates"
+puts "Creating fake trips"
 puts "___________________"
 
 User.all.each do |user|
@@ -82,7 +82,38 @@ User.all.each do |user|
   end
 end
 
+# Invitations
 
+puts "Creating fake invitations"
+puts "___________________"
+
+User.all.each do |user|
+  unless user.created_trips.empty?
+    rand(2..5).times do
+      receiver = User.new(email: Faker::Internet.email, password: "123456", nautical_bio: Faker::Quotes::Shakespeare.hamlet_quote)
+      receiver.save!
+      invitation = Invitation.new(sender_id: user.id, receiver_id: receiver.id, trip_id: user.created_trips.sample.id)
+      invitation.save!
+    end
+  end
+end
+
+# Enrollments
+
+puts "Creating fake enrollments"
+puts "___________________"
+
+User.all.each do |user|
+  unless user.created_trips.empty? || user.mates.empty?
+    trip = user.created_trips.sample
+    user.mates.each do |mate|
+      unless mate == user.mates.last
+        enrollment = Enrollment.new(mate_id: mate.id, trip_id: trip.id)
+        enrollment.save!
+      end
+    end
+  end
+end
 
 
 puts "------------------------------"
