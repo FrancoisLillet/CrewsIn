@@ -25,7 +25,6 @@ number.times do
   user.save!
 end
 
-
 # Experiences
 
 puts "Creating fake experiences"
@@ -38,7 +37,7 @@ possible_owners = ["me", "a friend / family member", "a boat renter"]
 example_models = ["Lagoon 450", "Oceanis 51.1", "Sun Odyssey 349", "OVNI 400", "RM 1270", "Ferreti 62", "Princess 58"]
 
 User.all.each do |user|
-  rand(0..5).times do
+  rand(3..6).times do
     start_date = Faker::Date.in_date_period(year: rand(2005..2022))
     experience = Experience.new( {
       user_id: user.id, country: Faker::Address.country, sailing_area: sailing_area_examples.sample,
@@ -48,7 +47,6 @@ User.all.each do |user|
     experience.save!
   end
 end
-
 
 # Mates
 
@@ -79,6 +77,7 @@ User.all.each do |user|
       skipper_id: user.id, max_capacity: rand(6..10), creator_id: user.id
     )
     trip.save!
+    puts "#{trip.id} - #{trip.skipper.id} and #{trip.creator.id}"
   end
 end
 
@@ -97,6 +96,15 @@ User.all.each do |user|
     end
   end
 end
+
+# Add an invitation from the second user to the first user (test user)
+sender = User.all[1]
+invited_trip = Trip.find(sender.created_trips.sample.id)
+puts "#{invited_trip.id} - #{invited_trip.skipper.id} and #{invited_trip.creator.id}"
+invitation = Invitation.new(sender_id: sender.id, receiver_id: User.first.id, trip_id: invited_trip.id)
+invitation.save!
+puts "#{invited_trip.id} - #{invited_trip.skipper.id} and #{invited_trip.creator.id}"
+
 
 # Enrollments
 
