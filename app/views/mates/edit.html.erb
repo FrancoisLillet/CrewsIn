@@ -6,7 +6,7 @@
                               order: [:year, :month, :day] %>
       <%= f.input :address %>
       <%= f.input :nationality %>
-      <%# <%= f.input :country_of_residence %> %>
+      <%= f.input :country_of_residence, as: :string %>
       <%= f.input :passport_number %>
       <%= f.input :expiration_date %>
       <%= f.submit "Submit", class: "btn btn-success"%>
