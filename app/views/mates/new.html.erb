@@ -9,7 +9,7 @@
       <%= f.input :address %>
       <%= f.input :nationality %>
       <%# We have to check the country of residence field because it has an error.%>
-      <%# <%= f.input :country_of_residence %>
+      <%= f.input :country_of_residence, as: :string %>
       <%= f.input :passport_number %>
       <%= f.input :expiration_date %>
       <%= f.submit "Submit", class: "btn btn-success"%>
