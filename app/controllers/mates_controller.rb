@@ -3,12 +3,12 @@ class MatesController < ApplicationController
 
   def index
     @user = current_user
-    @mates = Mate.all
+    @mates = @user.mates
   end
 
   def show
-    @user = current_user
     set_mate
+    @user = current_user
   end
 
   def new
@@ -56,6 +56,6 @@ class MatesController < ApplicationController
   end
 
   def mate_params
-    params.require(:mate).permit(:first_name, :last_name, :date_of_birth, :address, :nationality, :passport_number, :expiration_date, :country_of_residence)
+    params.require(:mate).permit(:first_name, :last_name, :is_user, :date_of_birth, :address, :nationality, :passport_number, :expiration_date, :country_of_residence)
   end
 end
