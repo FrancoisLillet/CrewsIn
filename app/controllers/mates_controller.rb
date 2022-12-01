@@ -21,7 +21,11 @@ class MatesController < ApplicationController
     @user = current_user
     @mate.user = current_user
     if @mate.save
-      redirect_to user_mates_path
+      if @mate.is_user
+        redirect_to user_path(@user)
+      else
+        redirect_to user_mates_path
+      end
     else
       render :new, status: :unprocessable_entity
     end
@@ -36,7 +40,11 @@ class MatesController < ApplicationController
     @user = current_user
     set_mate
     if @mate.update(mate_params)
-      redirect_to user_mates_path(@user)
+      if @mate.is_user
+        redirect_to user_mate_path(@mate)
+      else
+        redirect_to user_mates_path(@user)
+      end
     else
       render :edit
     end

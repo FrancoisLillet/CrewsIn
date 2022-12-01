@@ -37,7 +37,7 @@
   <%= link_to "My info", new_user_mate_path(@user.id, is_user: true), class: "button-main" %>
 <% else %>
 <!-- When the user already has is corresponding mate -->
-  <%= link_to "My info", edit_user_mate_path(@user.id, @user_as_mate.id, is_user: true), class: "button-main" %>
+  <%= link_to "My info", user_mate_path(@user.id, @user_as_mate.id, is_user: true), class: "button-main" %>
 <% end %>
 
   <button class="button-main" role="button">My Trips</button>
