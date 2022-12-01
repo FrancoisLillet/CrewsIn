@@ -15,12 +15,15 @@
 
 // Blue color #2D66C8
 
+a:link, a:visited {
+  color: white
+}
 
 .page-container {
   margin: 32px auto;
   padding: 16px 16px;
   max-width: 1024px;
-  background-color: rgb(255, 139, 247);
+  background-color: rgb(255, 255, 255);
 }
 
 .results-header {
@@ -29,3 +32,6 @@
   padding: 8px;
 }
 
+a:link {
+  text-decoration: none;
+}
