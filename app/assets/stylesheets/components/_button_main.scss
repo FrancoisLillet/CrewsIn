@@ -46,7 +46,7 @@
 
 .button-main:active {
   box-shadow: rgba(0, 0, 0, .1) 0 3px 6px 0, rgba(0, 0, 0, .1) 0 0 10px 0, rgba(0, 0, 0, .1) 0 1px 4px -1px;
-  transform: translateY(5px);
+  transform: scale(.90);
   transition-duration: .35s;
 }
 

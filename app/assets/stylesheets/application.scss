@@ -19,10 +19,15 @@
   background-color: #444444;
 }
 
+a:link, a:visited {
+  color: white
+}
+
 .page-container {
   margin: 32px auto;
   padding: 16px 16px;
-  max-width: 1024px;;
+  max-width: 1024px;
+  background-color: rgb(255, 255, 255);
 }
 
 .results-header {
@@ -37,4 +42,8 @@
 
 .text-center {
   text-align: center;
+}
+
+a:link {
+  text-decoration: none;
 }
