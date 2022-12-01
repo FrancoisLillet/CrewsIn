@@ -4,6 +4,9 @@
 
 import { application } from "./application"
 
+import DropdownRevealController from "./dropdown_reveal_controller"
+application.register("dropdown-reveal", DropdownRevealController)
+
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
 

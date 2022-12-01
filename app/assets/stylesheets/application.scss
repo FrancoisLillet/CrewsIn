@@ -15,6 +15,10 @@
 
 // Blue color #2D66C8
 
+.body {
+  background-color: #444444;
+}
+
 a:link, a:visited {
   color: white
 }
@@ -28,8 +32,16 @@ a:link, a:visited {
 
 .results-header {
   position: relative;
-  border-bottom: 1px solid #000000;
+  // border-bottom: 1px solid #000000;
   padding: 8px;
+}
+
+.results-header:hover {
+  cursor: pointer;
+}
+
+.text-center {
+  text-align: center;
 }
 
 a:link {
