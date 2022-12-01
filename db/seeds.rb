@@ -21,10 +21,9 @@ puts "Creating fake users"
 puts "___________________"
 
 number.times do
-  user = User.new(email: Faker::Internet.email, password: "123456", nautical_bio: Faker::Quotes::Shakespeare.hamlet_quote)
+  user = User.new(email: Faker::Internet.email, nickname: Faker::Name.first_name, password: "123456", nautical_bio: Faker::Quotes::Shakespeare.hamlet_quote)
   user.save!
 end
-
 
 # Experiences
 
@@ -38,7 +37,7 @@ possible_owners = ["me", "a friend / family member", "a boat renter"]
 example_models = ["Lagoon 450", "Oceanis 51.1", "Sun Odyssey 349", "OVNI 400", "RM 1270", "Ferreti 62", "Princess 58"]
 
 User.all.each do |user|
-  rand(0..5).times do
+  rand(3..6).times do
     start_date = Faker::Date.in_date_period(year: rand(2005..2022))
     experience = Experience.new( {
       user_id: user.id, country: Faker::Address.country, sailing_area: sailing_area_examples.sample,
@@ -48,7 +47,6 @@ User.all.each do |user|
     experience.save!
   end
 end
-
 
 # Mates
 
@@ -72,13 +70,14 @@ puts "Creating fake trips"
 puts "___________________"
 
 User.all.each do |user|
-  rand(0..5).times do
+  rand(2..5).times do
     start_date = Faker::Date.in_date_period(year: rand(2022..2023))
     trip = Trip.new(
       country: Faker::Address.country, start_date: start_date, end_date: (start_date + rand(7..21)), starting_point: Faker::Address.full_address,
       skipper_id: user.id, max_capacity: rand(6..10), creator_id: user.id
     )
     trip.save!
+    puts "#{trip.id} - #{trip.skipper.id} and #{trip.creator.id}"
   end
 end
 
@@ -90,13 +89,22 @@ puts "___________________"
 User.all.each do |user|
   unless user.created_trips.empty?
     rand(2..5).times do
-      receiver = User.new(email: Faker::Internet.email, password: "123456", nautical_bio: Faker::Quotes::Shakespeare.hamlet_quote)
+      receiver = User.new(email: Faker::Internet.email, nickname: Faker::Name.first_name, password: "123456", nautical_bio: Faker::Quotes::Shakespeare.hamlet_quote)
       receiver.save!
       invitation = Invitation.new(sender_id: user.id, receiver_id: receiver.id, trip_id: user.created_trips.sample.id)
       invitation.save!
     end
   end
 end
+
+# Add an invitation from the second user to the first user (test user)
+sender = User.all[1]
+invited_trip = Trip.find(sender.created_trips.sample.id)
+puts "#{invited_trip.id} - #{invited_trip.skipper.id} and #{invited_trip.creator.id}"
+invitation = Invitation.new(sender_id: sender.id, receiver_id: User.first.id, trip_id: invited_trip.id)
+invitation.save!
+puts "#{invited_trip.id} - #{invited_trip.skipper.id} and #{invited_trip.creator.id}"
+
 
 # Enrollments
 
@@ -115,7 +123,19 @@ User.all.each do |user|
   end
 end
 
+user = User.first
+user.email = "123@123.com"
+user.password = "123123"
+user.save!
 
 puts "------------------------------"
 puts "|      SEEDING FINISHED!     |"
 puts "------------------------------"
+puts ""
+puts ""
+puts "Your test credentials are:"
+puts "------------------------------"
+puts "login:       #{User.first.email}"
+puts "password:    123123"
+puts ""
+puts "Enjoying your Crewsin !"

@@ -1,0 +1,28 @@
+.trip-card {
+  margin: 16px 16px;
+  background-color: aqua;
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+.trip-photo-box {
+  margin: 8px 8px;
+}
+
+.trip-summary-box {
+  margin: 8px 8px;
+}
+
+
+.mini-trip-photo {
+  width: 200px;
+  border-radius: 5px;
+
+}
+
+.justify-right-element {
+  position: absolute;
+  right: 16px;
+  top: 16px;
+}
