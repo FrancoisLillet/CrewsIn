@@ -1,5 +1,5 @@
 <div class = prof-container>
-  <h1>Welcome <%= @user.email %></h1>
+  <h1>Welcome, <%= @user.nickname.capitalize %></h1>
 
 
     <% if @user.photo.attached? %>
@@ -9,7 +9,7 @@
     <% end %>
 
 
-  <div data-controller="profile-form" >
+  <div data-controller="profile-form">
     <label class="add-button" style="
         bottom: 98.5;
         bottom: 99.5;
@@ -19,14 +19,14 @@
         right: 576px;
         left: 787px;
         ">
-      <i class="fa-solid fa-plus center" data-profile-form-target=></i>
+      <i class="fa-solid fa-plus center"></i>
 
-          <%= simple_form_for(@user) do |f| %>
       <span style="display:none;">
-          <%= f.input :photo, as: :file %>
-          <%= f.submit %>
-      </span>
+          <%= simple_form_for @user, html: {class: "d-none", data: { profile_form_target: "form" }} do |f| %>
+            <%= f.input :photo, as: :file, input_html: { data: {action: "change->profile-form#submitForm"} } %>
+            <%= f.submit %>
         <% end %>
+      </span>
     </label>
   </div>
 </div>
