@@ -3,7 +3,7 @@ class MatesController < ApplicationController
 
   def index
     @user = current_user
-    @mates = @user.mates
+    @mates = @user.mates.select { |mate| mate.is_user == false }
   end
 
   def show

@@ -27947,3 +27947,10 @@ Processing by TripsController#index as HTML
 Completed 200 OK in 42ms (Views: 20.9ms | ActiveRecord: 9.1ms | Allocations: 46987)
 
 
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mMate Load (1.4ms)[0m  [1m[34mSELECT "mates".* FROM "mates" WHERE "mates"."user_id" = $1 AND "mates"."is_user" = $2[0m  [["user_id", 1], ["is_user", true]]
+  [1m[36mMate Load (0.7ms)[0m  [1m[34mSELECT "mates".* FROM "mates" WHERE "mates"."user_id" = $1 AND "mates"."is_user" = $2 ORDER BY "mates"."id" ASC LIMIT $3[0m  [["user_id", 1], ["is_user", true], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mMate Destroy (1.4ms)[0m  [1m[31mDELETE FROM "mates" WHERE "mates"."id" = $1[0m  [["id", 2]]
+  [1m[36mTRANSACTION (1.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mMate Load (1.1ms)[0m  [1m[34mSELECT "mates".* FROM "mates" WHERE "mates"."user_id" = $1 AND "mates"."is_user" = $2[0m  [["user_id", 1], ["is_user", true]]

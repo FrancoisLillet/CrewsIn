@@ -1,4 +1,15 @@
-<h1>Create a Mate</h1>
+<% if params[:is_user] == "true" %>
+  <h1>Create my personal profile</h1>
+  <br/>
+  <p>These information will be used to fill in the crew list whenever you add yourself
+  participate in a trip</p>
+<% else %>
+  <h1>Create a Mate</h1>
+  <br/>
+  <p>These information will be used to fill in the crew list whenever you add this person as
+  a participant to a trip</p>
+<% end %>
+
 
   <%= simple_form_for([@user, @mate], data: {turbo: false}) do |f| %>
       <%= f.input :first_name %>

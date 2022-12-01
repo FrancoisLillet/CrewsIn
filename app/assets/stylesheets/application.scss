@@ -15,12 +15,14 @@
 
 // Blue color #2D66C8
 
+.body {
+  background-color: #444444;
+}
 
 .page-container {
   margin: 32px auto;
   padding: 16px 16px;
-  max-width: 1024px;
-  background-color: rgb(255, 139, 247);
+  max-width: 1024px;;
 }
 
 .results-header {
@@ -28,4 +30,3 @@
   border-bottom: 1px solid #000000;
   padding: 8px;
 }
-
