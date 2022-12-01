@@ -41,6 +41,6 @@
 <% end %>
 
   <button class="button-main" role="button">My Trips</button>
-  <button class="button-main" role="button">My Mates</button>
+  <%= link_to "My info", user_mates_path(@user.id), class: "button-main" %>
   <button class="button-main" role="button">My CV</button>
 </div>

@@ -3,7 +3,7 @@ class MatesController < ApplicationController
 
   def index
     @user = current_user
-    @mates = @user.mates.select { |mate| mate.is_user == false }
+    @mates = @user.mates.select { |mate| mate.is_user == false }.sort { |m1, m2| m2.updated_at <=> m1.updated_at }
   end
 
   def show
