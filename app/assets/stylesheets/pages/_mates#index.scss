@@ -18,6 +18,10 @@
   font-size: 28px;
 }
 
+.invisible-div {
+  border-top: 1px solid #AAAAAA;
+}
+
 .grid-container {
   margin: 16px 16px;
   padding: 0px 16px;
@@ -51,4 +55,8 @@ a {
 
 .link-invisible-div {
   margin: 0px 64px;
+}
+
+.display-none {
+  display: none;
 }

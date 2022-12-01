@@ -27,8 +27,12 @@
 
 .results-header {
   position: relative;
-  border-bottom: 1px solid #000000;
+  // border-bottom: 1px solid #000000;
   padding: 8px;
+}
+
+.results-header:hover {
+  cursor: pointer;
 }
 
 .text-center {
