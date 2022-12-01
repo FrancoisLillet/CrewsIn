@@ -1,7 +1,15 @@
-<% Mate.where(user: @user).each do |mate| %>
+<div class="page-container">
+
+<h1>My mates</h1>
+<% @mates.each do |mate| %>
   <h3><%= link_to mate.first_name, mate_path(mate) %></h3>
   <%= mate.first_name %>
   <%= mate.date_of_birth %>
   <%= link_to "Edit", edit_user_mate_path(@user, mate) %>
   <%= link_to "DELETE", mate_path(mate), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
 <% end %>
+<br>
+
+<button class="button-main"><%= link_to "+ Add a new mate", new_user_mate_path(is_user: false) %></button>
+
+</div>

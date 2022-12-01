@@ -1,15 +1,39 @@
-<h1>This is the show page of the user</h1>
-
-<% if @user.photo.attached? %>
-  <%= cl_image_tag @user.photo.key, gravity: :face, class:"user-image"%>
-<% else %>
-  <%= image_tag asset_path("blank-prof.jpg"), class:"user-image"%>
-<% end %>
+<div class = prof-container>
+  <h1>Welcome, <%= @user.nickname.capitalize %></h1>
 
 
-<h1>Add a profile picture!</h1>
+    <% if @user.photo.attached? %>
+      <%= cl_image_tag @user.photo.key, gravity: :face, class:"profile-pic"%>
+    <% else %>
+      <%= image_tag asset_path("blank-prof.jpg"), class:"profile-pic"%>
+    <% end %>
 
-<%= simple_form_for(@user) do |f| %>
-    <%= f.input :photo, as: :file %>
-    <%= f.submit %>
-  <% end %>
+
+  <div data-controller="profile-form">
+    <label class="add-button" style="
+        bottom: 98.5;
+        bottom: 99.5;
+        bottom: 2px;
+        top: 416.845;
+        top: 374px;
+        right: 576px;
+        left: 787px;
+        ">
+      <i class="fa-solid fa-plus center"></i>
+
+      <span style="display:none;">
+          <%= simple_form_for @user, html: {class: "d-none", data: { profile_form_target: "form" }} do |f| %>
+            <%= f.input :photo, as: :file, input_html: { data: {action: "change->profile-form#submitForm"} } %>
+            <%= f.submit %>
+        <% end %>
+      </span>
+    </label>
+  </div>
+</div>
+
+<div class = buttons-container>
+  <button class="button-main" role="button">My Info</button>
+  <button class="button-main" role="button">My Trips</button>
+  <button class="button-main" role="button">My Mates</button>
+  <button class="button-main" role="button">My CV</button>
+</div>
