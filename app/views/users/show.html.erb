@@ -32,7 +32,7 @@
   <%= link_to "My info", user_mate_path(@user.id, @user_as_mate.id, is_user: true), class: "button-main" %>
 <% end %>
 <br>
-  <button class="button-main" role="button">My Trips</button>
+<%= link_to "My trips", user_trips_path(@user.id), class: "button-main" %>
   <br>
   <%= link_to "My mates", user_mates_path(@user.id), class: "button-main" %>
   <br>

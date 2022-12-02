@@ -3,30 +3,36 @@
     <%= image_tag "logo_text_white_2x.png", :alt => "Logo", class: "sidebar-wide-logo"%>
   </div>
   <div class="sidebar-wide-new-trip">
-    <%= link_to '#' do %>
+    <%= link_to new_user_trip_path(current_user.id) do %>
       <%= tag.div "NEW TRIP", class: "sidebar-wide-new-trip-button" %>
     <% end %>
   </div>
-  <div class="sidebar-wide-section">
-    <%= image_tag "icon-flag.svg", class: "sidebar-wide-section-icon" %>
-    <h3 class="sidebar-wide-section-title">Trips</h3>
-  </div>
+  <%= link_to user_trips_path(current_user.id) do %>
+    <div class="sidebar-wide-section">
+      <%= image_tag "icon-flag.svg", class: "sidebar-wide-section-icon" %>
+      <h3 class="sidebar-wide-section-title">Trips</h3>
+    </div>
+  <% end %>
   <div class="sidebar-wide-section">
     <%= image_tag "icon-export.svg", class: "sidebar-wide-section-icon" %>
     <h3 class="sidebar-wide-section-title">Export</h3>
   </div>
-  <div class="sidebar-wide-section">
-    <%= image_tag "icon-bell.svg", class: "sidebar-wide-section-icon" %>
-    <h3 class="sidebar-wide-section-title">Smth</h3>
-  </div>
-  <div class="sidebar-wide-section">
-    <%= image_tag "icon-user.svg", class: "sidebar-wide-section-icon" %>
-    <h3 class="sidebar-wide-section-title">Account</h3>
-  </div>
-  <div class="sidebar-wide-settings">
-    <%= image_tag "icon-settings.svg", class: "sidebar-wide-section-icon" %>
-    <h3 class="sidebar-wide-section-title">Account</h3>
-  </div>
+    <div class="sidebar-wide-section">
+      <%= image_tag "icon-bell.svg", class: "sidebar-wide-section-icon" %>
+      <h3 class="sidebar-wide-section-title">Smth</h3>
+    </div>
+  <%= link_to user_path(current_user.id) do %>
+    <div class="sidebar-wide-section">
+        <%= image_tag "icon-user.svg", class: "sidebar-wide-section-icon" %>
+        <h3 class="sidebar-wide-section-title">My profile</h3>
+    </div>
+  <% end %>
+  <%= link_to destroy_user_session_path do %>
+    <div class="sidebar-wide-settings">
+      <%= image_tag "icon-settings.svg", class: "sidebar-wide-section-icon" %>
+      <h3 class="sidebar-wide-section-title">Log out</h3>
+    </div>
+  <% end %>
   <div class="sidebar-wide-collapse" data-sidebar-target="wideButton" data-action="click->sidebar#toggle">
     <%= image_tag "collapse_side_bar.svg", class: "sidebar-wide-collapse-button" %>
   </div>

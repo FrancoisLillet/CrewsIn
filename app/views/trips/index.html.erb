@@ -32,12 +32,12 @@
             <p><%= trip.start_date.strftime("%a, %d %b %Y") %> → <%= trip.end_date.strftime("%a, %d %b %Y") %></p>
             <% trip.mates.length == 1 ? word = "mate" : word = "mates" %>
             <p> <%= "#{trip.mates.length} #{word}"%></p>
+
           </div>
-        </div>
+        <% end %>
       <% end %>
-    <% end %>
+    </div>
   </div>
-</div>
 
   <div class="category-container" data-controller="dropdown-reveal">
     <div class="results-header" data-action="click->dropdown-reveal#revealContent">
