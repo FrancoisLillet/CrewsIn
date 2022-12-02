@@ -57,14 +57,14 @@
             </div>
           </div>
         </div>
-      <% end %>
-      <%= link_to "Edit", edit_user_trip_path(@trip) %>
-      <%= link_to "Delete",
-                [@user, @trip],
-                data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
-              %></p>
-    </div>
+      </div>
+    <% end %>
+    <i class="fa-solid fa-pen-to-square"></i><%= link_to "Edit ", edit_user_trip_path(@trip) %>
+    <i class="fa-solid fa-trash"></i><%= link_to "Delete",
+              [@user, @trip],
+              data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+            %></p>
   </div>
 <% else %>
-  <%= link_to "Back yo your trips", user_trips_path(@user), class: "button-main"%>
+  <%= link_to "Back to your trips", user_trips_path(@user), class: "button-main"%>
 <% end %>

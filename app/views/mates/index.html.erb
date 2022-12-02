@@ -1,12 +1,11 @@
 <div class="page-container">
 
-  <h1 class="mate-title text-center">My mates</h1>
+  <h1 class="mate-title text-center">My Mates</h1>
   <br/>
-  <p>The following information will be used to fill in the crew list whenever you add one of those person in the crew list of a trip.</p>
+  <p>You can add a Mate's information to a trip without them having an account.</p>
   <% if @mates == nil || @mates.length == 0 %>
     <p>You have no mates yet.</p>
   <% end %>
-  <%= link_to "+ Add a new mate", new_user_mate_path(is_user: false), class: "button-main"%>
 
 
   <% @mates.each do |mate| %>
