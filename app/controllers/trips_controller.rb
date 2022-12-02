@@ -51,6 +51,13 @@ class TripsController < ApplicationController
     end
   end
 
+  def destroy
+    @user = current_user
+    set_trip
+    @trip.destroy
+    redirect_to user_trips_path(@user)
+  end
+
   private
 
   def set_trip
@@ -58,6 +65,6 @@ class TripsController < ApplicationController
   end
 
   def trip_params
-    params.require(:trip).permit(:country, :start_date, :end_date, :starting_point, :max_capacity, :creator_id, :skipper_id)
+    params.require(:trip).permit(:country, :start_date, :end_date, :starting_point, :max_capacity, :creator_id, :skipper_id, :photo)
   end
 end

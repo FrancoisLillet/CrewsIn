@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   resources :users, only: %i[show update] do
     resources :mates, only: %i[index new create edit update show]
     # get "/users/:id/mates/self",     to: "mates#show"
-    resources :trips, only: %i[index new create edit update]
+    resources :trips, only: %i[index new create edit update destroy]
   end
   resources :mates, only: %i[destroy]
   resources :trips, only: %i[show]
