@@ -14,8 +14,9 @@
 
 body {
   background-color: #fafafa;
-  font-family: "Roboto", sans-serif;
+  font-family: $body-font !important;
 }
+
 
 a,
 a:hover {
@@ -58,4 +59,15 @@ a:hover {
 
 a:link {
   text-decoration: none;
+}
+
+
+.application-container {
+  display: flex;
+  flex-direction: row;
+
+}
+.content-box {
+  width: 100%;
+  padding: 30px;
 }
