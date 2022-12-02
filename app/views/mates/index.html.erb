@@ -2,7 +2,7 @@
 
   <h1 class="mate-title text-center">My Mates</h1>
   <br/>
-  <p>You can add a Mate's information to a trip without them having an account.</p>
+  <p class="text-center">You can add a Mate's information to a trip without them having an account.</p>
   <% if @mates == nil || @mates.length == 0 %>
     <p>You have no mates yet.</p>
   <% end %>
@@ -29,7 +29,7 @@
         <div class="flex-link-container">
           <!-- <%= link_to "Edit", edit_user_mate_path(@user.id, mate.id), class: "button-main" %> -->
           <div class="link-invisible-div">
-          <%= link_to edit_user_mate_path(@user.id, mate.id) do %>
+          <%= link_to edit_user_mate_path(@user.id, mate.id, is_user: false) do %>
             <i class="fa-solid fa-pen-to-square"></i>
               <span> edit</span>
             <% end %>

@@ -30,6 +30,9 @@ gem "jbuilder"
 # Seed with Faker
 gem 'faker', '~> 3.0'
 
+# Country selector
+gem 'country_select', require: 'country_select_without_sort_alphabetical'
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 
