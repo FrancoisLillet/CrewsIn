@@ -4,8 +4,12 @@
   <br/>
   <p>The following information will be used to fill in the crew list whenever you add one of those person as
   a participant in a trip.</p>
-
+  <% if @mates == nil || @mates.length == 0 %>
+    <p>You have no mates yet.</p>
+  <% end %>
   <%= link_to "+ Add a new mate", new_user_mate_path(is_user: false), class: "button-main"%>
+
+
 
   <% @mates.each do |mate| %>
     <div class="profile-container" data-controller="dropdown-reveal">
