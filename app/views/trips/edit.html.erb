@@ -1,0 +1,9 @@
+<%= simple_form_for([@user, @trip], data: {turbo: false}) do |f| %>
+      <%= f.input :country, as: :string %>
+      <%= f.input :start_date %>
+      <%= f.input :end_date %>
+      <%= f.input :starting_point %>
+      <%= f.input :max_capacity, as: :integer %>
+      <%= f.input :photo %>
+      <%= f.submit "Submit", class: "btn btn-success"%>
+  <% end %>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CrewsIn</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.2/css/all.css">
+    <script src="https://cdn.jsdelivr.net/npm/swiffy-slider@1.6.0/dist/js/swiffy-slider.min.js" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/swiffy-slider@1.6.0/dist/css/swiffy-slider.min.css" rel="stylesheet">
+  </head>
+  <body data-controller="scroller">
+    <header class="nav">
+      <div class= "nav-logo"></div>
+      <div class="nav-buttons">
+      <%= link_to new_user_session_path do %>
+        <div class="nav-button nav-login">
+          Log In
+        </div>
+      <% end %>
+        <div class="nav-button nav-register">
+          Register
+        </div>
+      </div>
+    </header>
+    <div class="float-box">
+      <h2 class="float-title">Ditch the countless emails!</h2>
+      <%= image_tag 'icon-squiggle.svg' %>
+      <p class="float-text">Ready to learn about a revolutionary way of handling all sailing-related paperwork?</p>
+      <div class="float-button">LEARN MORE</div>
+    </div>
+    <div class="down-arrow" data-scroller-target="arrow" data-action="click->scroller#scroll" data-action="scroll@window->scroller#hide"></div>
+    <div class="banner"></div>
+    <div class="section about" data-scroller-target="endPoint">
+      <div class="about-images">
+        <%= image_tag 'about-1.png', class: "about-image-1" %>
+        <%= image_tag 'about-2.png', class: "about-image-2" %>
+      </div>
+      <div class="about-content">
+        <h2 class="about-title">About Us</h2>
+        <p class="about-text">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris in dolor dui. Maecenas nibh arcu, feugiat in interdum convallis, tempor a quam. Aenean pellentesque rutrum arcu a convallis. Quisque lacinia viverra enim, sit amet vestibulum magna blandit in. Nullam consequat volutpat diam sit amet tempor.
+        </p>
+        <%= image_tag 'about-signature.svg', class: "about-signature"%>
+      </div>
+    </div>
+    <div class="section testimonials">
+      <div class="caroussel-container">
+        <div class="swiffy-slider slider-item-helper">
+          <ul class="slider-container">
+            <li>
+              <div class="testimonial">
+                <%= image_tag 'icon-quotes.svg'%>
+                <p class="testimonial-text">One of the finest new charter yachts available in the South of France. Make the most of her spacious flybridge, the perfect area to relax with your loved ones and take in the majestic views.</p>
+                <p class="testimonial-name">Candice Newts</p>
+                <p class="testimonial-area">Dublin, Ireland</p>
+              </div>
+            </li>
+            <li>
+              <div class="testimonial">
+                <%= image_tag 'icon-quotes.svg'%>
+                <p class="testimonial-text">Having had a real handful of favorite pastimes over the course of my whole adult life, sailing was always front and center in such a list. So, when I found out about this yachts chartering service located just a few miles near my home, I was thrilled!</p>
+                <p class="testimonial-name">Ben Dohver</p>
+                <p class="testimonial-area">Tallinn, Estonia</p>
+              </div>
+            </li>
+            <li>
+              <div class="testimonial">
+                <%= image_tag 'icon-quotes.svg'%>
+                <p class="testimonial-text">One of the finest new charter yachts available in the South of France. Make the most of her spacious flybridge, the perfect area to relax with your loved ones and take in the majestic views.</p>
+                <p class="testimonial-name">Penny Traition</p>
+                <p class="testimonial-area">Alabama, United States</p>
+              </div>
+            </li>
+          </ul>
+          <button type="button" class="slider-nav"></button>
+          <button type="button" class="slider-nav slider-nav-next"></button>
+          <div class="slider-indicators">
+            <button class="active"></button>
+            <button></button>
+            <button></button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="team-container" data-controller="tiltable">
+      <div class="team-title">
+        The Crew
+        <%= image_tag 'icon-squiggle.svg' %>
+      </div>
+      <div class="team">
+        <div class="team-card" data-tiltable-target="profile">
+          <%= image_tag 'pfp-grant.png' %>
+          <p class="team-card-name">Grant Chichester<br>
+            <span class="team-card-title">Chief Smile Officer</span>
+          </p>
+          <p class="team-card-bio">A former History teacher hoping to make a career change
+            and get into tech! Originally from Texas but have lived abroad
+            for the past 8 years or so, mostly in Thailand and China.
+          </p>
+        </div>
+        <div class="team-card" data-tiltable-target="profile">
+          <%= image_tag 'pfp-gerard.png' %>
+          <p class="team-card-name">Gerard Almenara<br>
+            <span class="team-card-title">Knows What's Happening</span>
+          </p>
+          <p class="team-card-bio">A self-starter, go-getter, and all around champ.
+            I love to go places, do things, and meet people.
+            In short, I am not like the other guys. I'm different!
+            If you read this, please let me know, I'm curious.
+          </p>
+        </div>
+        <div class="team-card" data-tiltable-target="profile">
+          <%= image_tag 'pfp-françois.png' %>
+          <p class="team-card-name">François Lillet<br>
+            <span class="team-card-title">Chief Magic Officer</span>
+          </p>
+          <p class="team-card-bio">I am head of sales of a yacht charter agency.
+            I am passionate about ["magic", "sailing"].
+            By joining Le Wagon, I hope to build up skills that will be useful
+            to manage IT guys and to dive into an intellectually exciting field!
+          </p>
+        </div>
+        <div class="team-card" data-tiltable-target="profile">
+          <%= image_tag 'pfp-rodrigo.jpeg' %>
+          <p class="team-card-name">Rodrigo A. Abelleira<br>
+            <span class="team-card-title">Chief Figma Officer</span>
+          </p>
+          <p class="team-card-bio">In the past years i have been in different jobs,
+            but mainly in the music industry.
+            I want to learn to code because I consider it a very strong tool that
+            can be applied in very different fields.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <%= image_tag 'logo_white_2x.png', class: "footer-image" %>
+      <ul class="socials">
+        <li><i class="fa-brands fa-twitter fa-2xl"></i></li>
+        <li><i class="fa-brands fa-facebook fa-2xl"></i></li>
+        <li><i class="fa-brands fa-instagram fa-2xl"></i></li>
+      </ul>
+      <p class="copyright">© 2022. All Rights Reserved.</p>
+    </div>
+  </body>
+</html>
