@@ -4,7 +4,7 @@
       <%= image_tag "logo_white_2x.png", :alt => "Logo", class: "sidebar-small-logo"%>
     </div>
     <div class="sidebar-small-new-trip">
-      <%= link_to '#' do %>
+      <%= link_to new_user_trip_path(current_user.id) do %>
         <%= image_tag "icon-plus.svg", class: "sidebar-small-new-trip-button" %>
       <% end %>
     </div>
