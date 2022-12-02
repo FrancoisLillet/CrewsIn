@@ -1,0 +1,393 @@
+html {
+  overflow-x: hidden;
+}
+
+.nav {
+  width: 100vw;
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  padding: 0 50px 0 70px;
+  z-index: 2;
+  position: sticky;
+  top: 0;
+}
+
+.nav-logo {
+  height: 65px;
+}
+
+.nav-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 45px;
+  gap: 7px;
+}
+
+.nav-button {
+  width: 125px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.nav-login {
+  background-color: white;
+  color: #2d66c8;
+  border: 1px solid #2d66c8;
+}
+
+.nav-register {
+  background-color: #2d66c8;
+  color: white;
+}
+
+.banner {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0px;
+  z-index: -1;
+  background-image: asset-data-url("landing-banner.png");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  backdrop-filter: brightness(60%);
+}
+
+.float-box {
+  width: 500px;
+  height: 330px;
+  position: absolute;
+  background-image: asset-data-url("float-box-background.png");
+  background-size: contain;
+  top: 20%;
+  left: 8%;
+  background-color: white;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 50px;
+}
+
+.float-title {
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  font-size: 40px;
+  text-align: center;
+}
+
+.float-text {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  color: rgb(73, 73, 73);
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+
+.float-button {
+  width: 160px;
+  height: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #2d66c8;
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 5px;
+}
+
+.float-button:hover {
+  background-color: #ffc857;
+}
+
+.down-arrow {
+  height: 70px;
+  width: 100px;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background-image: asset-data-url("icon-arrow.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: fill;
+  color: white;
+  filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.7));
+}
+
+.section {
+  height: 800px;
+  width: 100vw;
+  background-color: #f3f3f3;
+}
+
+.about {
+  margin-top: 100vh;
+  display: flex;
+  flex-direction: row;
+}
+
+.about-images {
+  width: 42%;
+  height: 100%;
+  display: block;
+  position: relative;
+}
+
+.about-image-1 {
+  height: 65%;
+  position: absolute;
+  top: 23%;
+  left: 47%;
+  z-index: 1;
+}
+
+.about-image-2 {
+  height: 65%;
+  position: absolute;
+  top: 12%;
+  left: 34%;
+  z-index: 0;
+}
+
+.about-content {
+  width: 58%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding-left: 6%;
+}
+
+.about-title {
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  font-size: 40px;
+  color: black;
+  margin-bottom: 20px;
+}
+
+.about-text {
+  width: 50%;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+}
+
+.about-signature {
+  height: 15%;
+}
+
+.testimonials {
+  background-color: rgb(179, 208, 255);
+  background-image: asset-data-url("testimonials-background.jpg");
+  background-size: cover;
+}
+
+.caroussel-container {
+  width: 33%;
+  height: 200px;
+  position: relative;
+  top: 23%;
+  left: 50%;
+}
+
+.testimonial {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 80px;
+  text-align: center;
+  font-size: 18px;
+  background-color: white;
+  background-image: asset-data-url("testimonial-background.png");
+}
+
+.testimonial > img {
+  height: 30px;
+  margin-bottom: 30px;
+}
+
+.testimonial-name {
+  font-weight: 700;
+  font-size: 22px;
+}
+
+.testimonial-area {
+  font-weight: 500;
+  margin-top: -20px;
+  font-size: 14px;
+  color: rgb(49, 49, 49);
+  margin-bottom: 30px;
+}
+
+.team-container {
+  background-color: white;
+  padding: 20px 0 50px 0;
+}
+
+.team-title {
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  font-size: 40px;
+  color: black;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.team-title > img {
+  width: 130px;
+  margin: -10px 0 20px 0;
+}
+
+.team {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.team-card {
+  width: 350px;
+  height: 550px;
+  padding: 30px;
+  display: flex;
+  border-radius: 15px;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  box-shadow: 35px 35px 70px #bebebe, -35px -35px 70px #ffffff;
+}
+
+.team-card > img {
+  width: 80%;
+  border-radius: 15px;
+  box-shadow: 35px 35px 70px #bebebe, -35px -35px 70px #ffffff;
+}
+
+.team-card-name {
+  line-height: 20px;
+  margin-top: 20px;
+  font-size: 25px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.team-card-title {
+  font-size: 15px;
+  font-weight: 500;
+  color: rgb(68, 68, 68);
+}
+
+.team-card-bio {
+  padding: 0 20px;
+  text-align: center;
+}
+
+.footer {
+  height: 90px;
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+  color: white;
+  background-color: #2d66c8;
+  padding: 0 50px;
+}
+
+.footer-image {
+  height: 65px;
+}
+
+.socials {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  list-style: none;
+}
+
+.socials > li > i {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+}
+
+.copyright {
+  margin-top: 10px;
+}
+
+@media only screen and (max-width: 1600px) {
+  .about-content {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 0;
+  }
+  .about-text {
+    justify-content: center;
+    align-items: center;
+  }
+
+  .about-images {
+    display: none;
+  }
+
+  .team-card {
+    margin-top: 10px;
+  }
+}
+
+@media only screen and (max-width: 1100px) {
+  .testimonials {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 10%;
+  }
+
+  .caroussel-container {
+    position: initial;
+    width: 90%;
+  }
+
+  .nav {
+    padding: 0 50px 0 0;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .float-box {
+    display: none;
+  }
+}

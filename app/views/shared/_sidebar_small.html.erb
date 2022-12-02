@@ -1,0 +1,32 @@
+<div class="sidebar-small-container" data-sidebar-target="smallBar">
+  <div class="sidebar-small">
+    <div class="sidebar-small-logo-container">
+      <%= image_tag "logo_white_2x.png", :alt => "Logo", class: "sidebar-small-logo"%>
+    </div>
+    <div class="sidebar-small-new-trip">
+      <%= link_to '#' do %>
+        <%= image_tag "plus_icon.svg", class: "sidebar-small-new-trip-button" %>
+      <% end %>
+    </div>
+    <div class="sidebar-small-section-container">
+      <div class="sidebar-small-section">
+        <%= image_tag "icon-flag.svg", class: "sidebar-small-section-icon" %>
+      </div>
+      <div class="sidebar-small-section">
+        <%= image_tag "icon-export.svg", class: "sidebar-small-section-icon" %>
+      </div>
+      <div class="sidebar-small-section">
+        <%= image_tag "icon-bell.svg", class: "sidebar-small-section-icon" %>
+      </div>
+      <div class="sidebar-small-section">
+        <%= image_tag "icon-user.svg", class: "sidebar-small-section-icon" %>
+      </div>
+    </div>
+    <div class="sidebar-small-settings">
+      <%= image_tag "icon-settings.svg", class: "sidebar-small-section-icon" %>
+    </div>
+    <div class="sidebar-small-collapse">
+      <%= image_tag "collapse_side_bar.svg", class: "sidebar-small-collapse-button", data: {action:"click->sidebar#toggle"}%>
+    </div>
+  </div>
+</div>

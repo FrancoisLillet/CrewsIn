@@ -9,3 +9,12 @@ application.register("hello", HelloController)
 
 import ProfileFormController from "./profile_form_controller"
 application.register("profile-form", ProfileFormController)
+
+import SidebarController from "./sidebar_controller"
+application.register("sidebar", SidebarController)
+
+import TiltController from "./tilt_controller"
+application.register("tiltable", TiltController)
+
+import ScrollController from "./scroll_controller"
+application.register("scroller", ScrollController)

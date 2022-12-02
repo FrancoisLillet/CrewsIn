@@ -10,11 +10,24 @@
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
 
+body {
+  background-color: #fafafa;
+  font-family: "Roboto", sans-serif;
+}
 
+a,
+a:hover {
+  text-decoration: none;
+  color: unset;
+}
+::-webkit-meter-optimum-value .application-container {
+  height: 100vh;
+  width: 100vw;
+}
 
 // Blue color #2D66C8
-
 
 .page-container {
   margin: 32px auto;
@@ -28,4 +41,3 @@
   border-bottom: 1px solid #000000;
   padding: 8px;
 }
-
