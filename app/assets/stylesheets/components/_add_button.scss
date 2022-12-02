@@ -1,6 +1,6 @@
 .add-button{
-  background-color: #2D66C8;
-  color: white;
+  // background-color: #2D66C8;
+  color: $sidebar-background;
   width: 35px;
   height: 35px;
   border-radius: 50%;
@@ -15,8 +15,8 @@
 }
 
 .add-button:hover{
-  background-color: white;
-  color: #2E69CC;
+  background-color: $sidebar-background;
+  color: #FFFFFF;
   transition: 0.2s;
 }
 
