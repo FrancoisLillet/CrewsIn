@@ -6,7 +6,9 @@
   border-radius: 50%;
   object-fit: cover;
   transition: 0.2s all;
-  position:absolute;
+  position:relative;
+  bottom: 50px;
+  left: 45px;
   display:flex;
   align-items: center;
   justify-content: center;
