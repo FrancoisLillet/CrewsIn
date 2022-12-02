@@ -15,7 +15,9 @@
       <%= render "shared/sidebar_wide" %>
       <%= render "shared/sidebar_small" %>
       <%= render "shared/flashes" %>
-      <%= yield %>
+      <div class="content-box">
+        <%= yield %>
+      </div>
     </div>
   </body>
 </html>
