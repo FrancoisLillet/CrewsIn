@@ -8,6 +8,22 @@
 
 require "faker"
 
+# First, we destroy everything
+
+Enrollment.destroy_all
+puts "Enrollments deleted"
+Invitation.destroy_all
+puts "Invitations deleted"
+Trip.destroy_all
+puts "Trips deleted"
+Mate.destroy_all
+puts "Mates deleted"
+Experience.destroy_all
+puts "Experiences deleted"
+User.destroy_all
+puts "Users deleted"
+
+
 puts "How many instances of users do you want to create?"
 number = gets.chomp.to_i
 
