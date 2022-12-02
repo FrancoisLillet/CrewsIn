@@ -17,9 +17,15 @@
 }
 
 .right-box {
-  justify-self: flex-end;
+  margin: 0 auto;
+  display: flex;
+  justify-content: flex-end;
   padding: 8px 8px;
   margin-right: 0;
+}
+
+.right-box div {
+  justify-self: flex-end;
 }
 
 .trip-photo-box {

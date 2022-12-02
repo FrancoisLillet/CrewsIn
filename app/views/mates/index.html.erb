@@ -2,7 +2,12 @@
 
   <h1 class="mate-title text-center">My mates</h1>
   <br/>
-  <p>You can add your mates to the crewlist of a trip.</p>
+  <p>The following information will be used to fill in the crew list whenever you add one of those person in the crew list of a trip.</p>
+  <% if @mates == nil || @mates.length == 0 %>
+    <p>You have no mates yet.</p>
+  <% end %>
+  <%= link_to "+ Add a new mate", new_user_mate_path(is_user: false), class: "button-main"%>
+
 
   <% @mates.each do |mate| %>
     <div class="profile-container" data-controller="dropdown-reveal">

@@ -5,7 +5,12 @@
   <br>
 <div class="category-container" data-controller="dropdown-reveal">
   <div class="results-header" data-action="click->dropdown-reveal#revealContent">
-    <h1 style="display: inline">Upcoming trips</h1>
+    <% count = 0
+    unless @upcoming_trips == nil
+      count = @upcoming_trips.length
+    end
+    %>
+    <h1 style="display: inline">Upcoming trips (<%= count %>)</h1>
     <i class="caret-down fa-solid fa-angle-down"></i>
   </div>
   <div class="invisible-div" data-dropdown-reveal-target="content">
@@ -32,11 +37,13 @@
               <p> <%= "#{trip.mates.length} #{word}"%></p>
             </div>
           </div>
-          <div class="right-box" style="text-align: right">
+          <div class="right-box">
             <% origin = trip.creator == current_user ?  "me" : trip.creator.nickname %>
-            <span> Created by<br/>
-            <strong><%= origin %></strong>
-            </span>
+            <div style="text-align: right">
+              <span> Created by<br/>
+              <strong><%= origin %></strong>
+              </span>
+            </div>
           </div>
         </div>
       <% end %>
@@ -45,7 +52,12 @@
 
   <div class="category-container" data-controller="dropdown-reveal">
     <div class="results-header" data-action="click->dropdown-reveal#revealContent">
-      <h1 style="display: inline">Past trips</h1>
+    <% count = 0
+    unless @upcoming_trips == nil
+      count = @upcoming_trips.length
+    end
+    %>
+      <h1 style="display: inline">Past trips (<%= count %>)</h1>
       <i class="caret-down fa-solid fa-angle-down"></i>
     </div>
     <div class="invisible-div" data-dropdown-reveal-target="content">
@@ -53,24 +65,30 @@
         @past_trips.each do |trip| %>
           <!-- Trip card -->
             <div class="trip-card">
-              <%= link_to trip_path(trip) do %>
-                <div class="trip-photo-box">
-                  <% if trip.photo.attached? %>
-                    <%= cl_image_tag(trip.photo.key, class: "mini-trip-photo") %>
-                  <% else %>
-                    <%= image_tag asset_path("default_trip_photo.jpeg"), class: "mini-trip-photo" %>
-                  <% end %>
-                </div>
-              <% end %>
-              <div class="trip-summary-box">
+              <div class="left-box">
                 <%= link_to trip_path(trip) do %>
-                  <h3><%= trip.country %></h3>
+                  <div class="trip-photo-box">
+                    <% if trip.photo.attached? %>
+                      <%= cl_image_tag(trip.photo.key, class: "mini-trip-photo") %>
+                    <% else %>
+                      <%= image_tag asset_path("default_trip_photo.jpeg"), class: "mini-trip-photo" %>
+                    <% end %>
+                  </div>
                 <% end %>
+                <div class="trip-summary-box">
+                  <%= link_to trip_path(trip) do %>
+                    <h3><%= trip.country %></h3>
+                  <% end %>
+                  <p><%= trip.start_date.strftime("%a, %d %b %Y") %> → <%= trip.end_date.strftime("%a, %d %b %Y") %></p>
+                  <% trip.mates.length == 1 ? word = "mate" : word = "mates" %>
+                  <p> <%= "#{trip.mates.length} #{word}"%></p>
+                </div>
+              </div>
+              <div class="right-box" style="text-align: right">
                 <% origin = trip.creator == current_user ?  "me" : trip.creator.nickname %>
-                <span class="justify-right-element"> Created by <%= origin %></span>
-                <p><%= trip.start_date.strftime("%a, %d %b %Y") %> → <%= trip.end_date.strftime("%a, %d %b %Y") %></p>
-                <% trip.mates.length == 1 ? word = "mate" : word = "mates" %>
-                <p> <%= "#{trip.mates.length} #{word}"%></p>
+                <span> Created by<br/>
+                <strong><%= origin %></strong>
+                </span>
               </div>
             </div>
         <% end %>
