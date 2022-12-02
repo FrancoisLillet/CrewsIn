@@ -116,10 +116,8 @@ end
 # Add an invitation from the second user to the first user (test user)
 sender = User.all[1]
 invited_trip = Trip.find(sender.created_trips.sample.id)
-puts "#{invited_trip.id} - #{invited_trip.skipper.id} and #{invited_trip.creator.id}"
 invitation = Invitation.new(sender_id: sender.id, receiver_id: User.first.id, trip_id: invited_trip.id)
 invitation.save!
-puts "#{invited_trip.id} - #{invited_trip.skipper.id} and #{invited_trip.creator.id}"
 
 
 # Enrollments

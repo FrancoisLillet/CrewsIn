@@ -13,7 +13,8 @@
       @upcoming_trips.each do |trip| %>
       <!-- Trip card -->
         <div class="trip-card">
-          <%= link_to trip_path(trip) do %>
+          <div class="left-box">
+            <%= link_to trip_path(trip) do %>
             <div class="trip-photo-box">
               <% if trip.photo.attached? %>
                 <%= cl_image_tag(trip.photo.key, class: "mini-trip-photo") %>
@@ -21,22 +22,25 @@
                 <%= image_tag asset_path("default_trip_photo.jpeg"), class: "mini-trip-photo" %>
               <% end %>
             </div>
-          <% end %>
-          <div class="trip-summary-box">
-            <%= link_to trip_path(trip) do %>
-              <h3><%= trip.country %></h3>
             <% end %>
-            <%# <h3><%= trip.country </h3> %>
+            <div class="trip-summary-box">
+              <%= link_to trip_path(trip) do %>
+                <h3><%= trip.country %></h3>
+              <% end %>
+              <p><%= trip.start_date.strftime("%a, %d %b %Y") %> → <%= trip.end_date.strftime("%a, %d %b %Y") %></p>
+              <% trip.mates.length == 1 ? word = "mate" : word = "mates" %>
+              <p> <%= "#{trip.mates.length} #{word}"%></p>
+            </div>
+          </div>
+          <div class="right-box" style="text-align: right">
             <% origin = trip.creator == current_user ?  "me" : trip.creator.nickname %>
-            <span class="justify-right-element"> Created by <%= origin %></span>
-            <p><%= trip.start_date.strftime("%a, %d %b %Y") %> → <%= trip.end_date.strftime("%a, %d %b %Y") %></p>
-            <% trip.mates.length == 1 ? word = "mate" : word = "mates" %>
-            <p> <%= "#{trip.mates.length} #{word}"%></p>
+            <span> Created by<br/>
+            <strong><%= origin %></strong>
+            </span>
           </div>
-          </div>
-        <% end %>
+        </div>
       <% end %>
-    </div>
+     <% end %>
   </div>
 
   <div class="category-container" data-controller="dropdown-reveal">

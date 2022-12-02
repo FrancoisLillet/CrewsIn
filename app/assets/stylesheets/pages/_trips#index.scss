@@ -1,9 +1,25 @@
 .trip-card {
   margin: 16px 16px;
+  padding: 8px 8px;
   background-color: white;
+  border: 1px solid #AAAAAA;
+  border-radius: 8px;
+  box-shadow: 2px 2px 10px #888888;
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
   position: relative;
+}
+
+.left-box {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.right-box {
+  justify-self: flex-end;
+  padding: 8px 8px;
+  margin-right: 0;
 }
 
 .trip-photo-box {
@@ -17,15 +33,7 @@
   }
 }
 
-
 .mini-trip-photo {
   width: 200px;
   border-radius: 5px;
-
-}
-
-.justify-right-element {
-  position: absolute;
-  right: 16px;
-  top: 16px;
 }
