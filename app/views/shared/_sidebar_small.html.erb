@@ -9,22 +9,28 @@
       <% end %>
     </div>
     <div class="sidebar-small-section-container">
-      <div class="sidebar-small-section">
-        <%= image_tag "icon-flag.svg", class: "sidebar-small-section-icon" %>
-      </div>
+      <%= link_to user_trips_path(current_user.id) do %>
+        <div class="sidebar-small-section">
+          <%= image_tag "icon-flag.svg", class: "sidebar-small-section-icon" %>
+        </div>
+      <% end %>
       <div class="sidebar-small-section">
         <%= image_tag "icon-export.svg", class: "sidebar-small-section-icon" %>
       </div>
       <div class="sidebar-small-section">
         <%= image_tag "icon-bell.svg", class: "sidebar-small-section-icon" %>
       </div>
+      <%= link_to user_path(current_user.id) do %>
       <div class="sidebar-small-section">
         <%= image_tag "icon-user.svg", class: "sidebar-small-section-icon" %>
       </div>
+      <% end %>
     </div>
-    <div class="sidebar-small-settings">
-      <%= image_tag "icon-settings.svg", class: "sidebar-small-section-icon" %>
-    </div>
+    <%= link_to destroy_user_session_path do %>
+      <div class="sidebar-small-settings">
+        <%= image_tag "icon-settings.svg", class: "sidebar-small-section-icon" %>
+      </div>
+    <% end %>
     <div class="sidebar-small-collapse">
       <%= image_tag "collapse_side_bar.svg", class: "sidebar-small-collapse-button", data: {action:"click->sidebar#toggle"}%>
     </div>
