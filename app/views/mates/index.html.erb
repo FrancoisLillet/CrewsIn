@@ -5,8 +5,6 @@
   <p>The following information will be used to fill in the crew list whenever you add one of those person as
   a participant in a trip.</p>
 
-  <%= link_to "+ Add a new mate", new_user_mate_path(is_user: false), class: "button-main"%>
-
   <% @mates.each do |mate| %>
     <div class="profile-container" data-controller="dropdown-reveal">
         <div class="results-header" data-action="click->dropdown-reveal#revealContent">
@@ -44,7 +42,6 @@
     </div>
   <% end %>
   <br>
-  <%= link_to "Back", user_mates_path(@user.id), class: "button-back" %>
   <%= link_to "+ Add a new mate", new_user_mate_path(is_user: false), class: "button-main"%>
 
 </div>
