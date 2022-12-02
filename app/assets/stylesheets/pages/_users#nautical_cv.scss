@@ -3,11 +3,24 @@
   flex-wrap: wrap;
 }
 
-.content-container {
+.result-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-items: space-between;
   padding: 16px 16px;
 }
 
-.results-header h1 span {
+.experience-container {
+  background-color: $experience-color;
+  margin:8px 8px;
+  border-radius: 8px;
+}
+
+.content-container h3 {
+  font-size: 24px;
+}
+
+.content-container h3 span {
   font-size: 18px;
   font-weight: normal;
   font-style: italic;

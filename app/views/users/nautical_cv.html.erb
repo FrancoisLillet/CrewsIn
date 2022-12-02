@@ -4,47 +4,76 @@
     <h1 class="text-center">My nautical CV</h1>
     <br/>
     <p class="text-center">A nautical CV is required by shipowners before entrusting your their boat.
-    It has to be duly filled in and reflect your sailing experience until now.</p>
-    <% unless @experiences == nil
-      @experiences.each do |experience| %>
-        <div class="profile-container" data-controller="dropdown-reveal">
-            <div class="results-header container-flex" data-action="click->dropdown-reveal#revealContent">
-              <h1 style="display: inline"><%= "#{experience.country}" %>&nbsp;&nbsp;<span><%= "#{experience.start_date.strftime("%B %Y")}" %></span></h1>
-                <i class="caret-down fa-solid fa-angle-down"></i>
-            </div>
-          <div class="invisible-div display-none" data-dropdown-reveal-target="content">
-            <div class="content-container">
-              <div><p><%= experience.start_date.strftime("%d %b %Y") %> → <%= experience.end_date.strftime("%d %b %Y") %></p></div>
-              <div><p><%= experience.role %> on <%= experience.boat_model %> (<%= experience.boat_model %>
-              <%= experience.boat_length %>-feet-<%= experience.boat_type %>)</p></div>
-              <div><p>Shipowner:<%= experience.boat_owner %></p></div>
-              <% unless experience.number_of_miles == nil %>
-                <div><p><%= experience.number_of_miles %> miles</p></div>
-              <% end %>
-            </div>
-            <div class="flex-link-container">
-              <% "link_to Edit, edit_user_experience_path(@user.id, experience.id), class: button-main" %>
-              <div class="link-invisible-div">
-              <% "link_to edit_user_experience_path(@user.id, experience.id, is_user: false) do" %>
-                <i class="fa-solid fa-pen-to-square"></i>
-                  <span> edit</span>
-                <% "end" %>
-              </div>
-              <div class="link-invisible-div">
-                <% "Delete experience do" %>
-                  <i class="fa-solid fa-trash"></i>
-                  <span> delete </span>
-                <% "end" %>
-              </div>
-            </div>
+    It has to be duly filled in and reflect your sailing background until now.</p>
+    <!-- My nautical bio -->
+    <div class="category-container" data-controller="dropdown-reveal">
+      <div class="results-header" data-action="click->dropdown-reveal#revealContent">
+        <h1 style="display: inline">My nautical bio</h1>
+        <i class="caret-down fa-solid fa-angle-down"></i>
+      </div>
+      <div class="invisible-div" data-dropdown-reveal-target="content">
+        <div class="result-container">
+          <div class="content-container">
+            <p><em><%= @user.nautical_bio %></em></p>
+          </div>
+          <div class="right-box" style="text-align: right">
+            <span>edit <i class="fa-solid fa-pen-to-square"></i></span>
           </div>
         </div>
-      <% end %>
-    <% end %>
-
-    <div class="flex-button-container">
-      <%= link_to "Back", class: "button-back" %>
-      <%= link_to "Edit", class: "button-main" %>
+      </div>
+    </div>
+    <!-- My documents -->
+    <div class="category-container" data-controller="dropdown-reveal">
+      <div class="results-header" data-action="click->dropdown-reveal#revealContent">
+        <h1 style="display: inline">My documents</h1>
+        <i class="caret-down fa-solid fa-angle-down"></i>
+      </div>
+      <div class="invisible-div" data-dropdown-reveal-target="content">
+        <div class="result-container">
+          <% if true %>
+            <p>You have not uploaded your sailing license yet.</p>
+          <% else %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <!-- My experiences -->
+    <div class="category-container" data-controller="dropdown-reveal">
+      <div class="results-header" data-action="click->dropdown-reveal#revealContent">
+        <% count = 0
+        unless @experiences == nil
+          count = @experiences.length
+        end
+        %>
+        <h1 style="display: inline">My experiences (<%= count %>)</h1>
+        <i class="caret-down fa-solid fa-angle-down"></i>
+      </div>
+      <div class="invisible-div" data-dropdown-reveal-target="content">
+        <div class="addition-button">
+        <%= link_to "#" do %>
+          <i class="fa-solid fa-circle-plus"></i> Add an experience
+        <% end %>
+        </div>
+        <% unless @experiences == nil
+          @experiences.each do |experience| %>
+            <div class="result-container experience-container">
+              <div class="content-container">
+                <h3 style="display: inline"><%= "#{experience.country}" %>&nbsp;&nbsp;<span><%= "#{experience.start_date.strftime("%B %Y")}" %></span></h3>
+                <div><p><%= experience.start_date.strftime("%d %b %Y") %> → <%= experience.end_date.strftime("%d %b %Y") %></p></div>
+                <div><p><%= experience.role %> on <%= experience.boat_model %> (<%= experience.boat_model %>
+                <%= experience.boat_length %>-feet-<%= experience.boat_type %>)</p></div>
+                <div><p>Shipowner:<%= experience.boat_owner %></p></div>
+                <% unless experience.number_of_miles == nil %>
+                  <div><p><%= experience.number_of_miles %> miles</p></div>
+                <% end %>
+              </div>
+              <div class="right-box" style="text-align: right">
+                <span>edit <i class="fa-solid fa-pen-to-square"></i></span>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

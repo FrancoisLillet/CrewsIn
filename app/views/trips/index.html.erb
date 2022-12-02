@@ -39,11 +39,9 @@
           </div>
           <div class="right-box">
             <% origin = trip.creator == current_user ?  "me" : trip.creator.nickname %>
-            <div style="text-align: right">
               <span> Created by<br/>
               <strong><%= origin %></strong>
               </span>
-            </div>
           </div>
         </div>
       <% end %>
