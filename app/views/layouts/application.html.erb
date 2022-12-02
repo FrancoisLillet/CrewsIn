@@ -12,8 +12,10 @@
   </head>
   <body>
     <div class="application-container" data-controller="sidebar">
-      <%= render "shared/sidebar_wide" %>
-      <%= render "shared/sidebar_small" %>
+      <% if current_user %>
+        <%= render "shared/sidebar_wide" %>
+        <%= render "shared/sidebar_small" %>
+      <% end %>
       <%= render "shared/flashes" %>
       <div class="content-box">
         <%= yield %>
