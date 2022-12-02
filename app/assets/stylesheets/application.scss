@@ -14,7 +14,7 @@
 
 body {
   background-color: #fafafa;
-  font-family: $body-font !important;
+  font-family: 'Roboto', sans-serif;
 }
 
 
@@ -29,11 +29,6 @@ a:hover {
 }
 
 // Blue color #2D66C8
-
-.body {
-  background-color: #444444;
-}
-
 
 .page-container {
   margin: 32px auto;
