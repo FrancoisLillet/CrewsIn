@@ -72,3 +72,5 @@ yarn-debug.log*
 
 /tmp/*
 *.cache
+
+/app/assets/builds/*
