@@ -22,7 +22,7 @@
         </div>
       </div>
     </div>
-    <!-- My documents -->
+    <!-- My documents --><!-- Testis -->
     <div class="category-container" data-controller="dropdown-reveal">
       <div class="results-header" data-action="click->dropdown-reveal#revealContent">
         <h1 style="display: inline">My documents</h1>
@@ -50,9 +50,9 @@
       </div>
       <div class="invisible-div" data-dropdown-reveal-target="content">
         <div class="addition-button">
-        <%= link_to "#" do %>
-          <i class="fa-solid fa-circle-plus"></i> Add an experience
-        <% end %>
+          <%= link_to "#" do %>
+            <i class="fa-solid fa-circle-plus"></i> Add an experience
+          <% end %>
         </div>
         <% unless @experiences == nil
           @experiences.each do |experience| %>
