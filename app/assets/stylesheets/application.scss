@@ -14,8 +14,9 @@
 
 body {
   background-color: #fafafa;
-  font-family: "Roboto", sans-serif;
+  font-family: $body-font !important;
 }
+
 
 a,
 a:hover {
