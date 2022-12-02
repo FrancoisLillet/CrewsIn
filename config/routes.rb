@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   # root "articles#index"
   resources :users, only: %i[show update] do
     resources :mates, only: %i[index new create edit update show]
-    # get "/users/:id/mates/self",     to: "mates#show"
+    get "/nautical_cv", to: "users#nautical_cv", as: "nautical_cv"
     resources :trips, only: %i[index new create edit update destroy]
   end
   resources :mates, only: %i[destroy]

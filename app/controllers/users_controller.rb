@@ -13,6 +13,11 @@ class UsersController < ApplicationController
     redirect_to user_path(@user)
   end
 
+  def nautical_cv
+    @user = current_user
+    @experiences = current_user.experiences
+  end
+
 
 private
 
