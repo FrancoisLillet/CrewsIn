@@ -1,4 +1,16 @@
-<h1>Create a Mate</h1>
+<div class="page-container">
+<% if params[:is_user] == "true" %>
+  <h1 class="text-center">Create my personal profile</h1>
+  <br/>
+  <p>These information will be used to fill in the crew list whenever you add yourself
+  as participant in a trip.</p>
+<% else %>
+  <h1 class="text-center">Create a Mate</h1>
+  <br/>
+  <p>These information will be used to fill in the crew list whenever you add this person as
+  a participant to a trip.</p>
+<% end %>
+  <div class="profile-container">
 
   <%= simple_form_for([@user, @mate], data: {turbo: false}) do |f| %>
       <%= f.input :first_name %>
@@ -13,5 +25,8 @@
       <%= f.input :country_of_residence, as: :string %>
       <%= f.input :passport_number %>
       <%= f.input :expiration_date %>
-      <%= f.submit "Submit", class: "btn btn-success"%>
+    <div class="flex-link-container" style="margin: 32px 0px;">
+      <%= link_to "Back", request.referrer, class: "button-back" %>
+      <%= f.submit "Submit", class: "button-main space-"%>
+    </div>
   <% end %>

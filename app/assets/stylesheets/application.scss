@@ -29,15 +29,32 @@ a:hover {
 
 // Blue color #2D66C8
 
+.body {
+  background-color: #444444;
+}
+
+
 .page-container {
   margin: 32px auto;
   padding: 16px 16px;
   max-width: 1024px;
-  background-color: rgb(255, 139, 247);
+  background-color: rgb(255, 255, 255);
 }
 
 .results-header {
   position: relative;
-  border-bottom: 1px solid #000000;
+  // border-bottom: 1px solid #000000;
   padding: 8px;
+}
+
+.results-header:hover {
+  cursor: pointer;
+}
+
+.text-center {
+  text-align: center;
+}
+
+a:link {
+  text-decoration: none;
 }

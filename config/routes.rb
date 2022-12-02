@@ -7,8 +7,10 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "articles#index"
   resources :users, only: %i[show update] do
-    resources :mates, only: %i[index new create edit update]
-    resources :trips, only: [:index]
+    resources :mates, only: %i[index new create edit update show]
+    # get "/users/:id/mates/self",     to: "mates#show"
+    resources :trips, only: %i[index new create edit update]
   end
-  resources :mates, only: %i[show destroy]
+  resources :mates, only: %i[destroy]
+  resources :trips, only: %i[show]
 end

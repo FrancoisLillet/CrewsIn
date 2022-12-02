@@ -3,7 +3,7 @@ class MatesController < ApplicationController
 
   def index
     @user = current_user
-    @mates = @user.mates
+    @mates = @user.mates.select { |mate| mate.is_user == false }.sort { |m1, m2| m2.updated_at <=> m1.updated_at }
   end
 
   def show
@@ -21,7 +21,11 @@ class MatesController < ApplicationController
     @user = current_user
     @mate.user = current_user
     if @mate.save
-      redirect_to user_mates_path
+      if @mate.is_user
+        redirect_to user_path(@user)
+      else
+        redirect_to user_mates_path
+      end
     else
       render :new, status: :unprocessable_entity
     end
@@ -36,7 +40,11 @@ class MatesController < ApplicationController
     @user = current_user
     set_mate
     if @mate.update(mate_params)
-      redirect_to user_mates_path(@user)
+      if @mate.is_user
+        redirect_to user_mate_path(@mate)
+      else
+        redirect_to user_mates_path(@user)
+      end
     else
       render :edit
     end
