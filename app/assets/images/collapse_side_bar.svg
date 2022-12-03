@@ -1,14 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="603" height="603" viewBox="0 0 603 603">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="579" height="274" viewBox="0 0 579 274">
   <defs>
     <clipPath id="clip-collapse_side_bar">
-      <rect width="603" height="603"/>
+      <rect width="579" height="274" />
     </clipPath>
   </defs>
   <g id="collapse_side_bar" clip-path="url(#clip-collapse_side_bar)">
-    <line id="Line_1" data-name="Line 1" x2="146" y2="2" transform="translate(294 240)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="20"/>
-    <path id="Path_6" data-name="Path 6" d="M11.815,0H286.669" transform="translate(153.321 301.669)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="20"/>
-    <line id="Line_3" data-name="Line 3" x2="146" y2="3" transform="translate(294 360)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="20"/>
-    <line id="Line_4" data-name="Line 4" x1="49.09" y2="45.998" transform="translate(164 255.322)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="20"/>
-    <line id="Line_5" data-name="Line 5" x2="51.877" y2="44.604" transform="translate(164 302.017)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="20"/>
+    <line id="Line_1" data-name="Line 1" x2="273" y2="4" transform="translate(274.402 22.5)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="20" />
+    <line id="Line_4" data-name="Line 4" x1="91.815" y2="86.033" transform="translate(31.402 51.105)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="20" />
+    <path id="Path_6" data-name="Path 6" d="M11.815,0H525.886" transform="translate(21.712 137.79)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="20" />
+    <line id="Line_3" data-name="Line 3" x2="273" y2="6" transform="translate(274.402 246.5)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="20" />
+    <line id="Line_5" data-name="Line 5" x2="97.029" y2="83.426" transform="translate(31.402 138.442)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="20" />
   </g>
 </svg>
