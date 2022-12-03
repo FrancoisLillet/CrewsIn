@@ -6,29 +6,43 @@
     <p class="text-center">A nautical CV is required by shipowners before entrusting your their boat.
     It has to be duly filled in and reflect your sailing background until now.</p>
     <!-- My nautical bio -->
-    <div class="category-container" data-controller="dropdown-reveal">
-      <div class="results-header" data-action="click->dropdown-reveal#revealContent">
+    <div class="category-container" data-controller="modal-reveal">
+      <div class="results-header">
         <h1 style="display: inline">My nautical bio</h1>
-        <i class="caret-down fa-solid fa-angle-down"></i>
       </div>
-      <div class="invisible-div" data-dropdown-reveal-target="content">
+      <div class="invisible-div">
         <div class="result-container">
           <div class="content-container">
             <p><em><%= @user.nautical_bio %></em></p>
           </div>
           <div class="right-box" style="text-align: right">
-            <span>edit <i class="fa-solid fa-pen-to-square"></i></span>
+            <span class="edit-target" data-action="click->modal-reveal#toggleWindow">
+              edit <i class="fa-solid fa-pen-to-square"></i>
+            </span>
           </div>
+        </div>
+      </div>
+      <!-- Modal -->
+      <div id="myModal" class="modal-window display-none" data-modal-reveal-target="modalWindow">
+        <!-- Modal content -->
+        <div class="modal-content">
+          <span class="close" data-action="click->modal-reveal#toggleWindow">&times;</span>
+          <h4>Edit your nautical bio</h4>
+          <p>Some text in the Modal..</p>
+          <%= simple_form_for([@user], data: {turbo: false}) do |f| %>
+            <%= f.input :nautical_bio %>
+            <%= f.submit "Submit", class: "button-main"%>
+          <% end %>
         </div>
       </div>
     </div>
     <!-- My documents -->
-    <div class="category-container" data-controller="dropdown-reveal">
-      <div class="results-header" data-action="click->dropdown-reveal#revealContent">
+    <div class="category-container">
+      <div class="results-header">
         <h1 style="display: inline">My documents</h1>
         <i class="caret-down fa-solid fa-angle-down"></i>
       </div>
-      <div class="invisible-div" data-dropdown-reveal-target="content">
+      <div class="invisible-div">
         <div class="result-container">
           <% if true %>
             <p>You have not uploaded your sailing license yet.</p>
