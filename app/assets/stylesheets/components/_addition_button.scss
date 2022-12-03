@@ -1,0 +1,22 @@
+.addition-button {
+  text-align:center;
+  font-size: 24px;
+  max-width: 512px;
+  margin: 16px auto;
+  padding: 8px 32px;
+  border-radius: 32px;
+  color: $sidebar-background
+
+}
+
+.addition-button:hover {
+  cursor: pointer;
+  background-color: $sidebar-background;
+  color: #FFFFFF;
+  transition-duration: 0.5s;
+}
+
+.addition-button:active {
+  scale: 0.98;
+  transition-duration: 0.1s;
+}

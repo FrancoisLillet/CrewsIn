@@ -1,6 +1,6 @@
 <div class="page-container">
 <div class="category-container" data-controller="dropdown-reveal">
-  <div class="results-header" data-action="click->dropdown-reveal#revealContent">
+  <div class="results-header dropdown-header" data-action="click->dropdown-reveal#revealContent">
     <% count = 0
     unless @upcoming_trips == nil
       count = @upcoming_trips.length
@@ -35,11 +35,9 @@
           </div>
           <div class="right-box">
             <% origin = trip.creator == current_user ?  "me" : trip.creator.nickname %>
-            <div style="text-align: right">
               <span> Created by<br/>
               <strong><%= origin %></strong>
               </span>
-            </div>
           </div>
         </div>
       <% end %>
@@ -47,7 +45,7 @@
   </div>
 
   <div class="category-container" data-controller="dropdown-reveal">
-    <div class="results-header" data-action="click->dropdown-reveal#revealContent">
+    <div class="results-header dropdown-header" data-action="click->dropdown-reveal#revealContent">
     <% count = 0
     unless @upcoming_trips == nil
       count = @upcoming_trips.length

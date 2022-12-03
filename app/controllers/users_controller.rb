@@ -10,14 +10,23 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     @user.update(user_params)
-    redirect_to user_path(@user)
+    redirect_to user_nautical_cv_path(@user)
+  end
+
+  def nautical_cv
+    @user = current_user
+    @experiences = current_user.experiences.sort { |exp1, exp2| exp2.start_date <=> exp1.start_date }
+    @experience = Experience.new
   end
 
 
 private
 
 def user_params
-  params.require(:user).permit(:photo)
+  params.require(:user).permit(
+    :photo, :nautical_bio, :license_recto, :license_verso,
+    :vhf_certificate, :passport_photo
+  )
 end
 
 end

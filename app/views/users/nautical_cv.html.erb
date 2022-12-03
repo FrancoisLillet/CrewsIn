@@ -1,0 +1,311 @@
+<div class="page-container">
+  <div class="profile-container">
+
+    <h1 class="text-center">My nautical CV</h1>
+    <br/>
+    <p class="text-center">A nautical CV is required by shipowners before entrusting your their boat.
+    It has to be duly filled in and reflect your sailing background until now.</p>
+    <!-- My nautical bio -->
+    <div class="category-container" data-controller="modal-reveal">
+      <div class="results-header">
+        <h1 style="display: inline">My nautical bio</h1>
+      </div>
+      <div class="invisible-div">
+        <div class="result-container">
+          <div class="content-container">
+            <p><em><%= @user.nautical_bio %></em></p>
+          </div>
+          <div class="right-box" style="text-align: right">
+            <span class="edit-target" data-action="click->modal-reveal#toggleWindow">
+              edit <i class="fa-solid fa-pen-to-square"></i>
+            </span>
+          </div>
+        </div>
+      </div>
+      <!-- Modal for nautical bio -->
+      <div id="myModal" class="modal-window display-none" data-modal-reveal-target="modalWindow">
+        <!-- Modal content -->
+        <div class="modal-content">
+          <span class="close" data-action="click->modal-reveal#toggleWindow">&times;</span>
+          <h4>Edit your nautical bio</h4>
+          <p>Some text in the Modal..</p>
+          <%= simple_form_for([@user], data: {turbo: false}) do |f| %>
+            <%= f.input :nautical_bio %>
+            <%= f.submit "Submit", class: "button-main"%>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <!-- My documents -->
+    <div class="category-container" data-controller="dropdown-reveal">
+      <div class="results-header dropdown-header" data-action="click->dropdown-reveal#revealContent">
+        <!-- We count the number of documents already loaded -->
+        <%
+          count = 0
+          count += 1 if @user.license_recto.attached?
+          count += 1 if @user.license_verso.attached?
+          count += 1 if @user.passport_photo.attached?
+          count += 1 if @user.vhf_certificate.attached?
+          %>
+
+        <h1 style="display: inline">My documents  (<%= count %>)</h1>
+        <i class="caret-down fa-solid fa-angle-down"></i>
+      </div>
+      <div class="invisible-div" data-dropdown-reveal-target="content">
+
+        <!-- RECTO license -->
+        <div data-controller="modal-reveal">
+          <div class="result-container align-center">
+            <div>
+              <% if @user.license_recto.attached? %>
+                <div>
+                  <a href="https://res.cloudinary.com/dmz2vmnno/image/upload/v1/development/<%=@user.license_recto.key%>" target="_blank">
+                    <%= cl_image_tag @user.license_recto.key, class: "mini-document-photo" %>
+                  </a>
+                </div>
+              <% else %>
+                <div class="document-placeholder">
+                  <p>Empty</p>
+                </div>
+              <% end %>
+                </div>
+                  <p>Recto of my sailing license</p>
+                <div>
+            </div>
+            <div class="right-box" style="text-align: right">
+              <span class="edit-target" data-action="click->modal-reveal#toggleWindow">
+                edit <i class="fa-solid fa-pen-to-square"></i>
+              </span>
+            </div>
+          </div>
+          <!-- Modal for RECTO license -->
+          <div id="myModal" class="modal-window display-none" data-modal-reveal-target="modalWindow">
+            <!-- Modal content -->
+            <div class="modal-content">
+              <span class="close" data-action="click->modal-reveal#toggleWindow">&times;</span>
+              <h4>Upload a picture of my sailing license's recto</h4><br/>
+              <%= simple_form_for([@user], data: {turbo: false}) do |f| %>
+                <%= f.input :license_recto, label: false %>
+                <%= f.submit "Submit", class: "button-main"%>
+              <% end %>
+            </div>
+          </div>
+        </div>
+
+        <!-- VERSO license -->
+        <div data-controller="modal-reveal">
+          <div class="result-container align-center">
+            <div>
+              <% if @user.license_verso.attached? %>
+                <div>
+                  <a href="https://res.cloudinary.com/dmz2vmnno/image/upload/v1/development/<%=@user.license_verso.key%>" target="_blank">
+                    <%= cl_image_tag @user.license_verso.key, class: "mini-document-photo" %>
+                  </a>
+                </div>
+              <% else %>
+                <div class="document-placeholder">
+                  <p>Empty</p>
+                </div>
+              <% end %>
+                </div>
+                  <p>Verso of my sailing license</p>
+                <div>
+            </div>
+            <div class="right-box" style="text-align: right">
+              <span class="edit-target" data-action="click->modal-reveal#toggleWindow">
+                edit <i class="fa-solid fa-pen-to-square"></i>
+              </span>
+            </div>
+          </div>
+          <!-- Modal for RECTO license -->
+          <div id="myModal" class="modal-window display-none" data-modal-reveal-target="modalWindow">
+            <!-- Modal content -->
+            <div class="modal-content">
+              <span class="close" data-action="click->modal-reveal#toggleWindow">&times;</span>
+              <h4>Upload a picture of my sailing license's recto</h4><br/>
+              <%= simple_form_for([@user], data: {turbo: false}) do |f| %>
+                <%= f.input :license_verso, label: false %>
+                <div class="flex-link-container">
+                 <%= f.submit "Submit", class: "button-main" %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+
+        <!-- VHF certificate photo -->
+        <div data-controller="modal-reveal">
+          <div class="result-container align-center">
+            <div>
+              <% if @user.vhf_certificate.attached? %>
+                <div>
+                  <a href="https://res.cloudinary.com/dmz2vmnno/image/upload/v1/development/<%=@user.vhf_certificate.key%>" target="_blank">
+                    <%= cl_image_tag @user.vhf_certificate.key, class: "mini-document-photo" %>
+                  </a>
+                </div>
+              <% else %>
+                <div class="document-placeholder">
+                  <p>Empty</p>
+                </div>
+              <% end %>
+                </div>
+                  <p>Photo of my VHF certificate</p>
+                <div>
+            </div>
+            <div class="right-box" style="text-align: right">
+              <span class="edit-target" data-action="click->modal-reveal#toggleWindow">
+                edit <i class="fa-solid fa-pen-to-square"></i>
+              </span>
+            </div>
+          </div>
+          <!-- Modal for VHF certificate -->
+          <div id="myModal" class="modal-window display-none" data-modal-reveal-target="modalWindow">
+            <!-- Modal content -->
+            <div class="modal-content">
+              <span class="close" data-action="click->modal-reveal#toggleWindow">&times;</span>
+              <h4>Upload a picture of my VHF certificate</h4><br/>
+              <%= simple_form_for([@user], data: {turbo: false}) do |f| %>
+                <%= f.input :vhf_certificate, label: false %>
+                <div class="flex-link-container">
+                 <%= f.submit "Submit", class: "button-main" %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+
+        <!-- Passport photo -->
+        <div data-controller="modal-reveal">
+          <div class="result-container align-center">
+            <div>
+              <% if @user.passport_photo.attached? %>
+                <div>
+                  <a href="https://res.cloudinary.com/dmz2vmnno/image/upload/v1/development/<%=@user.passport_photo.key%>" target="_blank">
+                    <%= cl_image_tag @user.passport_photo.key, class: "mini-document-photo" %>
+                  </a>
+                </div>
+              <% else %>
+                <div class="document-placeholder">
+                  <p>Empty</p>
+                </div>
+              <% end %>
+                </div>
+                  <p>Photo of my passport's main page</p>
+                <div>
+            </div>
+            <div class="right-box" style="text-align: right">
+              <span class="edit-target" data-action="click->modal-reveal#toggleWindow">
+                edit <i class="fa-solid fa-pen-to-square"></i>
+              </span>
+            </div>
+          </div>
+          <!-- Modal for passport photo -->
+          <div id="myModal" class="modal-window display-none" data-modal-reveal-target="modalWindow">
+            <!-- Modal content -->
+            <div class="modal-content">
+              <span class="close" data-action="click->modal-reveal#toggleWindow">&times;</span>
+              <h4>Upload a picture of my passport's main page</h4><br/>
+              <%= simple_form_for([@user], data: {turbo: false}) do |f| %>
+                <%= f.input :passport_photo, label: false %>
+                <div class="flex-link-container">
+                 <%= f.submit "Submit", class: "button-main" %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!-- My experiences -->
+    <div class="category-container" data-controller="dropdown-reveal">
+      <div class="results-header dropdown-header" data-action="click->dropdown-reveal#revealContent">
+        <% count = 0
+        unless @experiences == nil
+          count = @experiences.length
+        end
+        %>
+        <h1 style="display: inline">My experiences (<%= count %>)</h1>
+        <i class="caret-down fa-solid fa-angle-down"></i>
+      </div>
+      <div class="invisible-div" data-dropdown-reveal-target="content">
+        <div data-controller="modal-reveal">
+            <div class="addition-button" data-action="click->modal-reveal#toggleWindow">
+              <i class="fa-solid fa-circle-plus"></i> Add an experience
+            </div>
+          <!-- Modal for new experience  -->
+          <div id="myModal" class="modal-window display-none" data-modal-reveal-target="modalWindow">
+            <!-- Modal content -->
+            <div class="modal-content">
+              <span class="close" data-action="click->modal-reveal#toggleWindow">&times;</span>
+              <h4>Add a new sailing experience</h4><br/>
+              <%= simple_form_for([@user, @experience]) do |f| %>
+                <%= f.input :country, collection: Mate.countries %>
+                <%= f.input :start_date %>
+                <%= f.input :end_date %>
+                <%= f.input :sailing_area %>
+                <%= f.input :role, collection: ["Skipper", "Co-skipper", "Active mate", "Passenger"], label: "My role onboard" %>
+                <%= f.input :boat_model %>
+                <%= f.input :boat_length, label: "Boat length in feet (one foot = 30cm, 10 feet = 3 m)" %>
+                <%= f.input :boat_type, collection: ["Sailing monohull", "Sailing catamaran", "Motor yacht", "Motor catamaran", "Rigid-Inflatable boat"] %>
+                <%= f.input :boat_owner, collection: ["Charter company", "Friend", "Me"], label: "Boat owner"  %>
+                <%= f.input :number_of_miles %>
+                <%= f.input :comment, label: "Tell us more (optional)!" %>
+                <div class="flex-link-container">
+                 <%= f.submit "Submit", class: "button-main" %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <% unless @experiences == nil
+          @experiences.each do |experience| %>
+            <div data-controller="modal-reveal">
+              <div class="result-container experience-container">
+                <div class="content-container">
+                  <h3 style="display: inline"><%= "#{experience.country}" %>&nbsp;&nbsp;<span><%= "#{experience.start_date.strftime("%B %Y")}" %></span></h3>
+                  <div><p><%= experience.start_date.strftime("%d %b %Y") %> → <%= experience.end_date.strftime("%d %b %Y") %></p></div>
+                  <div><p><%= experience.role %> on <%= experience.boat_model %> (<%= experience.boat_model %>
+                  <%= experience.boat_length %>-feet-<%= experience.boat_type %>)</p></div>
+                  <div><p>Shipowner:<%= experience.boat_owner %></p></div>
+                  <% unless experience.number_of_miles == nil %>
+                    <div><p><%= experience.number_of_miles %> miles</p></div>
+                  <% end %>
+                </div>
+                <div class="right-box" style="text-align: right">
+                  <span class="edit-target" data-action="click->modal-reveal#toggleWindow">
+                    edit <i class="fa-solid fa-pen-to-square"></i>
+                  </span>
+                </div>
+              </div>
+              <!-- Modal for update experience  -->
+              <div id="myModal" class="modal-window display-none" data-modal-reveal-target="modalWindow">
+                <!-- Modal content -->
+                <div class="modal-content">
+                  <span class="close" data-action="click->modal-reveal#toggleWindow">&times;</span>
+                  <h4>Update a sailing experience</h4><br/>
+                  <%= simple_form_for([@user, experience]) do |f| %>
+                    <%= f.input :country, collection: Mate.countries %>
+                    <%= f.input :start_date %>
+                    <%= f.input :end_date %>
+                    <%= f.input :sailing_area %>
+                    <%= f.input :role, collection: ["Skipper", "Co-skipper", "Active mate", "Passenger"], label: "My role onboard" %>
+                    <%= f.input :boat_model %>
+                    <%= f.input :boat_length, label: "Boat length in feet (one foot = 30cm, 10 feet = 3 m)" %>
+                    <%= f.input :boat_type, collection: ["Sailing monohull", "Sailing catamaran", "Motor yacht", "Motor catamaran", "Rigid-Inflatable boat"] %>
+                    <%= f.input :boat_owner, collection: ["Charter company", "Friend", "Me"], label: "Boat owner"  %>
+                    <%= f.input :number_of_miles %>
+                    <%= f.input :comment, label: "Tell us more (optional)!" %>
+                    <div class="flex-link-container">
+                    <%= f.submit "Submit", class: "button-main" %>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -23,7 +23,7 @@
     </div>
     <div class="flex-button-container">
       <%= link_to "Back", user_mates_path(@user.id), class: "button-back" %>
-      <%= link_to "Edit", edit_user_mate_path(@user.id, @mate.id), class: "button-main" %>
+      <%= link_to "Edit", edit_user_mate_path(@user.id, @mate.id, is_user: @mate.is_user), class: "button-main" %>
     </div>
   </div>
 </div>
