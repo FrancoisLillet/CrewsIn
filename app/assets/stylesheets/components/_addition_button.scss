@@ -10,6 +10,7 @@
 }
 
 .addition-button:hover {
+  cursor: pointer;
   background-color: $sidebar-background;
   color: #FFFFFF;
   transition-duration: 0.5s;

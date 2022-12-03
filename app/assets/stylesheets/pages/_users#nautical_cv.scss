@@ -26,6 +26,42 @@
   font-style: italic;
 }
 
+// skipper document
+
+.invisible-flex div {
+  padding: 16px 16px;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.result-container > div > div {
+  margin: 0px 16px;
+}
+
+.result-container .document-placeholder {
+  font-size: 12px;
+  text-align: center;
+  width: 200px;
+  padding: 48px;
+  border-radius: 4px;
+  border: 1px solid #000000;
+}
+
+.mini-document-photo {
+  width: 200px;
+  border-radius: 4px;
+  border: 1px solid #000000;
+}
+
+.mini-document-photo:hover {
+  scale: 1.04;
+  border: 2px solid $sidebar-background;
+  transition-duration: 0.5s;
+}
+
+
 // Modal window
 
 .modal-content h4 {

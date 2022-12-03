@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :users, only: %i[show update] do
     resources :mates, only: %i[index new create edit update show]
     get "/nautical_cv", to: "users#nautical_cv", as: "nautical_cv"
+    resources :experiences, only: %i[create update]
     resources :trips, only: %i[index new create edit update destroy]
   end
   resources :mates, only: %i[destroy]

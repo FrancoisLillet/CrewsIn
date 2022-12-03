@@ -4,7 +4,7 @@
 <%= link_to "+ Add a new Trip", new_user_trip_path(@user), class: "button-main"%>
   <br>
 <div class="category-container" data-controller="dropdown-reveal">
-  <div class="results-header" data-action="click->dropdown-reveal#revealContent">
+  <div class="results-header dropdown-header" data-action="click->dropdown-reveal#revealContent">
     <% count = 0
     unless @upcoming_trips == nil
       count = @upcoming_trips.length
@@ -49,7 +49,7 @@
   </div>
 
   <div class="category-container" data-controller="dropdown-reveal">
-    <div class="results-header" data-action="click->dropdown-reveal#revealContent">
+    <div class="results-header dropdown-header" data-action="click->dropdown-reveal#revealContent">
     <% count = 0
     unless @upcoming_trips == nil
       count = @upcoming_trips.length
