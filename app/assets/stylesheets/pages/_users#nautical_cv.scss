@@ -25,3 +25,23 @@
   font-weight: normal;
   font-style: italic;
 }
+
+// Modal window
+
+.modal-content h4 {
+  margin: 8px auto;
+}
+
+.modal-content .close {
+  float: right;
+  text-align: right;
+}
+
+.edit-target {
+  color: $sidebar-background;
+}
+
+.edit-target:hover {
+  cursor:pointer;
+  color: #000000;
+}
