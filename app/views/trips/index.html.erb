@@ -1,8 +1,4 @@
 <div class="page-container">
-<h1 class="mate-title text-center">My trips</h1>
-  <br/>
-<%= link_to "+ Add a new Trip", new_user_trip_path(@user), class: "button-main"%>
-  <br>
 <div class="category-container" data-controller="dropdown-reveal">
   <div class="results-header" data-action="click->dropdown-reveal#revealContent">
     <% count = 0
@@ -11,7 +7,7 @@
     end
     %>
     <h1 style="display: inline">Upcoming trips (<%= count %>)</h1>
-    <i class="caret-down fa-solid fa-angle-down"></i>
+    <i class="caret-down fa-solid fa-angle-down" data-dropdown-reveal-target="arrow"></i>
   </div>
   <div class="invisible-div" data-dropdown-reveal-target="content">
     <% unless @upcoming_trips == nil
@@ -58,7 +54,7 @@
     end
     %>
       <h1 style="display: inline">Past trips (<%= count %>)</h1>
-      <i class="caret-down fa-solid fa-angle-down"></i>
+      <i class="caret-down fa-solid fa-angle-down" data-dropdown-reveal-target="arrow"></i>
     </div>
     <div class="invisible-div" data-dropdown-reveal-target="content">
       <% unless @past_trips == nil
