@@ -248,7 +248,7 @@
                 <%= f.input :boat_model %>
                 <%= f.input :boat_length, label: "Boat length in feet (one foot = 30cm, 10 feet = 3 m)" %>
                 <%= f.input :boat_type, collection: ["Sailing monohull", "Sailing catamaran", "Motor yacht", "Motor catamaran", "Rigid-Inflatable boat"] %>
-                <%= f.input :boat_owner, collection: ["Charter company", "Friend", "Me"], label: "Boat owner"  %>
+                <%= f.input :boat_owner, collection: ["A charter company", "Friend / family member", "Me"], label: "Boat owner"  %>
                 <%= f.input :number_of_miles %>
                 <%= f.input :comment, label: "Tell us more (optional)!" %>
                 <div class="flex-link-container">
@@ -267,15 +267,23 @@
                   <div><p><%= experience.start_date.strftime("%d %b %Y") %> → <%= experience.end_date.strftime("%d %b %Y") %></p></div>
                   <div><p><%= experience.role %> on <%= experience.boat_model %> (<%= experience.boat_model %>
                   <%= experience.boat_length %>-feet-<%= experience.boat_type %>)</p></div>
-                  <div><p>Shipowner:<%= experience.boat_owner %></p></div>
+                  <div><p>Shipowner: <%= experience.boat_owner %></p></div>
                   <% unless experience.number_of_miles == nil %>
                     <div><p><%= experience.number_of_miles %> miles</p></div>
                   <% end %>
                 </div>
                 <div class="right-box" style="text-align: right">
-                  <span class="edit-target" data-action="click->modal-reveal#toggleWindow">
-                    edit <i class="fa-solid fa-pen-to-square"></i>
+                  <span>
+                    <span class="edit-target" data-action="click->modal-reveal#toggleWindow">
+                      edit <i class="fa-solid fa-pen-to-square"></i>
+                    </span><br/><br/>
+                    <span class="delete-target">
+                      <%= link_to user_experience_path(@user, experience.id), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
+                        delete <i class="fa-solid fa-trash"></i>
+                      <% end %>
                   </span>
+                  </span>
+
                 </div>
               </div>
               <!-- Modal for update experience  -->
