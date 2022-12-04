@@ -26,6 +26,13 @@ class ExperiencesController < ApplicationController
     end
   end
 
+  def destroy
+    @user = current_user
+    @experience = Experience.find(params[:id])
+    @experience.destroy
+    redirect_to user_nautical_cv_path(@user)
+  end
+
   private
 
   def experience_params

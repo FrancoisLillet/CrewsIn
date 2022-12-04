@@ -81,3 +81,12 @@
   cursor:pointer;
   color: #000000;
 }
+
+.delete-target {
+  color: $danger-red;
+}
+
+.delete-target:hover {
+  cursor:pointer;
+  color: #000000;
+}
