@@ -4,7 +4,7 @@ class Trip < ApplicationRecord
 
   belongs_to :skipper, class_name: "User"
   belongs_to :creator, class_name: "User"
-  has_many :enrollments
+  has_many :enrollments, dependent: :destroy
   has_many :invitations
   has_many :mates, through: :enrollments
 

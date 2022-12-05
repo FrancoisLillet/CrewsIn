@@ -11,7 +11,9 @@ Rails.application.routes.draw do
     get "/nautical_cv", to: "users#nautical_cv", as: "nautical_cv"
     resources :experiences, only: %i[create update destroy]
     resources :trips, only: %i[index new create edit update destroy]
+    resources :enrollments, only: %i[new create]
   end
   resources :mates, only: %i[destroy]
   resources :trips, only: %i[show]
+  resources :enrollments, only: %i[destroy]
 end
