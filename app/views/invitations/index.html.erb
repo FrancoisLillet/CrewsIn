@@ -10,12 +10,11 @@
     <i class="caret-down fa-solid fa-angle-down" data-dropdown-reveal-target="arrow"></i>
   </div>
   <div class="invisible-div" data-dropdown-reveal-target="content">
-    <% unless @invitations == nil
+    <% unless @invited_trips == nil
       @invited_trips.each do |invited_trip| %>
       <!-- Trip card -->
         <div class="trip-card">
           <div class="left-box">
-            <%= invited_trip do %>
             <div class="trip-photo-box">
               <% if invited_trip.photo.attached? %>
                 <%= cl_image_tag(invited_trip.photo.key, class: "mini-trip-photo") %>
@@ -23,11 +22,8 @@
                 <%= image_tag asset_path("default_trip_photo.jpeg"), class: "mini-trip-photo" %>
               <% end %>
             </div>
-            <% end %>
             <div class="trip-summary-box">
-              <%= invited_trip do %>
-                <h3><%= invited_trip.country %></h3>
-              <% end %>
+              <h3><%= invited_trip.country %></h3>
               <p><%= invited_trip.start_date.strftime("%a, %d %b %Y") %> → <%= invited_trip.end_date.strftime("%a, %d %b %Y") %></p>
               <% invited_trip.mates.length == 1 ? word = "mate" : word = "mates" %>
               <p> <%= "#{invited_trip.mates.length} #{word}"%></p>

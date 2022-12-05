@@ -14,6 +14,7 @@ Rails.application.routes.draw do
       resources :invitations, only: %i[create update]
       resources :enrollments, only: %i[new create]
     end
+    resources :invitations, only: %i[index]
   end
   resources :mates, only: %i[destroy]
   resources :trips, only: %i[show]
