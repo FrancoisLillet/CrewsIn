@@ -6,6 +6,7 @@ class InvitationsController < ApplicationController
     @invitation.trip_id = params[:trip_id]
     @invitation.save
     if @invitation.save
+      MyMailer.with(invitation: @invitation).invitation_email.deliver_now
       redirect_to user_trips_path
     else
       redirect_to user_trips_path, alert: "Your invitation was not sent because some fields were missing"
