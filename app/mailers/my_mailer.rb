@@ -3,6 +3,7 @@ class MyMailer < ActionMailer::Base
 
   def invitation_email
     @invitation = params[:invitation]
+    @home_url = url_for(controller: 'pages', action: 'landing')
     mail(to: @invitation.receiver_email, subject: "You're invited to a trip!")
   end
 end
