@@ -107,7 +107,7 @@ User.all.each do |user|
     rand(2..5).times do
       receiver = User.new(email: Faker::Internet.email, nickname: Faker::Name.first_name, password: "123456", nautical_bio: Faker::Quotes::Shakespeare.hamlet_quote)
       receiver.save!
-      invitation = Invitation.new(sender_id: user.id, receiver_id: receiver.id, trip_id: user.created_trips.sample.id)
+      invitation = Invitation.new(sender_id: user.id, receiver_id: receiver.id, receiver_email: Faker::Internet.email, trip_id: user.created_trips.sample.id)
       invitation.save!
     end
   end
@@ -116,7 +116,7 @@ end
 # Add an invitation from the second user to the first user (test user)
 sender = User.all[1]
 invited_trip = Trip.find(sender.created_trips.sample.id)
-invitation = Invitation.new(sender_id: sender.id, receiver_id: User.first.id, trip_id: invited_trip.id)
+invitation = Invitation.new(sender_id: sender.id, receiver_id: User.first.id, receiver_email: User.first.email, trip_id: invited_trip.id)
 invitation.save!
 
 
