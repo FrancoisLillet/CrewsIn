@@ -1,5 +1,10 @@
 class InvitationsController < ApplicationController
 
+  def index
+    @invitations_received = @user.invitations_received.map{ |invitation_received| invitation_received.trip }
+
+  end
+
   def create
 
     @user = current_user
