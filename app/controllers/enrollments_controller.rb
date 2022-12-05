@@ -6,14 +6,10 @@ class EnrollmentsController < ApplicationController
 
   def create
     @user = current_user
-    # @mate = set_mate
-    # @trip = set_trip
     @enrollment = Enrollment.new(enrollment_params)
-    @enrollment.mate_id = set_mate.id
-    @enrollment.trip_id = set_trip.id
     @enrollment.save
-    if enrollment.save
-      redirect_to trip_path(@trip)
+    if @enrollment.save
+      redirect_to user_trips_path(@user)
     else
       render :new, status: :unprocessable_entity
     end
@@ -27,14 +23,6 @@ class EnrollmentsController < ApplicationController
   end
 
   private
-
-  def set_mate
-    @mate = Mate.find(params[:id])
-  end
-
-  def set_trip
-    @trip = Trip.find(params[:id])
-  end
 
   def enrollment_params
     params.require(:enrollment).permit(:mate_id, :trip_id)
