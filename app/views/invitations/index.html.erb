@@ -1,0 +1,45 @@
+<div class="page-container">
+<div class="category-container" data-controller="dropdown-reveal">
+  <div class="results-header dropdown-header" data-action="click->dropdown-reveal#revealContent">
+    <% count = 0
+    unless @upcoming_trips == nil
+      count = @upcoming_trips.length
+    end
+    %>
+    <h1 style="display: inline">Upcoming trips (<%= count %>)</h1>
+    <i class="caret-down fa-solid fa-angle-down" data-dropdown-reveal-target="arrow"></i>
+  </div>
+  <div class="invisible-div" data-dropdown-reveal-target="content">
+    <% unless @upcoming_trips == nil
+      @upcoming_trips.each do |trip| %>
+      <!-- Trip card -->
+        <div class="trip-card">
+          <div class="left-box">
+            <%= link_to trip_path(trip) do %>
+            <div class="trip-photo-box">
+              <% if trip.photo.attached? %>
+                <%= cl_image_tag(trip.photo.key, class: "mini-trip-photo") %>
+              <% else %>
+                <%= image_tag asset_path("default_trip_photo.jpeg"), class: "mini-trip-photo" %>
+              <% end %>
+            </div>
+            <% end %>
+            <div class="trip-summary-box">
+              <%= link_to trip_path(trip) do %>
+                <h3><%= trip.country %></h3>
+              <% end %>
+              <p><%= trip.start_date.strftime("%a, %d %b %Y") %> → <%= trip.end_date.strftime("%a, %d %b %Y") %></p>
+              <% trip.mates.length == 1 ? word = "mate" : word = "mates" %>
+              <p> <%= "#{trip.mates.length} #{word}"%></p>
+            </div>
+          </div>
+          <div class="right-box">
+            <% origin = trip.creator == current_user ?  "me" : trip.creator.nickname %>
+              <span> Created by<br/>
+              <strong><%= origin %></strong>
+              </span>
+          </div>
+        </div>
+      <% end %>
+     <% end %>
+  </div>
