@@ -93,7 +93,6 @@ User.all.each do |user|
       skipper_id: user.id, max_capacity: rand(6..10), creator_id: user.id
     )
     trip.save!
-    puts "#{trip.id} - #{trip.skipper.id} and #{trip.creator.id}"
   end
 end
 
