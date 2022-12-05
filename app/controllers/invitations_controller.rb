@@ -1,5 +1,7 @@
 class InvitationsController < ApplicationController
+
   def create
+
     @user = current_user
     @invitation = Invitation.new(invitation_params)
     @invitation.sender = @user
