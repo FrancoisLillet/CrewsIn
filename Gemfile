@@ -30,6 +30,9 @@ gem "jbuilder"
 # Seed with Faker
 gem 'faker', '~> 3.0'
 
+# For emails
+gem "letter_opener"
+
 # Country selector
 gem 'country_select', require: 'country_select_without_sort_alphabetical'
 
