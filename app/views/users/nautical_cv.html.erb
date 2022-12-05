@@ -240,7 +240,7 @@
               <span class="close" data-action="click->modal-reveal#toggleWindow">&times;</span>
               <h4>Add a new sailing experience</h4><br/>
               <%= simple_form_for([@user, @experience]) do |f| %>
-                <%= f.input :country, collection: Mate.countries %>
+                <%= f.input :country, collection: Mate.countries, required: true%>
                 <%= f.input :start_date %>
                 <%= f.input :end_date %>
                 <%= f.input :sailing_area %>

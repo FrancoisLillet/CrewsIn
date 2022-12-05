@@ -2,7 +2,7 @@ class Trip < ApplicationRecord
   has_one_attached :photo
   has_one_attached :summary_file
 
-  belongs_to :skipper, class_name: "User"
+  belongs_to :skipper, class_name: "User", optional: true
   belongs_to :creator, class_name: "User"
   has_many :enrollments
   has_many :invitations
