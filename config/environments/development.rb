@@ -79,19 +79,9 @@ Rails.application.configure do
     port: 3000,
     protocol: 'http'
   }
+  # This tells the local computer which domain is to be considered when opening a link.
 
   # SMTP settings for gmail
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    address:              'smtp.gmail.com',
-    port:                 587,
-    domain:               'gmail.com',
-    user_name:            ENV['GMAIL_ADDRESS'],
-    password:             ENV['GMAIL_APP_PASSWORD'],
-    authentication:       'plain',
-    enable_starttls_auto: true,
-    open_timeout:         5,
-    read_timeout:         5
-  }
 
 end
