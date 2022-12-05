@@ -18,6 +18,7 @@ class EnrollmentsController < ApplicationController
   def destroy
     @user = current_user
     @enrollment = Enrollment.find(params[:id])
+    @trip = @enrollment.trip
     @enrollment.destroy
     redirect_to trip_path(@trip)
   end
