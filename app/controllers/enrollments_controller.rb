@@ -2,14 +2,12 @@ class EnrollmentsController < ApplicationController
   def new
     @user = current_user
     @enrollment = Enrollment.new
-    @ur_mates = Mate.all.select { |m| m.user_id == @user.id }
     @ur_trips = Trip.all.select { |t| t.creator_id == @user.id }
   end
 
   def create
     @user = current_user
     @enrollment = Enrollment.new(enrollment_params)
-    @ur_mates = Mate.all.select { |m| m.user_id == @user.id }
     @ur_trips = Trip.all.select { |t| t.creator_id == @user.id }
     @enrollment.save
     if @enrollment.save

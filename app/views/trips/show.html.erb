@@ -65,6 +65,19 @@
         </div>
       </div>
     <% end %>
+
+    <%= simple_form_for([@user, @trip, @enrollment], data: {turbo: false}) do |f| %>
+        <%= f.collection_select :mate_id, @user.mates, :id, :first_name %>
+        <%= f.collection_select :trip_id, @ur_trips, :id, :country %>
+        <%#<% f.input_field :trip_id, value: @enrollment.trip_id %>
+        <%= f.submit "Submit", class: "btn btn-success"%>
+    <% end %>
+
+
+
+
+
+
     <i class="fa-solid fa-pen-to-square"></i><%= link_to "Edit ", edit_user_trip_path(@trip) %>
     <i class="fa-solid fa-trash"></i><%= link_to "Delete",
               [@user, @trip],
