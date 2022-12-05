@@ -1,8 +1,10 @@
 class InvitationsController < ApplicationController
 
   def index
-    @invitations_received = @user.invitations_received.map{ |invitation_received| invitation_received.trip }
+    @user = current_user
+    @invited_trips = @user.invitations_received.map{ |invitation_received| invitation_received.trip }
 
+    @invited_trips = Invitation.where(receiver_email: @user.email).map{ |invitation_received| invitation_received.trip }
   end
 
   def create
