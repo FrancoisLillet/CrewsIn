@@ -2,8 +2,8 @@
   <div class="page-container">
     <!-- Trip card -->
 
-    <div class="trip-show-card" data-controller="modal-reveal">
-      <div style="display: flex; flex-wrap: wrap">
+    <div class="trip-show-card">
+      <div style="display: flex; flex-wrap: wrap" data-controller="modal-reveal">
         <div class="left-box">
           <div class="trip-photo-box">
             <% if @trip.photo.attached? %>
@@ -13,7 +13,7 @@
             <% end %>
           </div>
           <div class="trip-summary-box">
-            <h3><%= @trip.country %></h3>
+            <h2><%= @trip.country %></h2>
             <p><%= @trip.start_date.strftime("%a, %d %b %Y") %> → <%= @trip.end_date.strftime("%a, %d %b %Y") %></p>
             <% @trip.mates.length == 1 ? word = "mate" : word = "mates" %>
             <p> <%= "#{@trip.mates.length} #{word}"%></p>
@@ -55,8 +55,48 @@
 
 
       <!-- Mates (crew list) -->
-      <div id="crew-list-container" style="background-color: green">
-        <div class="results-container">
+      <div id="crew-list-container">
+        <% count = 0 %>
+        <% unless @trip.mates == nil %>
+          <% count = @trip.mates.length %>
+        <% end %>
+        <h2 class="text-center">Current participants (<%= count %>)</h2>
+          <!-- Div where we enroll crew members or add new mates -->
+          <div class="profile-container" data-controller="dropdown-reveal">
+            <div class="results-header dropdown-header add-crew-member-button" data-action="click->dropdown-reveal#revealContent">
+              <h3 style="display: inline"><i class="fa-solid fa-circle-plus"></i> Add a participant </h3>
+                <i class="caret-down fa-solid fa-angle-down"></i>
+            </div>
+            <div class="invisible-div display-none" data-dropdown-reveal-target="content">
+              <%# Add only the mates that are not in the trip yet %>
+              <% @available_mates = @user.mates - @trip.mates %>
+              <% if @available_mates.empty? %>
+                <p class="text-center">Your list of available mates is empty.</p>
+              <% else %>
+                <p class="text-center">Choose a participant among the list of your mates:</p>
+                <% @available_mates.each do |mate| %>
+                  <%= simple_form_for([@user, @trip, @enrollment], data: {turbo: false}) do |f| %>
+                  <%= f.input :mate_id, as: :hidden, input_html: { value: mate.id } %>
+                  <div class="text-center">
+                    <%= f.submit "#{mate.first_name} #{mate.last_name}", class: "crew-member-button" %>
+                  </div>
+                  <% end %>
+                <% end %>
+              <% end %>
+              <br/>
+              <p class="text-center">If the participant you want to add to the trip is not in the list of your mates, you can create a new mate:</p>
+              <div class="addition-button" style="font-size: 22px" data-action="click->dropdown-reveal#revealContent">
+                <i class="fa-solid fa-circle-plus"></i> Create a new mate
+              </div>
+            </div>
+          </div>
+
+
+          <div name="invisible-div-to-add-crew-members">
+            <div class="display-none" data-dropdown-reveal-target="content">
+
+            </div>
+          </div>
           <% @trip.mates.each do |mate|%>
             <div class="profile-container" data-controller="dropdown-reveal">
               <div class="results-header dropdown-header" data-action="click->dropdown-reveal#revealContent">
@@ -95,14 +135,6 @@
           <% end %>
         </div>
       </div>
-      <%# Add only the mates that are not in the trip yet %>
-      <% @available_mates = @user.mates - @trip.mates %>
-      <% unless @available_mates.empty? %>
-        <%= simple_form_for([@user, @trip, @enrollment], data: {turbo: false}) do |f| %>
-            <%= f.collection_select :mate_id, @available_mates, :id, :first_name, {},  { class: 'col-3 form-control-lg mb-2' } %>
-            <%= f.submit "Add Mate", class: "button-main"%>
-        <% end %>
-      <% end %>
 
       <i class="fa-solid fa-pen-to-square"></i><%= link_to "Edit ", edit_user_trip_path(@trip) %>
       <i class="fa-solid fa-trash"></i><%= link_to "Delete",

@@ -25,7 +25,7 @@
               <% end %>
             </div>
             <div class="trip-summary-box">
-              <h3><%= invitation.trip.country %></h3>
+              <h2><%= invitation.trip.country %></h2>
               <p><%= invitation.trip.start_date.strftime("%a, %d %b %Y") %> → <%= invitation.trip.end_date.strftime("%a, %d %b %Y") %></p>
               <% invitation.trip.mates.length == 1 ? word = "mate" : word = "mates" %>
               <p> <%= "#{invitation.trip.mates.length} #{word}"%></p>
