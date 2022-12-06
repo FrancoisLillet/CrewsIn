@@ -1,4 +1,4 @@
-<% if @trip.creator_id == current_user.id || Invitation.exists?(receiver_id: current_user.id, trip_id: @trip.id) %>
+<% if @trip.creator_id == current_user.id || @invited_users.include?(@user.id) %>
   <div class="page-container">
     <!-- Trip card -->
     <div class="trip-card" data-controller="modal-reveal">
