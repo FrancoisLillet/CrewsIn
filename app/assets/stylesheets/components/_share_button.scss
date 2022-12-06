@@ -1,17 +1,13 @@
 .share-button {
   text-align:center;
-  font-size: 24px;
   max-width: 512px;
-  margin: 16px auto;
   padding: 8px 32px;
+  margin: 4px auto;
   border-radius: 32px;
-  color: $sidebar-background
-
 }
 
 .share-button:hover {
   cursor: pointer;
-  background-color: $sidebar-background;
   color: #FFFFFF;
   transition-duration: 0.5s;
 }
@@ -23,4 +19,35 @@
 
 .share-button span {
   font-size: 16px;
+}
+
+// Button to send invitations
+
+.sending-invitation-button {
+  color: $sidebar-background;
+  padding: 8px 32px;
+}
+
+.sending-invitation-button:hover {
+  background-color: $sidebar-background;
+}
+
+// Button ton accept invitations
+
+.accept-invitation-button {
+  color: $sidebar-background;
+  padding: 4px 32px;
+}
+
+.accept-invitation-button:hover {
+  background-color: $sidebar-background;
+}
+
+.decline-invitation-button {
+  color: $danger-red;
+  padding: 4px 32px;
+}
+
+.decline-invitation-button:hover {
+  background-color: $danger-red;
 }
