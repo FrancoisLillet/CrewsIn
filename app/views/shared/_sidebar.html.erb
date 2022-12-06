@@ -3,10 +3,12 @@
     <%= tag.div class: "sidebar-logo" %>
   </div>
   <div name="sidebar-new-trip" class="sidebar-section centered">
-    <div class="sidebar-new-trip">
-      <%= tag.div class: "icon-new-trip" %>
+  <%= link_to new_user_trip_path(current_user.id) do %>
+      <div class="sidebar-new-trip">
+        <%= tag.div class: "icon-new-trip" %>
+      </div>
+  <% end %>
     </div>
-  </div>
   <div name="sidebar-buttons" class="sidebar-section">
     <%= link_to user_trips_path(current_user.id) do %>
       <div class="sidebar-button">

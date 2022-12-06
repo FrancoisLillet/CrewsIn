@@ -241,8 +241,8 @@
               <h4>Add a new sailing experience</h4><br/>
               <%= simple_form_for([@user, @experience]) do |f| %>
                 <%= f.input :country, collection: Mate.countries, required: true%>
-                <%= f.input :start_date %>
-                <%= f.input :end_date %>
+                <%= f.input :start_date, as: :date, html5: true, required: true, format: 'yyyy-mm-dd' %>
+                <%= f.input :end_date, as: :date, html5: true, required: true, format: 'yyyy-mm-dd' %>
                 <%= f.input :sailing_area %>
                 <%= f.input :role, collection: ["Skipper", "Co-skipper", "Active mate", "Passenger"], label: "My role onboard" %>
                 <%= f.input :boat_model %>
