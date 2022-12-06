@@ -25,7 +25,7 @@
           </span>
         </div>
         <div>
-          <div class="share-button" data-action="click->modal-reveal#toggleWindow">
+          <div class="share-button sending-invitation-button" data-action="click->modal-reveal#toggleWindow">
             <span><i class="fa-solid fa-share-from-square"></i> Share this trip </span>
           </div>
         </div>
@@ -88,8 +88,8 @@
             </div>
           </div>
         </div>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
     <%# Add only the mates that are not in the trip yet %>
     <% @available_mates = @user.mates - @trip.mates %>
     <% unless @available_mates.empty? %>

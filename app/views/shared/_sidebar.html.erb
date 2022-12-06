@@ -21,16 +21,18 @@
     </div>
     -->
       <!-- Notification circle is visible when there are some pending invitation -->
-    <div class="sidebar-button">
-      <div style="position:relative">
-        <%= image_tag 'icon-bell.svg', class: "sidebar-icon" %>
-          <% pending_invitations = Invitation.where(receiver_email: current_user.email).map{ |invitation_received| invitation_received.trip } %>
-            <% unless pending_invitations.empty? %>
-            <span id="nofitication-circle"><%= pending_invitations.length %></span>
-            <% end %>
+    <%= link_to user_invitations_path(current_user.id) do %>
+      <div class="sidebar-button">
+          <div style="position:relative">
+            <%= image_tag 'icon-bell.svg', class: "sidebar-icon" %>
+              <% pending_invitations = Invitation.where(receiver_email: current_user.email).map{ |invitation_received| invitation_received.trip } %>
+                <% unless pending_invitations.empty? %>
+                <span id="nofitication-circle"><%= pending_invitations.length %></span>
+                <% end %>
+          </div>
+          <div class="sidebar-button-text">Invitations</div>
       </div>
-      <div class="sidebar-button-text">Invitations</div>
-    </div>
+    <% end %>
     <%= link_to user_path(current_user.id) do %>
       <div class="sidebar-button">
         <%= image_tag 'icon-user.svg', class: "sidebar-icon" %>

@@ -10,30 +10,52 @@
     <i class="caret-down fa-solid fa-angle-down" data-dropdown-reveal-target="arrow"></i>
   </div>
   <div class="invisible-div" data-dropdown-reveal-target="content">
-    <% unless @invited_trips == nil
-      @invited_trips.each do |invited_trip| %>
+    <% if @invited_trips == nil %>
+      <p>When other users share their trip with you, you will be able to collaborate!</p>
+    <% else %>
+      <%= @invitations_received.each do |invitation| %>
       <!-- Trip card -->
         <div class="trip-card">
           <div class="left-box">
             <div class="trip-photo-box">
-              <% if invited_trip.photo.attached? %>
-                <%= cl_image_tag(invited_trip.photo.key, class: "mini-trip-photo") %>
+              <% if invitation.trip.photo.attached? %>
+                <%= cl_image_tag(invitation.trip.photo.key, class: "mini-trip-photo") %>
               <% else %>
                 <%= image_tag asset_path("default_trip_photo.jpeg"), class: "mini-trip-photo" %>
               <% end %>
             </div>
             <div class="trip-summary-box">
-              <h3><%= invited_trip.country %></h3>
-              <p><%= invited_trip.start_date.strftime("%a, %d %b %Y") %> → <%= invited_trip.end_date.strftime("%a, %d %b %Y") %></p>
-              <% invited_trip.mates.length == 1 ? word = "mate" : word = "mates" %>
-              <p> <%= "#{invited_trip.mates.length} #{word}"%></p>
+              <h3><%= invitation.trip.country %></h3>
+              <p><%= invitation.trip.start_date.strftime("%a, %d %b %Y") %> → <%= invitation.trip.end_date.strftime("%a, %d %b %Y") %></p>
+              <% invitation.trip.mates.length == 1 ? word = "mate" : word = "mates" %>
+              <p> <%= "#{invitation.trip.mates.length} #{word}"%></p>
             </div>
           </div>
           <div class="right-box">
-            <% origin = invited_trip.creator == current_user ?  "me" : invited_trip.creator.nickname %>
+
+
+            <% origin = invitation.trip.creator == current_user ?  "me" : invitation.trip.creator.nickname %>
+
+            <div style="text-align: right; padding: 0 32px">
               <span> Created by<br/>
-              <strong><%= origin %></strong>
+                <strong><%= origin %></strong>
               </span>
+            </div>
+            <div>
+              <%= link_to invitation_path(invitation), data: {turbo_method: :patch} do %>
+                <div class="share-button accept-invitation-button">
+                  <span><i class="fa-solid fa-circle-check"></i> Accept </span>
+                </div>
+              <% end %>
+              <%= link_to invitation_path(invitation), data: {turbo_method: :delete, turbo_confirm: "Are you sure you want to decline this invitation?"} do %>
+                <div class="share-button decline-invitation-button">
+                  <span style="color: $danger-red !important"><i class="fa-solid fa-circle-xmark"></i> Decline </span>
+                </div>
+              <% end %>
+            </div>
+
+
+
           </div>
         </div>
       <% end %>
