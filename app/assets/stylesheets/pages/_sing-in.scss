@@ -37,7 +37,6 @@
 
 #user_email {
   height: 50px;
-  margin-bottom: 35px;
   background-color: white;
   border-radius: 5px 0;
   border: 1px solid black;
@@ -48,13 +47,30 @@
   background-color: white;
   border-radius: 5px 0;
   border: 1px solid black;
-  margin-bottom: -15px;
+
+}
+
+#user_nickname {
+  height: 50px;
+  background-color: white;
+  border-radius: 5px 0;
+  border: 1px solid black;
+
+}
+
+#user_password_confirmation {
+  height: 50px;
+  background-color: white;
+  border-radius: 5px 0;
+  border: 1px solid black;
+
 }
 
 .user_remember_me
 {
   margin-top: 50px;
 }
+
 
 
 .login-button-container > input {
