@@ -6,8 +6,14 @@
 
       <%= simple_form_for([@user, @trip], data: {turbo: false}) do |f| %>
           <%= f.input :country, as: :string %>
-          <%= f.input :start_date, as: :date, html5: true, required: true, format: 'yyyy-mm-dd' %>
-          <%= f.input :end_date, as: :date, html5: true, required: true, format: 'yyyy-mm-dd' %>
+          <div class = dates-container>
+            <div class = date>
+              <%= f.input :start_date, as: :date, html5: true, required: true, format: 'yyyy-mm-dd' %>
+            </div>
+            <div class = date>
+              <%= f.input :end_date, as: :date, html5: true, required: true, format: 'yyyy-mm-dd' %>
+            </div>
+          </div>
           <%= f.input :starting_point %>
           <%= f.input :max_capacity, as: :integer %>
           <%= f.input :photo %>
