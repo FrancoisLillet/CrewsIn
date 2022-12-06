@@ -190,9 +190,13 @@
 
 #nofitication-circle {
   position: absolute;
+  text-align: center;
+  font-size: 18px;
+  width: 32px;
+  height: 32px;
   left: 28px;
   top: 4px;
-  padding: 2px 4px;
+  padding: 3px 4px;
   border-radius: 48px;
   background-color: $red;
 
