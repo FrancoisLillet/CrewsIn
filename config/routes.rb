@@ -12,7 +12,9 @@ Rails.application.routes.draw do
     resources :experiences, only: %i[create update destroy]
     resources :trips, only: %i[index new create edit update destroy] do
       resources :enrollments, only: %i[new create]
+      resources :invitations, only: %i[create update]
     end
+    resources :invitations, only: %i[index]
   end
   resources :mates, only: %i[destroy]
   resources :trips, only: %i[show]

@@ -19,6 +19,7 @@ class TripsController < ApplicationController
     @user = current_user
     @ur_trips = Trip.all.select { |t| t.creator_id == @user.id }
     set_trip
+    @invitation = Invitation.new
   end
 
   def new
@@ -30,7 +31,6 @@ class TripsController < ApplicationController
     @trip = Trip.new(trip_params)
     @user = current_user
     @trip.creator_id = @user.id
-    @trip.skipper_id = @user.id
     if @trip.save
       redirect_to user_trips_path
     else
