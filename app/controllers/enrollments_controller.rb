@@ -2,16 +2,16 @@ class EnrollmentsController < ApplicationController
   def new
     @user = current_user
     @enrollment = Enrollment.new
-    @ur_trips = Trip.all.select { |t| t.creator_id == @user.id }
   end
 
   def create
     @user = current_user
     @enrollment = Enrollment.new(enrollment_params)
-    @ur_trips = Trip.all.select { |t| t.creator_id == @user.id }
+    @trip = Trip.find(params[:trip_id])
+    @enrollment.trip = @trip
     @enrollment.save
     if @enrollment.save
-      redirect_to user_trips_path(@user)
+      redirect_to trip_path(@trip)
     else
       render :new, status: :unprocessable_entity
     end

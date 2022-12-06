@@ -65,12 +65,13 @@
         </div>
       </div>
     <% end %>
-
-    <%= simple_form_for([@user, @trip, @enrollment], data: {turbo: false}) do |f| %>
-        <%= f.collection_select :mate_id, @user.mates, :id, :first_name %>
-        <%= f.collection_select :trip_id, @ur_trips, :id, :country %>
-        <%#<% f.input_field :trip_id, value: @enrollment.trip_id %>
-        <%= f.submit "Submit", class: "btn btn-success"%>
+    <%# Add only the mates that are not in the trip yet %>
+    <% @available_mates = @user.mates - @trip.mates %>
+    <% unless @available_mates.empty? %>
+      <%= simple_form_for([@user, @trip, @enrollment], data: {turbo: false}) do |f| %>
+          <%= f.collection_select :mate_id, @available_mates, :id, :first_name %>
+          <%= f.submit "Add Mate", class: "btn btn-success"%>
+      <% end %>
     <% end %>
 
 
