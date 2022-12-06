@@ -4,4 +4,5 @@ class Enrollment < ApplicationRecord
 
   validates :mate_id, presence: true
   validates :trip_id, presence: true
+
 end

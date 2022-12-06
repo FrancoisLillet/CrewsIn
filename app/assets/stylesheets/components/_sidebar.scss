@@ -21,6 +21,7 @@
     align-items: flex-end;
     flex-direction: column;
     justify-content: center;
+    margin-top: 18px;
   }
 
   .sidebar {
@@ -74,6 +75,7 @@
     font-weight: 400;
     align-items: center;
     flex-direction: row;
+    position: relative;
   }
 
   .sidebar-button:hover {
@@ -112,6 +114,7 @@
     align-items: flex-end;
     flex-direction: column;
     justify-content: center;
+    margin-top: 18px;
   }
 
   .sidebar {
@@ -184,3 +187,20 @@
     background-position: left center;
   }
 }
+
+// Notifications
+
+#nofitication-circle {
+  position: absolute;
+  text-align: center;
+  font-size: 18px;
+  width: 32px;
+  height: 32px;
+  left: 28px;
+  top: 4px;
+  padding: 3px 4px;
+  border-radius: 48px;
+  background-color: $red;
+  transition: ease 0.4s;
+}
+

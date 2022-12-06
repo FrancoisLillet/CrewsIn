@@ -1,69 +1,154 @@
-<% if @trip.creator_id == current_user.id %>
+<% if @trip.creator_id == current_user.id || @invited_users.include?(@user.id) %>
   <div class="page-container">
     <!-- Trip card -->
-    <div class="trip-card">
-      <div class="left-box">
-        <div class="trip-photo-box">
-          <% if @trip.photo.attached? %>
-            <%= cl_image_tag(@trip.photo.key, class: "mini-trip-photo") %>
-          <% else %>
-            <%= image_tag asset_path("default_trip_photo.jpeg"), class: "mini-trip-photo" %>
-          <% end %>
-        </div>
-        <div class="trip-summary-box">
-          <h3><%= @trip.country %></h3>
-          <p><%= @trip.start_date.strftime("%a, %d %b %Y") %> → <%= @trip.end_date.strftime("%a, %d %b %Y") %></p>
-          <% @trip.mates.length == 1 ? word = "mate" : word = "mates" %>
-          <p> <%= "#{@trip.mates.length} #{word}"%></p>
-        </div>
-      </div>
-      <div class="right-box">
-        <% origin = @trip.creator == current_user ?  "me" : @trip.creator.nickname %>
-        <div style="text-align: right">
-          <span> Created by<br/>
-          <strong><%= origin %></strong>
-          </span>
-        </div>
-      </div>
-    </div>
 
-    <div class="results-container">
-      <% @trip.mates.each do |mate|%>
-          <div class="profile-container" data-controller="dropdown-reveal">
-            <div class="results-header" data-action="click->dropdown-reveal#revealContent">
-              <h1 style="display: inline"><%= "#{mate.first_name} #{mate.last_name}" %> </h1>
-                <i class="caret-down fa-solid fa-angle-down"></i>
-            </div>
-          <div class="invisible-div display-none" data-dropdown-reveal-target="content">
-            <div class="grid-container">
-              <div class="left-column"><p>First name</p></div><div class="right-column"><p><%= mate.first_name%></p></div>
-              <div class="left-column"><p>Last name</p></div><div class="right-column"><p><%= mate.last_name%></p></div>
-              <div class="left-column"><p>Date of birth</p></div><div class="right-column"><p><%= mate.date_of_birth.strftime("%d %b %Y")%></p></div>
-              <div class="left-column"><p>Address</p></div><div class="right-column"><p><%= mate.address%></p></div>
-              <div class="left-column"><p>Phone number</p></div><div class="right-column"><p><%= mate.phone_number%></p></div>
-              <div class="left-column"><p>Nationality</p></div><div class="right-column"><p><%= mate.nationality%></p></div>
-              <div class="left-column"><p>Country of residence</p></div><div class="right-column"><p><%= mate.country_of_residence %></p></div>
-              <div class="left-column"><p>Passport_number</p></div><div class="right-column"><p><%= mate.passport_number%></p></div>
-              <div class="left-column"><p>expiration_date</p></div><div class="right-column"><p><%= mate.expiration_date.strftime("%d %b %Y")%></p></div>
-            </div>
-            <div class="flex-link-container">
-              <!-- <%= link_to "Edit", edit_user_mate_path(@user.id, mate.id), class: "button-main" %> -->
-              <div class="link-invisible-div">
-              <%= link_to edit_user_mate_path(@user.id, mate.id) do %>
-                <i class="fa-solid fa-pen-to-square"></i>
-                  <span> edit</span>
-                <% end %>
-              </div>
+    <div class="trip-show-card">
+      <div style="display: flex; flex-wrap: wrap" data-controller="modal-reveal">
+        <div class="left-box">
+          <div class="trip-photo-box">
+            <% if @trip.photo.attached? %>
+              <%= cl_image_tag(@trip.photo.key, class: "mini-trip-photo") %>
+            <% else %>
+              <%= image_tag asset_path("default_trip_photo.jpeg"), class: "mini-trip-photo" %>
+            <% end %>
+          </div>
+          <div class="trip-summary-box">
+            <h2><%= @trip.country %></h2>
+            <p><%= @trip.start_date.strftime("%a, %d %b %Y") %> → <%= @trip.end_date.strftime("%a, %d %b %Y") %></p>
+            <% @trip.mates.length == 1 ? word = "mate" : word = "mates" %>
+            <p> <%= "#{@trip.mates.length} #{word}"%></p>
+          </div>
+        </div>
+        <div class="right-box">
+          <% origin = @trip.creator == current_user ?  "me" : @trip.creator.nickname %>
+          <div style="text-align: right; padding: 0 32px">
+            <span> Created by<br/>
+            <strong><%= origin %></strong>
+            </span>
+          </div>
+          <div>
+            <div class="share-button sending-invitation-button" data-action="click->modal-reveal#toggleWindow">
+              <span><i class="fa-solid fa-share-from-square"></i> Share this trip </span>
             </div>
           </div>
         </div>
+
+            <!-- Modal for invitation  -->
+            <div id="myModal" class="modal-window display-none" data-modal-reveal-target="modalWindow">
+              <!-- Modal content -->
+              <div class="modal-content">
+                <span class="close" data-action="click->modal-reveal#toggleWindow">&times;</span>
+                <h4>Share this trip to a friend</h4><br/>
+                <p>They will be able to add themselves and their mates (children, partner, etc...) to the trip.</p>
+                <%= simple_form_for [@user, @trip, @invitation] do |f| %>
+
+                  <%= f.input :receiver_email, label: "Please enter their email" %>
+
+                  <div class="flex-link-container">
+                  <%= f.submit "Send invitation", class: "button-main" %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+
       </div>
-    <% end %>
-    <i class="fa-solid fa-pen-to-square"></i><%= link_to "Edit ", edit_user_trip_path(@trip) %>
-    <i class="fa-solid fa-trash"></i><%= link_to "Delete",
-              [@user, @trip],
-              data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
-            %></p>
+
+
+      <!-- Mates (crew list) -->
+      <div id="crew-list-container">
+        <% count = 0 %>
+        <% unless @trip.mates == nil %>
+          <% count = @trip.mates.length %>
+        <% end %>
+        <h2 class="text-center">Current participants (<%= count %>)</h2>
+          <!-- Div where we enroll crew members or add new mates -->
+          <div class="profile-container-mates" data-controller="dropdown-reveal">
+            <div class="results-header dropdown-header add-crew-member-button" data-action="click->dropdown-reveal#revealContent">
+              <h3 style="display: inline"><i class="fa-solid fa-circle-plus"></i> Add a participant </h3>
+                <i class="caret-down fa-solid fa-angle-down"></i>
+            </div>
+
+            <div class="invisible-div display-none" data-dropdown-reveal-target="content">
+
+              <div><!-- Case 1 : Select one of your available mates -->
+                <% @available_mates = @user.mates - @trip.mates %>
+                <% if @available_mates.empty? %>
+                  <p class="text-center">Your list of available mates is empty.</p>
+                <% else %>
+                  <p class="text-center">Choose a participant among the list of your mates:</p>
+                  <% @available_mates.each do |mate| %>
+                    <%= simple_form_for([@user, @trip, @enrollment], data: {turbo: false}) do |f| %>
+                    <%= f.input :mate_id, as: :hidden, input_html: { value: mate.id } %>
+                    <div class="text-center">
+                      <%= f.submit "#{mate.first_name} #{mate.last_name}", class: "crew-member-button" %>
+                    </div>
+                    <% end %>
+                  <% end %>
+                <% end %>
+              </div>
+              <br/>
+              <div><!-- Case 2 : Create a mate -->
+                <p class="text-center">If the participant you want to add to the trip is not in the list of your mates, you can create a new mate:</p>
+                <div class="addition-button" style="font-size: 22px" data-action="click->dropdown-reveal#revealContent">
+                  <i class="fa-solid fa-circle-plus"></i> Create a new mate
+                </div>
+              </div>
+              <div><!-- Case 3 : Invite someone -->
+              </div>
+            </div>
+          </div>
+
+
+          <div name="invisible-div-to-add-crew-members">
+            <div class="display-none" data-dropdown-reveal-target="content">
+
+            </div>
+          </div>
+          <% @trip.mates.each do |mate|%>
+            <div class="profile-container-mates" data-controller="dropdown-reveal">
+              <div class="results-header dropdown-header" data-action="click->dropdown-reveal#revealContent">
+                <h3 style="display: inline"><%= "#{mate.first_name} #{mate.last_name}" %> </h3>
+                  <i class="caret-down fa-solid fa-angle-down"></i>
+              </div>
+              <div class="invisible-div display-none" data-dropdown-reveal-target="content">
+                <div class="grid-container">
+                  <div class="left-column"><p>First name</p></div><div class="right-column"><p><%= mate.first_name%></p></div>
+                  <div class="left-column"><p>Last name</p></div><div class="right-column"><p><%= mate.last_name%></p></div>
+                  <div class="left-column"><p>Date of birth</p></div><div class="right-column"><p><%= mate.date_of_birth.strftime("%d %b %Y")%></p></div>
+                  <div class="left-column"><p>Address</p></div><div class="right-column"><p><%= mate.address%></p></div>
+                  <div class="left-column"><p>Phone number</p></div><div class="right-column"><p><%= mate.phone_number%></p></div>
+                  <div class="left-column"><p>Nationality</p></div><div class="right-column"><p><%= mate.nationality%></p></div>
+                  <div class="left-column"><p>Country of residence</p></div><div class="right-column"><p><%= mate.country_of_residence %></p></div>
+                  <div class="left-column"><p>Passport_number</p></div><div class="right-column"><p><%= mate.passport_number%></p></div>
+                  <div class="left-column"><p>expiration_date</p></div><div class="right-column"><p><%= mate.expiration_date.strftime("%d %b %Y")%></p></div>
+                </div>
+                <div class="flex-link-container">
+                  <!-- <%= link_to "Edit", edit_user_mate_path(@user.id, mate.id), class: "button-main" %> -->
+                  <div class="link-invisible-div">
+                    <%= link_to edit_user_mate_path(@user.id, mate.id) do %>
+                      <i class="fa-solid fa-pen-to-square"></i>
+                        <span> edit</span>
+                    <% end %>
+                  </div>
+                  <% enrollment = Enrollment.find_by(mate: mate, trip: @trip) %>
+                  <i class="fa-solid fa-trash"></i><%= link_to "Remove Enrollment",
+                    enrollment_path(enrollment),
+                    data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+                  %></p>
+
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <i class="fa-solid fa-pen-to-square"></i><%= link_to "Edit ", edit_user_trip_path(@trip) %>
+      <i class="fa-solid fa-trash"></i><%= link_to "Delete",
+                [@user, @trip],
+                data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+              %></p>
+    </div>
   </div>
 <% else %>
   <%= link_to "Back to your trips", user_trips_path(@user), class: "button-main"%>

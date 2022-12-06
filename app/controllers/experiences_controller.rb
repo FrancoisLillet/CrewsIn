@@ -1,7 +1,4 @@
 class ExperiencesController < ApplicationController
-  def new
-    @experience = Experience.new
-  end
 
   def create
     @user = current_user
@@ -11,7 +8,7 @@ class ExperiencesController < ApplicationController
     if @experience.save
       redirect_to user_nautical_cv_path
     else
-      redirect_to user_path(@user)
+      redirect_to user_nautical_cv_path, alert: "Your experience was not saved because some fields were missing."
     end
   end
 
@@ -24,6 +21,13 @@ class ExperiencesController < ApplicationController
     else
       redirect_to user_path(@user)
     end
+  end
+
+  def destroy
+    @user = current_user
+    @experience = Experience.find(params[:id])
+    @experience.destroy
+    redirect_to user_nautical_cv_path(@user)
   end
 
   private

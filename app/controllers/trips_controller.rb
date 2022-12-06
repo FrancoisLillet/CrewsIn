@@ -15,8 +15,11 @@ class TripsController < ApplicationController
   end
 
   def show
-    @user = current_user
     set_trip
+    @invited_users = Invitation.where("trip_id = ? AND receiver_id IS NOT null", @trip.id).pluck(:receiver_id)
+    @enrollment = Enrollment.new
+    @user = current_user
+    @invitation = Invitation.new
   end
 
   def new
@@ -28,7 +31,6 @@ class TripsController < ApplicationController
     @trip = Trip.new(trip_params)
     @user = current_user
     @trip.creator_id = @user.id
-    @trip.skipper_id = @user.id
     if @trip.save
       redirect_to user_trips_path
     else
@@ -43,7 +45,7 @@ class TripsController < ApplicationController
 
   def update
     @user = current_user
-    set_trip
+  set_trip
     if @trip.update(trip_params)
       redirect_to user_trips_path(@user)
     else
@@ -56,6 +58,15 @@ class TripsController < ApplicationController
     set_trip
     @trip.destroy
     redirect_to user_trips_path(@user)
+  end
+
+  def summary
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: "summary"
+      end
+    end
   end
 
   private

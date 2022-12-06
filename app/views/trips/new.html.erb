@@ -1,13 +1,25 @@
 <div class = "page-container">
-  <h1>Create your New Trip</h1>
+  <div class = "central-container">
+    <div class = "text-center">
+      <h1>Create your New Trip</h1>
+    </div>
 
-    <%= simple_form_for([@user, @trip], data: {turbo: false}) do |f| %>
-        <%= f.input :country, as: :string %>
-        <%= f.input :start_date %>
-        <%= f.input :end_date %>
-        <%= f.input :starting_point %>
-        <%= f.input :max_capacity, as: :integer %>
-        <%= f.input :photo %>
-        <%= f.submit "Submit", class: "btn btn-success"%>
-    <% end %>
+      <%= simple_form_for([@user, @trip], data: {turbo: false}) do |f| %>
+          <%= f.input :country, as: :string %>
+          <div class = dates-container>
+            <div class = date>
+              <%= f.input :start_date, as: :date, html5: true, required: true, format: 'yyyy-mm-dd' %>
+            </div>
+            <div class = date>
+              <%= f.input :end_date, as: :date, html5: true, required: true, format: 'yyyy-mm-dd' %>
+            </div>
+          </div>
+          <%= f.input :starting_point %>
+          <%= f.input :max_capacity, as: :integer %>
+          <%= f.input :photo %>
+          <div class = "text-center">
+            <%= f.submit "Create", class: "button-main"%>
+          </div>
+      <% end %>
+  </div>
 </div>

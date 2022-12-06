@@ -1,5 +1,4 @@
 <div class="page-container">
-<div class="category-container" data-controller="dropdown-reveal">
   <div class="results-header dropdown-header" data-action="click->dropdown-reveal#revealContent">
     <% count = 0
     unless @upcoming_trips == nil
@@ -26,7 +25,7 @@
             <% end %>
             <div class="trip-summary-box">
               <%= link_to trip_path(trip) do %>
-                <h3><%= trip.country %></h3>
+                <h2><%= trip.country %></h2>
               <% end %>
               <p><%= trip.start_date.strftime("%a, %d %b %Y") %> → <%= trip.end_date.strftime("%a, %d %b %Y") %></p>
               <% trip.mates.length == 1 ? word = "mate" : word = "mates" %>
@@ -41,7 +40,7 @@
           </div>
         </div>
       <% end %>
-     <% end %>
+    <% end %>
   </div>
 
   <div class="category-container" data-controller="dropdown-reveal">
@@ -71,7 +70,7 @@
                 <% end %>
                 <div class="trip-summary-box">
                   <%= link_to trip_path(trip) do %>
-                    <h3><%= trip.country %></h3>
+                    <h2><%= trip.country %></h2>
                   <% end %>
                   <p><%= trip.start_date.strftime("%a, %d %b %Y") %> → <%= trip.end_date.strftime("%a, %d %b %Y") %></p>
                   <% trip.mates.length == 1 ? word = "mate" : word = "mates" %>
@@ -85,9 +84,7 @@
                 </span>
               </div>
             </div>
-        <% end %>
       <% end %>
-    </div>
+    <% end %>
   </div>
-<div>
 </div>

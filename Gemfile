@@ -30,6 +30,9 @@ gem "jbuilder"
 # Seed with Faker
 gem 'faker', '~> 3.0'
 
+# For emails
+gem "letter_opener"
+
 # Country selector
 gem 'country_select', require: 'country_select_without_sort_alphabetical'
 
@@ -54,7 +57,10 @@ gem "sassc-rails"
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
-
+gem 'wkhtmltopdf-binary'
+gem 'wicked_pdf'
+gem 'prawn-rails-forms'
+gem 'prawn'
 gem 'cloudinary'
 gem 'bootstrap'
 gem "devise"
