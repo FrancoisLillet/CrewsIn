@@ -5,6 +5,4 @@ class Enrollment < ApplicationRecord
   validates :mate_id, presence: true
   validates :trip_id, presence: true
 
-  after_create :generate_summary_pdf
-
 end
