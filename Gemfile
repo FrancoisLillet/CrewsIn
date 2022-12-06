@@ -57,7 +57,10 @@ gem "sassc-rails"
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
-
+gem 'wkhtmltopdf-binary'
+gem 'wicked_pdf'
+gem 'prawn-rails-forms'
+gem 'prawn'
 gem 'cloudinary'
 gem 'bootstrap'
 gem "devise"
