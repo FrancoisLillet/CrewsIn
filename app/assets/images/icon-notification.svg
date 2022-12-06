@@ -1,0 +1,21 @@
+<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <mask id="mask0_94_420" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="48" height="48">
+    <rect width="48" height="48" fill="#FFFFFF" />
+  </mask>
+  <g mask="url(#mask0_94_420)">
+    <path d="M9 37.45V35.9H13.1V20.3C13.1 17.6333 13.9333 15.2833 15.6 13.25C17.2667 11.2167 19.4333 9.96667 22.1 9.5V8.05C22.1 7.51667 22.275 7.08333 22.625 6.75C22.975 6.41667 23.4333 6.25 24 6.25C24.5667 6.25 25.025 6.41667 25.375 6.75C25.725 7.08333 25.9 7.51667 25.9 8.05V9.5C28.5667 9.96667 30.7417 11.2167 32.425 13.25C34.1083 15.2833 34.95 17.6333 34.95 20.3V35.9H39V37.45H9ZM24 43.25C23.1333 43.25 22.375 42.9417 21.725 42.325C21.075 41.7083 20.75 40.9333 20.75 40H27.25C27.25 40.9333 26.9417 41.7083 26.325 42.325C25.7083 42.9417 24.9333 43.25 24 43.25ZM14.6 35.9H33.4V20.3C33.4 17.7 32.4917 15.4833 30.675 13.65C28.8583 11.8167 26.6333 10.9 24 10.9C21.4 10.9 19.1833 11.8167 17.35 13.65C15.5167 15.4833 14.6 17.7 14.6 20.3V35.9Z" fill="#FFFFFF" />
+  </g>
+  <g>
+    <svg fill="red" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="24px" y="-4px" width="24px"
+      viewBox="0 0 24.394 24.394" style="enable-background:new 0 0 24.394 24.394;" xml:space="preserve">
+      <g>
+        <g id="b80_food">
+          <circle cx="12.197" cy="12.197" r="12.197"/>
+          <text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle" fill="#FFFFFF"><%= pending_invitations.length %></text>
+        </g>
+        <g id="Capa_1_82_">
+        </g>
+      </g>
+    </svg>
+  </g>
+</svg>

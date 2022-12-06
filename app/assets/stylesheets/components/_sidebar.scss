@@ -74,6 +74,7 @@
     font-weight: 400;
     align-items: center;
     flex-direction: row;
+    position: relative;
   }
 
   .sidebar-button:hover {
@@ -183,4 +184,16 @@
     background-repeat: no-repeat;
     background-position: left center;
   }
+}
+
+// Notifications
+
+#nofitication-circle {
+  position: absolute;
+  left: 28px;
+  top: 4px;
+  padding: 2px 4px;
+  border-radius: 48px;
+  background-color: $red;
+
 }
