@@ -7,9 +7,11 @@ class EnrollmentsController < ApplicationController
   def create
     @user = current_user
     @enrollment = Enrollment.new(enrollment_params)
+    @trip = Trip.find(params[:trip_id])
+    @enrollment.trip = @trip
     @enrollment.save
     if @enrollment.save
-      redirect_to user_trips_path(@user)
+      redirect_to trip_path(@trip)
     else
       render :new, status: :unprocessable_entity
     end
