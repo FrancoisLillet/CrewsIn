@@ -2,8 +2,8 @@
   <div class="page-container">
     <!-- Trip card -->
 
-    <div class="trip-show-card">
-      <div style="display: flex; flex-wrap: wrap" data-controller="modal-reveal">
+    <div class="trip-show-card" data-controller="modal-reveal">
+      <div style="display: flex; flex-wrap: wrap">
         <div class="left-box">
           <div class="trip-photo-box">
             <% if @trip.photo.attached? %>
@@ -69,31 +69,53 @@
             </div>
 
             <div class="invisible-div display-none" data-dropdown-reveal-target="content">
-
-              <div><!-- Case 1 : Select one of your available mates -->
-                <% @available_mates = @user.mates - @trip.mates %>
-                <% if @available_mates.empty? %>
-                  <p class="text-center">Your list of available mates is empty.</p>
-                <% else %>
-                  <p class="text-center">Choose a participant among the list of your mates:</p>
-                  <% @available_mates.each do |mate| %>
-                    <%= simple_form_for([@user, @trip, @enrollment], data: {turbo: false}) do |f| %>
-                    <%= f.input :mate_id, as: :hidden, input_html: { value: mate.id } %>
-                    <div class="text-center">
-                      <%= f.submit "#{mate.first_name} #{mate.last_name}", class: "crew-member-button" %>
-                    </div>
+              <div class="multi-case-container">
+                <div class="case-container"><!-- Case 1 : Select one of your available mates -->
+                  <div >
+                    <h4 class="text-center"><i class="fa-solid fa-clipboard-check"></i>&nbsp; <strong>Case 1</strong></h4>
+                    <% @available_mates = @user.mates - @trip.mates %>
+                      <p>Choose a participant among the list of your available mates (those that are already part of the crew list
+                      do not appear in the list):</p>
+                    <% if @available_mates.empty? %>
+                      <p class="text-center"><em>Your list of available mates is empty. You first need to create them.</em></p>
                     <% end %>
-                  <% end %>
-                <% end %>
-              </div>
-              <br/>
-              <div><!-- Case 2 : Create a mate -->
-                <p class="text-center">If the participant you want to add to the trip is not in the list of your mates, you can create a new mate:</p>
-                <div class="addition-button" style="font-size: 22px" data-action="click->dropdown-reveal#revealContent">
-                  <i class="fa-solid fa-circle-plus"></i> Create a new mate
+                      <% @available_mates.each do |mate| %>
+                        <%= simple_form_for([@user, @trip, @enrollment], data: {turbo: false}) do |f| %>
+                        <%= f.input :mate_id, as: :hidden, input_html: { value: mate.id } %>
+                        <div class="text-center">
+                          <%= f.submit "#{mate.first_name} #{mate.last_name}", class: "crew-member-button" %>
+                        </div>
+                        <% end %>
+                      <% end %>
+                  </div>
                 </div>
-              </div>
-              <div><!-- Case 3 : Invite someone -->
+                <div class="case-container"><!-- Case 2 : Create a mate -->
+                  <div>
+                    <h4 class="text-center"><i class="fa-solid fa-user-plus"></i>&nbsp; <strong>Case 2</strong></h4>
+                    <p>
+                      The participant you want to add to the trip is not in the list of your mates,
+                      but you know their personal information. Create them as a new mate, so you can add them to any trip you want.
+                    </p>
+                    <%= link_to new_user_mate_path(@user) do %>
+                      <div class="addition-button" style="font-size: 18px" data-action="click->dropdown-reveal#revealContent">
+                        <i class="fa-solid fa-circle-plus"></i> Create a new mate
+                      </div>
+                    <% end %>
+                  </div>
+                </div>
+                <div class="case-container"><!-- Case 3 : Invite someone -->
+                  <div>
+                    <h4 class="text-center"><i class="fa-solid fa-share-from-square"></i>&nbsp; <strong>Case 3</strong></h4>
+                    <p>
+                      If you want to add some participants but do not know their informations,
+                      send them an invitations to collaborate on the crew list. Like so, they will be able to add themselves as
+                      participants, or add their children / whose they already know all personal details.
+                    </p>
+                    <div class="share-button sending-invitation-button" data-action="click->modal-reveal#toggleWindow">
+                      <span><i class="fa-solid fa-share-from-square"></i> Share this trip </span>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
