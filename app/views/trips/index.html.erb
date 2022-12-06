@@ -25,7 +25,7 @@
             <% end %>
             <div class="trip-summary-box">
               <%= link_to trip_path(trip) do %>
-                <h3><%= trip.country %></h3>
+                <h2><%= trip.country %></h2>
               <% end %>
               <p><%= trip.start_date.strftime("%a, %d %b %Y") %> → <%= trip.end_date.strftime("%a, %d %b %Y") %></p>
               <% trip.mates.length == 1 ? word = "mate" : word = "mates" %>
@@ -70,7 +70,7 @@
                 <% end %>
                 <div class="trip-summary-box">
                   <%= link_to trip_path(trip) do %>
-                    <h3><%= trip.country %></h3>
+                    <h2><%= trip.country %></h2>
                   <% end %>
                   <p><%= trip.start_date.strftime("%a, %d %b %Y") %> → <%= trip.end_date.strftime("%a, %d %b %Y") %></p>
                   <% trip.mates.length == 1 ? word = "mate" : word = "mates" %>
