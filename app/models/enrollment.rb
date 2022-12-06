@@ -7,9 +7,4 @@ class Enrollment < ApplicationRecord
 
   after_create :generate_summary_pdf
 
-  def generate_summary_pdf
-    Prawn::Document.generate('Crewlist.pdf') do
-      text 'hello, world!'
-    end
-  end
 end
