@@ -14,13 +14,22 @@
         <div class="sidebar-button-text">Trips</div>
       </div>
     <% end %>
+    <!--
     <div class="sidebar-button">
       <%= image_tag 'icon-export.svg', class: "sidebar-icon" %>
       <div class="sidebar-button-text">Export</div>
     </div>
+    -->
+      <!-- Notification circle is visible when there are some pending invitation -->
     <div class="sidebar-button">
-      <%= image_tag 'icon-bell.svg', class: "sidebar-icon" %>
-      <div class="sidebar-button-text">Smth</div>
+      <div style="position:relative">
+        <%= image_tag 'icon-bell.svg', class: "sidebar-icon" %>
+          <% pending_invitations = Invitation.where(receiver_email: current_user.email).map{ |invitation_received| invitation_received.trip } %>
+            <% unless pending_invitations.empty? %>
+            <span id="nofitication-circle"><%= pending_invitations.length %></span>
+            <% end %>
+      </div>
+      <div class="sidebar-button-text">Invitations</div>
     </div>
     <%= link_to user_path(current_user.id) do %>
       <div class="sidebar-button">
@@ -32,12 +41,14 @@
   <div name="sidebar-settings" class="sidebar-section">
     <div class="sidebar-button">
       <%= image_tag 'icon-settings.svg', class: "sidebar-icon" %>
-      <div class="sidebar-button-text">Settings</div>
+      <div class="sidebar-button-text">Account</div>
     </div>
-        <div class="sidebar-button">
+    <%= link_to destroy_user_session_path, data: {turbo_method: :delete, turbo_confirm: "Are you sure you want to log out?"} do %>
+      <div class="sidebar-button">
       <%= image_tag 'icon-logout.svg', class: "sidebar-icon" %>
-      <div class="sidebar-button-text">Exit</div>
+      <div class="sidebar-button-text">Log&nbsp;out</div>
     </div>
+    <% end %>
   </div>
   <div name="sidebar-back" class="sidebar-section sidebar-collapse-section">
     <%= image_tag 'collapse_side_bar.svg', class: "sidebar-collapse", data: {sidebar_target: "sidebarButton", action:"click->sidebar#toggle"} %>

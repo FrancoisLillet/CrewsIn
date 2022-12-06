@@ -1,7 +1,7 @@
 <% if @trip.creator_id == current_user.id %>
   <div class="page-container">
     <!-- Trip card -->
-    <div class="trip-card">
+    <div class="trip-card" data-controller="modal-reveal">
       <div class="left-box">
         <div class="trip-photo-box">
           <% if @trip.photo.attached? %>
@@ -19,21 +19,46 @@
       </div>
       <div class="right-box">
         <% origin = @trip.creator == current_user ?  "me" : @trip.creator.nickname %>
-        <div style="text-align: right">
+        <div style="text-align: right; padding: 0 32px">
           <span> Created by<br/>
           <strong><%= origin %></strong>
           </span>
         </div>
+        <div>
+          <div class="share-button" data-action="click->modal-reveal#toggleWindow">
+            <span><i class="fa-solid fa-share-from-square"></i> Share this trip </span>
+          </div>
+        </div>
       </div>
+
+          <!-- Modal for invitation  -->
+          <div id="myModal" class="modal-window display-none" data-modal-reveal-target="modalWindow">
+            <!-- Modal content -->
+            <div class="modal-content">
+              <span class="close" data-action="click->modal-reveal#toggleWindow">&times;</span>
+              <h4>Share this trip to a friend</h4><br/>
+              <p>They will be able to add themselves and their mates (children, partner, etc...) to the trip.</p>
+              <%= simple_form_for [@user, @trip, @invitation] do |f| %>
+
+                <%= f.input :receiver_email, label: "Please enter their email" %>
+
+                <div class="flex-link-container">
+                 <%= f.submit "Send invitation", class: "button-main" %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+
     </div>
 
+    <!-- Mates (crew list) -->
     <div class="results-container">
       <% @trip.mates.each do |mate|%>
-          <div class="profile-container" data-controller="dropdown-reveal">
-            <div class="results-header" data-action="click->dropdown-reveal#revealContent">
-              <h1 style="display: inline"><%= "#{mate.first_name} #{mate.last_name}" %> </h1>
-                <i class="caret-down fa-solid fa-angle-down"></i>
-            </div>
+        <div class="profile-container" data-controller="dropdown-reveal">
+          <div class="results-header dropdown-header" data-action="click->dropdown-reveal#revealContent">
+            <h1 style="display: inline"><%= "#{mate.first_name} #{mate.last_name}" %> </h1>
+              <i class="caret-down fa-solid fa-angle-down"></i>
+          </div>
           <div class="invisible-div display-none" data-dropdown-reveal-target="content">
             <div class="grid-container">
               <div class="left-column"><p>First name</p></div><div class="right-column"><p><%= mate.first_name%></p></div>
@@ -73,8 +98,6 @@
           <%= f.submit "Add Mate", class: "btn btn-success"%>
       <% end %>
     <% end %>
-
-
 
 
 
