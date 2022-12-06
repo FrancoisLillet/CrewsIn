@@ -15,11 +15,10 @@ class TripsController < ApplicationController
   end
 
   def show
-    @invited_users = "x"
+    set_trip
+    @invited_users = Invitation.where("trip_id = ? AND receiver_id IS NOT null", @trip.id).pluck(:receiver_id)
     @enrollment = Enrollment.new
     @user = current_user
-    @ur_trips = Trip.all.select { |t| t.creator_id == @user.id }
-    set_trip
     @invitation = Invitation.new
   end
 
