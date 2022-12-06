@@ -7,8 +7,32 @@
   position: relative;
 }
 
+
+
+// Crew list
+
 #crew-list-container {
   padding: 16px 32px;
+}
+
+
+// Add a participant
+
+.multi-case-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: stretch;
+}
+
+.case-container {
+  flex-grow: 1;
+  width: 30%;
+  min-width: 256px;
+  margin: 8px 8px;
+  padding: 16px 16px;
+  background-color: $body-blue;
+  border-top-right-radius: 32px;
+  border-bottom-left-radius: 32px;
 }
 
 .add-crew-member-button {
@@ -21,7 +45,7 @@
 }
 
 .crew-member-button {
-  width: 40%;
+  width: 100%;
   border: none;
   border-radius: 8px;
   background-color: #DBE4EE;
@@ -31,7 +55,7 @@
 
 .crew-member-button:hover {
   transition-duration: 0.5s;
-  scale: 1.08;
+  scale: 1.02;
   border: 2px solid $sidebar-background;
 }
 
