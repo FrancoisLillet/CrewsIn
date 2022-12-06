@@ -25,7 +25,7 @@
       <div style="position:relative">
         <%= image_tag 'icon-bell.svg', class: "sidebar-icon" %>
           <% pending_invitations = Invitation.where(receiver_email: current_user.email).map{ |invitation_received| invitation_received.trip } %>
-            <% unless pending_invitations == nil %>
+            <% unless pending_invitations.empty? %>
             <span id="nofitication-circle"><%= pending_invitations.length %></span>
             <% end %>
       </div>
