@@ -43,10 +43,12 @@
     <% end %>
   </div>
   <div name="sidebar-settings" class="sidebar-section">
-    <div class="sidebar-button">
-      <%= image_tag 'icon-settings.svg', class: "sidebar-icon" %>
-      <div class="sidebar-button-text">Account</div>
-    </div>
+    <%= link_to edit_user_registration_path(current_user.id) do %>
+      <div class="sidebar-button">
+        <%= image_tag 'icon-settings.svg', class: "sidebar-icon" %>
+        <div class="sidebar-button-text">Account</div>
+      </div>
+    <% end %>
     <%= link_to destroy_user_session_path, data: {turbo_method: :delete, turbo_confirm: "Are you sure you want to log out?"} do %>
       <div class="sidebar-button">
       <%= image_tag 'icon-logout.svg', class: "sidebar-icon" %>

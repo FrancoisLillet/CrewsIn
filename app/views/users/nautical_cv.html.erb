@@ -1,14 +1,14 @@
 <div class="page-container">
   <div class="profile-container">
 
-    <h1 class="text-center">My nautical CV</h1>
+    <h1 class="text-center">My Nautical CV</h1>
     <br/>
-    <p class="text-center">A nautical CV is required by shipowners before entrusting your their boat.
-    It has to be duly filled in and reflect your sailing background until now.</p>
+    <p class="text-center">A Nautical CV is required by shipowners before entrusting you with their boat.
+    It has to be duly filled in and must accurately display your sailing background.</p>
     <!-- My nautical bio -->
     <div class="category-container" data-controller="modal-reveal">
       <div class="results-header">
-        <h1 style="display: inline">My nautical bio</h1>
+        <h1 style="display: inline">My Nautical Bio</h1>
       </div>
       <div class="invisible-div">
         <div class="result-container">
@@ -27,7 +27,7 @@
         <!-- Modal content -->
         <div class="modal-content">
           <span class="close" data-action="click->modal-reveal#toggleWindow">&times;</span>
-          <h4>Edit your nautical bio</h4>
+          <h4>Edit your Nautical Bio</h4>
           <p>Some text in the Modal..</p>
           <%= simple_form_for([@user], data: {turbo: false}) do |f| %>
             <%= f.input :nautical_bio %>
@@ -69,7 +69,7 @@
                 </div>
               <% end %>
                 </div>
-                  <p>Front-side of my sailing license</p>
+                  <p>Front of my sailing license</p>
                 <div>
             </div>
             <div class="right-box" style="text-align: right">
@@ -83,7 +83,7 @@
             <!-- Modal content -->
             <div class="modal-content">
               <span class="close" data-action="click->modal-reveal#toggleWindow">&times;</span>
-              <h4>Upload a picture of my sailing license's recto</h4><br/>
+              <h4>Upload a picture of the front of your sailing license</h4><br/>
               <%= simple_form_for([@user], data: {turbo: false}) do |f| %>
                 <%= f.input :license_recto, label: false %>
                 <%= f.submit "Submit", class: "button-main"%>
@@ -108,7 +108,7 @@
                 </div>
               <% end %>
                 </div>
-                  <p>Back-side of my sailing license</p>
+                  <p>Back of my sailing license</p>
                 <div>
             </div>
             <div class="right-box" style="text-align: right">
@@ -122,7 +122,7 @@
             <!-- Modal content -->
             <div class="modal-content">
               <span class="close" data-action="click->modal-reveal#toggleWindow">&times;</span>
-              <h4>Upload a picture of my sailing license's front side</h4><br/>
+              <h4>Upload a picture of the back of your sailing licence</h4><br/>
               <%= simple_form_for([@user], data: {turbo: false}) do |f| %>
                 <%= f.input :license_verso, label: false %>
                 <div class="flex-link-container">
@@ -149,7 +149,7 @@
                 </div>
               <% end %>
                 </div>
-                  <p>Photo of my VHF certificate</p>
+                  <p>My VHF certificate</p>
                 <div>
             </div>
             <div class="right-box" style="text-align: right">
@@ -163,7 +163,7 @@
             <!-- Modal content -->
             <div class="modal-content">
               <span class="close" data-action="click->modal-reveal#toggleWindow">&times;</span>
-              <h4>Upload a picture of my VHF certificate</h4><br/>
+              <h4>Upload a picture of your VHF certificate</h4><br/>
               <%= simple_form_for([@user], data: {turbo: false}) do |f| %>
                 <%= f.input :vhf_certificate, label: false %>
                 <div class="flex-link-container">
@@ -190,7 +190,7 @@
                 </div>
               <% end %>
                 </div>
-                  <p>Photo of my passport's main page</p>
+                  <p>Passport information page</p>
                 <div>
             </div>
             <div class="right-box" style="text-align: right">
@@ -204,7 +204,7 @@
             <!-- Modal content -->
             <div class="modal-content">
               <span class="close" data-action="click->modal-reveal#toggleWindow">&times;</span>
-              <h4>Upload a picture of my passport's main page</h4><br/>
+              <h4>Upload a picture of your passport's information page</h4><br/>
               <%= simple_form_for([@user], data: {turbo: false}) do |f| %>
                 <%= f.input :passport_photo, label: false %>
                 <div class="flex-link-container">
@@ -241,8 +241,14 @@
               <h4>Add a new sailing experience</h4><br/>
               <%= simple_form_for([@user, @experience]) do |f| %>
                 <%= f.input :country, collection: Mate.countries, required: true%>
-                <%= f.input :start_date, as: :date, html5: true, required: true, format: 'yyyy-mm-dd' %>
-                <%= f.input :end_date, as: :date, html5: true, required: true, format: 'yyyy-mm-dd' %>
+                <div class = dates-container>
+                  <div class = date>
+                    <%= f.input :start_date, as: :date, html5: true, required: true, format: 'yyyy-mm-dd' %>
+                  </div>
+                  <div class = date>
+                    <%= f.input :end_date, as: :date, html5: true, required: true, format: 'yyyy-mm-dd' %>
+                  </div>
+                </div>
                 <%= f.input :sailing_area %>
                 <%= f.input :role, collection: ["Skipper", "Co-skipper", "Active mate", "Passenger"], label: "My role onboard" %>
                 <%= f.input :boat_model %>

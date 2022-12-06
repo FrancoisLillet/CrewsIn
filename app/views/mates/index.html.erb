@@ -9,7 +9,7 @@
 
 
   <% @mates.each do |mate| %>
-    <div class="profile-container" data-controller="dropdown-reveal">
+    <div class="profile-container-mates" data-controller="dropdown-reveal">
         <div class="results-header dropdown-header" data-action="click->dropdown-reveal#revealContent">
           <h1 style="display: inline"><%= "#{mate.first_name} #{mate.last_name}" %> </h1>
             <i class="caret-down fa-solid fa-angle-down"></i>

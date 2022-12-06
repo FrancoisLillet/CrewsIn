@@ -1,0 +1,9 @@
+.dates-container{
+  display: flex;
+  justify-items: space-between;
+  flex-direction: row;
+}
+
+.date {
+  flex-grow: 1;
+}
