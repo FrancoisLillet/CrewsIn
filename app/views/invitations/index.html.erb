@@ -2,18 +2,18 @@
 <div class="category-container" data-controller="dropdown-reveal">
   <div class="results-header dropdown-header" data-action="click->dropdown-reveal#revealContent">
     <% count = 0
-    unless @invitations_received.empty?
-      count = @invitations_received.length
+    unless @pending_invitations.empty?
+      count = @pending_invitations.length
     end
     %>
     <h1 style="display: inline">Your invitations (<%= count %>)</h1>
     <i class="caret-down fa-solid fa-angle-down" data-dropdown-reveal-target="arrow"></i>
   </div>
   <div class="invisible-div" data-dropdown-reveal-target="content">
-    <% if @invitations_received.empty? %>
+    <% if @pending_invitations.empty? %>
       <p>When other users share their trip with you, you will be able to collaborate!</p>
     <% else %>
-      <% @invitations_received.each do |invitation| %>
+      <% @pending_invitations.each do |invitation| %>
       <!-- Trip card -->
         <div class="trip-card">
           <div class="left-box">
