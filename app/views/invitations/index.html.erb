@@ -2,18 +2,18 @@
 <div class="category-container" data-controller="dropdown-reveal">
   <div class="results-header dropdown-header" data-action="click->dropdown-reveal#revealContent">
     <% count = 0
-    unless @invited_trips == nil
-      count = @invited_trips.length
+    unless @invitations_received.empty?
+      count = @invitations_received.length
     end
     %>
     <h1 style="display: inline">Your invitations (<%= count %>)</h1>
     <i class="caret-down fa-solid fa-angle-down" data-dropdown-reveal-target="arrow"></i>
   </div>
   <div class="invisible-div" data-dropdown-reveal-target="content">
-    <% if @invited_trips == nil %>
+    <% if @invitations_received.empty? %>
       <p>When other users share their trip with you, you will be able to collaborate!</p>
     <% else %>
-      <%= @invitations_received.each do |invitation| %>
+      <% @invitations_received.each do |invitation| %>
       <!-- Trip card -->
         <div class="trip-card">
           <div class="left-box">
@@ -32,10 +32,7 @@
             </div>
           </div>
           <div class="right-box">
-
-
-            <% origin = invitation.trip.creator == current_user ?  "me" : invitation.trip.creator.nickname %>
-
+          <% origin = invitation.trip.creator == current_user ?  "me" : invitation.trip.creator.nickname %>
             <div style="text-align: right; padding: 0 32px">
               <span> Created by<br/>
                 <strong><%= origin %></strong>
@@ -53,11 +50,9 @@
                 </div>
               <% end %>
             </div>
-
-
-
           </div>
         </div>
       <% end %>
-     <% end %>
+    <% end %>
   </div>
+</div>
