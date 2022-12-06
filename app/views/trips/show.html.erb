@@ -1,4 +1,4 @@
-<% if @trip.creator_id == current_user.id %>
+<% if @trip.creator_id == current_user.id || Invitation.exists?(receiver_id: current_user.id, trip_id: @trip.id) %>
   <div class="page-container">
     <!-- Trip card -->
     <div class="trip-card">
@@ -69,8 +69,8 @@
     <% @available_mates = @user.mates - @trip.mates %>
     <% unless @available_mates.empty? %>
       <%= simple_form_for([@user, @trip, @enrollment], data: {turbo: false}) do |f| %>
-          <%= f.collection_select :mate_id, @available_mates, :id, :first_name %>
-          <%= f.submit "Add Mate", class: "btn btn-success"%>
+          <%= f.collection_select :mate_id, @available_mates, :id, :first_name, {},  { class: 'col-3 form-control-lg mb-2' } %>
+          <%= f.submit "Add Mate", class: "button-main"%>
       <% end %>
     <% end %>
 
