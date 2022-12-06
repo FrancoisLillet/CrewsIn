@@ -15,6 +15,7 @@ class TripsController < ApplicationController
   end
 
   def show
+    @invited_users = "x"
     @enrollment = Enrollment.new
     @user = current_user
     @ur_trips = Trip.all.select { |t| t.creator_id == @user.id }
