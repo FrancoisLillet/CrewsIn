@@ -62,31 +62,38 @@
         <% end %>
         <h2 class="text-center">Current participants (<%= count %>)</h2>
           <!-- Div where we enroll crew members or add new mates -->
-          <div class="profile-container" data-controller="dropdown-reveal">
+          <div class="profile-container-mates" data-controller="dropdown-reveal">
             <div class="results-header dropdown-header add-crew-member-button" data-action="click->dropdown-reveal#revealContent">
               <h3 style="display: inline"><i class="fa-solid fa-circle-plus"></i> Add a participant </h3>
                 <i class="caret-down fa-solid fa-angle-down"></i>
             </div>
+
             <div class="invisible-div display-none" data-dropdown-reveal-target="content">
-              <%# Add only the mates that are not in the trip yet %>
-              <% @available_mates = @user.mates - @trip.mates %>
-              <% if @available_mates.empty? %>
-                <p class="text-center">Your list of available mates is empty.</p>
-              <% else %>
-                <p class="text-center">Choose a participant among the list of your mates:</p>
-                <% @available_mates.each do |mate| %>
-                  <%= simple_form_for([@user, @trip, @enrollment], data: {turbo: false}) do |f| %>
-                  <%= f.input :mate_id, as: :hidden, input_html: { value: mate.id } %>
-                  <div class="text-center">
-                    <%= f.submit "#{mate.first_name} #{mate.last_name}", class: "crew-member-button" %>
-                  </div>
+
+              <div><!-- Case 1 : Select one of your available mates -->
+                <% @available_mates = @user.mates - @trip.mates %>
+                <% if @available_mates.empty? %>
+                  <p class="text-center">Your list of available mates is empty.</p>
+                <% else %>
+                  <p class="text-center">Choose a participant among the list of your mates:</p>
+                  <% @available_mates.each do |mate| %>
+                    <%= simple_form_for([@user, @trip, @enrollment], data: {turbo: false}) do |f| %>
+                    <%= f.input :mate_id, as: :hidden, input_html: { value: mate.id } %>
+                    <div class="text-center">
+                      <%= f.submit "#{mate.first_name} #{mate.last_name}", class: "crew-member-button" %>
+                    </div>
+                    <% end %>
                   <% end %>
                 <% end %>
-              <% end %>
+              </div>
               <br/>
-              <p class="text-center">If the participant you want to add to the trip is not in the list of your mates, you can create a new mate:</p>
-              <div class="addition-button" style="font-size: 22px" data-action="click->dropdown-reveal#revealContent">
-                <i class="fa-solid fa-circle-plus"></i> Create a new mate
+              <div><!-- Case 2 : Create a mate -->
+                <p class="text-center">If the participant you want to add to the trip is not in the list of your mates, you can create a new mate:</p>
+                <div class="addition-button" style="font-size: 22px" data-action="click->dropdown-reveal#revealContent">
+                  <i class="fa-solid fa-circle-plus"></i> Create a new mate
+                </div>
+              </div>
+              <div><!-- Case 3 : Invite someone -->
               </div>
             </div>
           </div>
@@ -98,7 +105,7 @@
             </div>
           </div>
           <% @trip.mates.each do |mate|%>
-            <div class="profile-container" data-controller="dropdown-reveal">
+            <div class="profile-container-mates" data-controller="dropdown-reveal">
               <div class="results-header dropdown-header" data-action="click->dropdown-reveal#revealContent">
                 <h3 style="display: inline"><%= "#{mate.first_name} #{mate.last_name}" %> </h3>
                   <i class="caret-down fa-solid fa-angle-down"></i>
