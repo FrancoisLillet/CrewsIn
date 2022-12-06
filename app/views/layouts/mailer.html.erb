@@ -3,11 +3,19 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <style>
-      /* Email styles need to be inline */
+      #signature-logo {
+        padding: 8px 8px;
+        background-color: $sidebar-background;
+      }
     </style>
   </head>
 
   <body>
     <%= yield %>
+    <br><br>
+    <span>The CrewsIn team</span>
+    <span id="signature-logo">
+      <%= image_tag asset_path("logo_text_white_2x") %>
+    </span>
   </body>
 </html>
