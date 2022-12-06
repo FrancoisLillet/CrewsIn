@@ -88,8 +88,8 @@
             </div>
           </div>
         </div>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
     <%# Add only the mates that are not in the trip yet %>
     <% @available_mates = @user.mates - @trip.mates %>
     <% unless @available_mates.empty? %>
