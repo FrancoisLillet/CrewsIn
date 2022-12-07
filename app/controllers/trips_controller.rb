@@ -61,6 +61,7 @@ class TripsController < ApplicationController
   end
 
   def summary
+    @trip = set_trip
     respond_to do |format|
       format.html
       format.pdf do
