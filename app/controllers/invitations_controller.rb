@@ -4,7 +4,6 @@ class InvitationsController < ApplicationController
     @user = current_user
     @pending_invitations = Invitation.where(receiver_email: @user.email).select { |invitation| invitation.receiver_id == nil }
     @invited_trips = @pending_invitations.map{ |pending_invitation| pending_invitation.trip }
-    raise
   end
 
   def create
