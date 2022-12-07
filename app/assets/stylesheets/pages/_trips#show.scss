@@ -12,7 +12,7 @@
 // Crew list
 
 #crew-list-container {
-  padding: 16px 32px;
+  padding: 32px 32px;
 }
 
 
@@ -77,4 +77,14 @@
 
 .skipper-icon {
   color: $sidebar-background;
+}
+
+.negative-button {
+  background-color: $danger-light-red;
+}
+
+.negative-button:hover {
+  color: #FFFFFF;
+  background-color: $danger-red;
+  transition-duration: 0.5s;
 }

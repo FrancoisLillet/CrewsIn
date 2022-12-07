@@ -16,6 +16,7 @@
     <%= simple_form_for([@user, @mate], data: {turbo: false}) do |f| %>
           <%= f.input :first_name %>
           <%= f.input :last_name %>
+          <%= f.input :redirect_page, as: :hidden, input_html: { value: "#{params[:origin_page]}" } %>
           <%= f.input :date_of_birth, as: :date, start_year: Date.today.year - 90,
                                   end_year: Date.today.year, discard_day: false,
                                   order: [:year, :month, :day] %>

@@ -17,14 +17,19 @@ class MatesController < ApplicationController
   end
 
   def create
+    redirect_page = params[:mate][:redirect_page]
     @mate = Mate.new(mate_params)
     @user = current_user
     @mate.user = current_user
     if @mate.save
-      if @mate.is_user
-        redirect_to user_path(@user)
+      unless redirect_page == nil
+          redirect_to redirect_page
       else
-        redirect_to user_mates_path
+        if @mate.is_user
+          redirect_to user_path(@user)
+        else
+          redirect_to user_mates_path
+        end
       end
     else
       render :new, status: :unprocessable_entity
@@ -37,13 +42,18 @@ class MatesController < ApplicationController
   end
 
   def update
+    redirect_page = params[:mate][:redirect_page]
     @user = current_user
     set_mate
     if @mate.update(mate_params)
-      if @mate.is_user
-        redirect_to user_mate_path(@mate)
+      unless redirect_page == nil
+          redirect_to redirect_page
       else
-        redirect_to user_mates_path(@user)
+        if @mate.is_user
+          redirect_to user_path(@user)
+        else
+          redirect_to user_mates_path
+        end
       end
     else
       render :edit
