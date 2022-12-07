@@ -3,6 +3,7 @@
     <%= tag.div class: "sidebar-logo" %>
   </div>
   <div name="sidebar-new-trip" class="sidebar-section centered">
+
   <%= link_to new_user_trip_path(current_user.id) do %>
       <div class="sidebar-new-trip">
         <%= tag.div class: "icon-new-trip" %>
@@ -16,13 +17,8 @@
         <div class="sidebar-button-text">Trips</div>
       </div>
     <% end %>
-    <!--
-    <div class="sidebar-button">
-      <%= image_tag 'icon-export.svg', class: "sidebar-icon" %>
-      <div class="sidebar-button-text">Export</div>
-    </div>
-    -->
-      <!-- Notification circle is visible when there are some pending invitation -->
+
+    <!-- Notification circle is visible when there are some pending invitation -->
     <%= link_to user_invitations_path(current_user.id) do %>
       <div class="sidebar-button">
           <div style="position:relative">
@@ -35,6 +31,7 @@
           <div class="sidebar-button-text">Invitations</div>
       </div>
     <% end %>
+
     <%= link_to user_path(current_user.id) do %>
       <div class="sidebar-button">
         <%= image_tag 'icon-user.svg', class: "sidebar-icon" %>
@@ -43,6 +40,7 @@
     <% end %>
   </div>
   <div name="sidebar-settings" class="sidebar-section">
+
     <%= link_to edit_user_registration_path(current_user.id) do %>
       <div class="sidebar-button">
         <%= image_tag 'icon-settings.svg', class: "sidebar-icon" %>

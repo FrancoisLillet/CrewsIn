@@ -25,6 +25,5 @@ export default class extends Controller {
       this.element.classList.add("sidebar-wide");
       sessionStorage['sidebarStatus'] = "sidebar-wide";
     }
-
   }
 }
