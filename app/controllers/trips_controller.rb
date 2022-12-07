@@ -61,7 +61,7 @@ class TripsController < ApplicationController
   end
 
   def summary
-    @trip = Trip.find(params[:id])
+    @trip = set_trip
     respond_to do |format|
       format.html
       format.pdf do

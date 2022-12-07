@@ -1,1 +1,24 @@
-<%=  %>
+
+
+
+<%= @trip.creator.nickname %>
+
+
+
+<% @trip.mates.each do |mate|%>
+  <div class="profile-container-mates">
+      <h3 style="display: inline"><%= "#{mate.first_name} #{mate.last_name}" %> </h3>
+        <i class="caret-down fa-solid fa-angle-down"></i>
+    </div>
+      <div class="grid-container">
+        <div class="left-column"><p>First name</p></div><div class="right-column"><p><%= mate.first_name%></p></div>
+        <div class="left-column"><p>Last name</p></div><div class="right-column"><p><%= mate.last_name%></p></div>
+        <div class="left-column"><p>Date of birth</p></div><div class="right-column"><p><%= mate.date_of_birth.strftime("%d %b %Y")%></p></div>
+        <div class="left-column"><p>Address</p></div><div class="right-column"><p><%= mate.address%></p></div>
+        <div class="left-column"><p>Phone number</p></div><div class="right-column"><p><%= mate.phone_number%></p></div>
+        <div class="left-column"><p>Nationality</p></div><div class="right-column"><p><%= mate.nationality%></p></div>
+        <div class="left-column"><p>Country of residence</p></div><div class="right-column"><p><%= mate.country_of_residence %></p></div>
+        <div class="left-column"><p>Passport_number</p></div><div class="right-column"><p><%= mate.passport_number%></p></div>
+        <div class="left-column"><p>expiration_date</p></div><div class="right-column"><p><%= mate.expiration_date.strftime("%d %b %Y")%></p></div>
+      </div>
+ <% end %>
