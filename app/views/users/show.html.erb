@@ -1,5 +1,5 @@
 <div class = prof-container>
-  <h1>Welcome, <%= @user.nickname.capitalize %></h1>
+  <h1><%= @user.nickname.capitalize %>'s Profile</h1>
   <div class = prof-pic-container>
     <% if @user.photo.attached? %>
       <%= cl_image_tag @user.photo.key, gravity: :face, class:"profile-pic"%>

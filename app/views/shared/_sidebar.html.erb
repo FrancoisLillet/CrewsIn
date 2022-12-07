@@ -1,6 +1,8 @@
 <div class="sidebar parent">
   <div class="sidebar-logo-section">
-    <%= tag.div class: "sidebar-logo" %>
+    <%= link_to user_path(current_user.id) do %>
+      <%= tag.div class: "sidebar-logo" %>
+    <% end %>
   </div>
   <div name="sidebar-new-trip" class="sidebar-section centered">
 
