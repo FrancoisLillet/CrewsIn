@@ -24,6 +24,3 @@ application.register("sidebar", SidebarController)
 
 import TiltController from "./tilt_controller"
 application.register("tilt", TiltController)
-
-import PasswordController from "./password_parity_controller"
-application.register("password", PasswordController)
