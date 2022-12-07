@@ -25,16 +25,13 @@
                   input_html: { autocomplete: "new-password" } %>
     </div>
 
-  <div class= "text-center">
-    <br>
-    <br>
-        <div class="form-actions">
-          <%= f.button :submit, "Sign up", class: 'button-main' %>
-        </div>
-      <% end %>
-
-    <br>
-      <span class="login-signup">Have an account already?<%= link_to " Log in", new_user_session_path, class: "gray", style: "font-size: 16px" %><br /></span>
-
-  </div>
+    <div class="text-center">
+      <br/><br/>
+      <div class="form-actions">
+        <%= f.button :submit, "Sign up", class: 'button-main' %>
+      </div>
+      <br/>
+      <span class="login-signup">Have an account already? <%= link_to " Log in", new_user_session_path, class: "gray", style: "font-size: 16px" %><br /></span>
+    </div>
+  <% end %>
 </div>
