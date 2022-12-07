@@ -142,7 +142,17 @@
           <% @trip.mates.each do |mate|%>
             <div class="profile-container-mates" data-controller="dropdown-reveal">
               <div class="results-header dropdown-header" data-action="click->dropdown-reveal#revealContent">
-                <h3 style="display: inline"><%= "#{mate.first_name} #{mate.last_name} #{mate.is_user && mate.user_id == current_user.id ? '(me)' : ''}" %> </h3>
+                <h3 class="skipper-name" style="display: inline">
+                  <% if mate.is_user && mate.user_id == current_user.id %>
+                    Me
+                  <% else %>
+                    <%= "#{mate.first_name} #{mate.last_name}" %>
+                  <% end %>
+                  <% if @trip.skipper_id == mate.user_id && mate.is_user %>
+                      <em>- skipper&nbsp;</em>
+                      <i class="skipper-icon fa-sharp fa-solid fa-dharmachakra"></i>
+                  <% end %>
+                </h3>
                   <i class="caret-down fa-solid fa-angle-down"></i>
               </div>
               <div class="invisible-div display-none" data-dropdown-reveal-target="content">
@@ -159,17 +169,36 @@
                 </div>
                 <div class="flex-link-container">
                   <!-- <%= link_to "Edit", edit_user_mate_path(@user.id, mate.id), class: "button-main" %> -->
-                  <div class="link-invisible-div">
+                  <div class="link-invisible-div text-center">
+                    <div class="switch-container">
+                      <% if mate.is_user && @trip.skipper_id != mate.user_id %>
+                        <%= "#{mate.first_name} is the skipper?" %>
+                        <!-- <input type="checkbox" id="switch" /><label for="switch"></label> -->
+                        <%= simple_form_for([@user, @trip], data: {turbo: false}) do |f| %>
+                        <%= f.input :skipper_id, as: :hidden, input_html: { value: mate.user_id } %>
+                        <div class="text-center">
+                          <%= f.submit "Set #{mate.first_name} #{mate.last_name} as skipper", class: "crew-member-button" %>
+                        </div>
+                        <% end %>
+                      <% elsif mate.is_user && @trip.skipper_id == mate.user_id %>
+                        <%= simple_form_for([@user, @trip], data: {turbo: false}) do |f| %>
+                        <%= f.input :skipper_id, as: :hidden, input_html: { value: nil } %>
+                          <div class="text-center">
+                            <%= f.submit "Remove #{mate.first_name} #{mate.last_name}'s skipper role", class: "crew-member-button" %>
+                          </div>
+                        <% end %>
+                      <% end %>
+                    </div>
                     <%= link_to edit_user_mate_path(@user.id, mate.id, is_user: mate.is_user) do %>
                       <i class="fa-solid fa-pen-to-square"></i>
                         <span> edit</span>
                     <% end %>
+                    <% enrollment = Enrollment.find_by(mate: mate, trip: @trip) %>
+                    <i class="fa-solid fa-trash"></i><%= link_to "Remove Enrollment",
+                      enrollment_path(enrollment),
+                      data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+                    %></p>
                   </div>
-                  <% enrollment = Enrollment.find_by(mate: mate, trip: @trip) %>
-                  <i class="fa-solid fa-trash"></i><%= link_to "Remove Enrollment",
-                    enrollment_path(enrollment),
-                    data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
-                  %></p>
 
                 </div>
               </div>

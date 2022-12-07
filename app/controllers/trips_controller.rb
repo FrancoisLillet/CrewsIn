@@ -45,7 +45,8 @@ class TripsController < ApplicationController
 
   def update
     @user = current_user
-  set_trip
+    set_trip
+
     if @trip.update(trip_params)
       redirect_to user_trips_path(@user)
     else
