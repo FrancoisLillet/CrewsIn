@@ -142,7 +142,7 @@
           <% @trip.mates.each do |mate|%>
             <div class="profile-container-mates" data-controller="dropdown-reveal">
               <div class="results-header dropdown-header" data-action="click->dropdown-reveal#revealContent">
-                <h3 style="display: inline"><%= "#{mate.first_name} #{mate.last_name} #{mate.is_user ? '(me)' : ''}" %> </h3>
+                <h3 style="display: inline"><%= "#{mate.first_name} #{mate.last_name} #{mate.is_user && mate.user_id == current_user.id ? '(me)' : ''}" %> </h3>
                   <i class="caret-down fa-solid fa-angle-down"></i>
               </div>
               <div class="invisible-div display-none" data-dropdown-reveal-target="content">
