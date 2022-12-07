@@ -4,7 +4,6 @@ class UsersController < ApplicationController
   def show
     @user = current_user
     @user_as_mate = @user.mates.where("mates.is_user = true").first
-
   end
 
   def update
@@ -18,7 +17,6 @@ class UsersController < ApplicationController
     @experiences = current_user.experiences.sort { |exp1, exp2| exp2.start_date <=> exp1.start_date }
     @experience = Experience.new
   end
-
 
 private
 

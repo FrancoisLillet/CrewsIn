@@ -17,6 +17,7 @@ class TripsController < ApplicationController
   def show
     set_trip
     @invited_users = Invitation.where("trip_id = ? AND receiver_id IS NOT null", @trip.id).pluck(:receiver_id)
+    @skipper = @trip.skipper.mates.where("is_user = true").first unless @trip.skipper == nil
     @enrollment = Enrollment.new
     @user = current_user
     @invitation = Invitation.new
@@ -48,7 +49,7 @@ class TripsController < ApplicationController
     set_trip
 
     if @trip.update(trip_params)
-      redirect_to user_trips_path(@user)
+      redirect_to trip_path(@trip)
     else
       render :edit
     end
