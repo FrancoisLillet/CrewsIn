@@ -1,17 +1,17 @@
 <div class="sidebar parent">
   <div class="sidebar-logo-section">
     <%= link_to user_path(current_user.id) do %>
+
       <%= tag.div class: "sidebar-logo" %>
     <% end %>
   </div>
   <div name="sidebar-new-trip" class="sidebar-section centered">
-
-  <%= link_to new_user_trip_path(current_user.id) do %>
+    <%= link_to new_user_trip_path(current_user.id) do %>
       <div class="sidebar-new-trip">
         <%= tag.div class: "icon-new-trip" %>
       </div>
-  <% end %>
-    </div>
+    <% end %>
+  </div>
   <div name="sidebar-buttons" class="sidebar-section">
     <%= link_to user_trips_path(current_user.id) do %>
       <div class="sidebar-button">
@@ -19,21 +19,19 @@
         <div class="sidebar-button-text">Trips</div>
       </div>
     <% end %>
-
     <!-- Notification circle is visible when there are some pending invitation -->
     <%= link_to user_invitations_path(current_user.id) do %>
       <div class="sidebar-button">
-          <div style="position:relative">
-            <%= image_tag 'icon-bell.svg', class: "sidebar-icon" %>
-              <% pending_invitations = Invitation.where(receiver_email: @user.email).select { |invitation| invitation.receiver_id == nil } %>
-                <% unless pending_invitations.empty? %>
-                <span id="nofitication-circle"><%= pending_invitations.length %></span>
-                <% end %>
-          </div>
-          <div class="sidebar-button-text">Invitations</div>
+        <div style="position:relative">
+          <%= image_tag 'icon-bell.svg', class: "sidebar-icon" %>
+          <% pending_invitations = Invitation.where(receiver_email: @user.email).select { |invitation| invitation.receiver_id == nil } %>
+          <% unless pending_invitations.empty? %>
+            <span id="nofitication-circle"><%= pending_invitations.length %></span>
+          <% end %>
+        </div>
+        <div class="sidebar-button-text">Invitations</div>
       </div>
     <% end %>
-
     <%= link_to user_path(current_user.id) do %>
       <div class="sidebar-button">
         <%= image_tag 'icon-user.svg', class: "sidebar-icon" %>
@@ -42,7 +40,6 @@
     <% end %>
   </div>
   <div name="sidebar-settings" class="sidebar-section">
-
     <%= link_to edit_user_registration_path(current_user.id) do %>
       <div class="sidebar-button">
         <%= image_tag 'icon-settings.svg', class: "sidebar-icon" %>
@@ -51,9 +48,9 @@
     <% end %>
     <%= link_to destroy_user_session_path, data: {turbo_method: :delete, turbo_confirm: "Are you sure you want to log out?"} do %>
       <div class="sidebar-button">
-      <%= image_tag 'icon-logout.svg', class: "sidebar-icon" %>
-      <div class="sidebar-button-text">Log&nbsp;out</div>
-    </div>
+        <%= image_tag 'icon-logout.svg', class: "sidebar-icon" %>
+        <div class="sidebar-button-text">Log&nbsp;out</div>
+      </div>
     <% end %>
   </div>
   <div name="sidebar-back" class="sidebar-section sidebar-collapse-section">
