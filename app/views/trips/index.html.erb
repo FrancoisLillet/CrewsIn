@@ -21,7 +21,7 @@
               <% if trip.photo.attached? %>
                 <%= cl_image_tag(trip.photo.key, class: "mini-trip-photo") %>
               <% else %>
-                <%= image_tag asset_path("default_trip_photo.jpeg"), class: "mini-trip-photo" %>
+                <%= image_tag asset_path("default_trip_photo.jpg"), class: "mini-trip-photo" %>
               <% end %>
             </div>
             <% end %>
@@ -71,7 +71,7 @@
                     <% if trip.photo.attached? %>
                       <%= cl_image_tag(trip.photo.key, class: "mini-trip-photo") %>
                     <% else %>
-                      <%= image_tag asset_path("default_trip_photo.jpeg"), class: "mini-trip-photo" %>
+                      <%= image_tag asset_path("default_trip_photo.jpg"), class: "mini-trip-photo" %>
                     <% end %>
                   </div>
                 <% end %>
