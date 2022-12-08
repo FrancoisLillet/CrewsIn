@@ -98,10 +98,6 @@
           <%= cl_image_tag skipper_user.license_recto.key, class: "document-photo" %>
         </a>
       </div>
-    <% else %>
-      <div class="document-placeholder">
-        <p>Empty</p>
-      </div>
     <% end %>
     <% if skipper_user.license_verso.attached? %>
       <div>
@@ -109,10 +105,6 @@
         <a href="https://res.cloudinary.com/dmz2vmnno/image/upload/v1/development/<%=skipper_user.license_verso.key%>" target="_blank">
           <%= cl_image_tag skipper_user.license_verso.key, class: "document-photo" %>
         </a>
-      </div>
-    <% else %>
-      <div class="document-placeholder">
-        <p>Empty</p>
       </div>
     <% end %>
     <% if skipper_user.vhf_certificate.attached? %>
@@ -122,10 +114,6 @@
           <%= cl_image_tag skipper_user.vhf_certificate.key, class: "document-photo" %>
         </a>
       </div>
-    <% else %>
-      <div class="document-placeholder">
-        <p>Empty</p>
-      </div>
     <% end %>
     <% if skipper_user.passport_photo.attached? %>
       <div>
@@ -133,10 +121,6 @@
         <a href="https://res.cloudinary.com/dmz2vmnno/image/upload/v1/development/<%=skipper_user.passport_photo.key%>" target="_blank">
           <%= cl_image_tag skipper_user.passport_photo.key, class: "document-photo" %>
         </a>
-      </div>
-    <% else %>
-      <div class="document-placeholder">
-        <p>Empty</p>
       </div>
     <% end %>
   </div>
