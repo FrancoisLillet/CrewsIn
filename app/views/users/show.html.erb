@@ -11,6 +11,7 @@
       <div data-controller="profile-form">
         <span style="display:none;">
           <%= simple_form_for @user, html: {class: "d-none", data: { profile_form_target: "form" }} do |f| %>
+            <%= f.input :redirect_page, as: :hidden, input_html: { value: user_path(@user) } %>
             <%= f.input :photo, as: :file, input_html: { data: {action: "change->profile-form#submitForm"} } %>
             <%= f.submit %>
           <% end %>
