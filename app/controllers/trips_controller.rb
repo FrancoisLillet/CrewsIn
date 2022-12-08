@@ -64,16 +64,25 @@ class TripsController < ApplicationController
   end
 
   def summary
+    params.permit(:user, :trip, :recipient)
+    @user = User.find(params[:user_id])
     @trip = set_trip
     respond_to do |format|
       format.html
       format.pdf do
         render pdf: "summary"
       end
-      MyMailer.with(trip: @trip).send_summary_pdf(recipient).deliver_now
+    end
+  end
+
+    def summary_send
+      @user = current_user
+      recipient = params[:recipient]
+      @trip = Trip.find(params[:trip])
+      MyMailer.with(recipient: recipient, user: @user.id, trip: @trip.id).send_summary_pdf.deliver_now
     end
 
-  end
+
 
   private
 
@@ -83,6 +92,8 @@ class TripsController < ApplicationController
 
   def trip_params
     params.require(:trip).permit(:country, :start_date, :end_date, :starting_point, :max_capacity, :creator_id,
-                                 :skipper_id, :photo)
+    :skipper_id, :photo)
   end
+
+
 end
