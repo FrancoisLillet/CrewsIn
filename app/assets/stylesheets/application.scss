@@ -29,7 +29,7 @@ a, a:hover {
 // Blue color #2D66C8
 
 .page-container {
-  padding: 0px 30px 16px 40px;
+  padding: 8px 30px 16px 40px;
 }
 
 .central-container{
@@ -99,4 +99,8 @@ h6, h5, h4, h3, h2, h1 {
   font-family: "Roboto", "sans-serif";
   font-weight: 400;
   line-height: 1.2;
+}
+
+.form-title {
+  text-align: center;
 }

@@ -17,7 +17,8 @@
           </div>
           <div class="right-box" style="text-align: right">
             <span class="edit-target" data-action="click->modal-reveal#toggleWindow">
-              edit <i class="fa-solid fa-pen-to-square"></i>
+              <i class="fa-solid fa-pen-clip"></i>
+                <span> edit</span>
             </span>
           </div>
         </div>
@@ -27,10 +28,9 @@
         <!-- Modal content -->
         <div class="modal-content">
           <span class="close" data-action="click->modal-reveal#toggleWindow">&times;</span>
-          <h4>Edit your Nautical Bio</h4>
-          <p>Some text in the Modal..</p>
+          <h3 class="form-title">Edit your Nautical Bio</h3>
           <%= simple_form_for([@user], data: {turbo: false}) do |f| %>
-            <%= f.input :nautical_bio %>
+            <%= f.input :nautical_bio, label: "Summary pf your sailing life" %>
             <%= f.submit "Submit", class: "button-main"%>
           <% end %>
         </div>
@@ -74,7 +74,8 @@
             </div>
             <div class="right-box" style="text-align: right">
               <span class="edit-target" data-action="click->modal-reveal#toggleWindow">
-                edit <i class="fa-solid fa-pen-to-square"></i>
+                <i class="fa-solid fa-pen-clip"></i>
+                  <span> edit</span>
               </span>
             </div>
           </div>
@@ -83,7 +84,7 @@
             <!-- Modal content -->
             <div class="modal-content">
               <span class="close" data-action="click->modal-reveal#toggleWindow">&times;</span>
-              <h4>Upload a picture of the front of your sailing license</h4><br/>
+              <h3 class="form-title">Upload a picture of the front of your sailing license</h4><br/>
               <%= simple_form_for([@user], data: {turbo: false}) do |f| %>
                 <%= f.input :license_recto, label: false %>
                 <%= f.submit "Submit", class: "button-main"%>
@@ -113,7 +114,8 @@
             </div>
             <div class="right-box" style="text-align: right">
               <span class="edit-target" data-action="click->modal-reveal#toggleWindow">
-                edit <i class="fa-solid fa-pen-to-square"></i>
+                <i class="fa-solid fa-pen-clip"></i>
+                  <span> edit</span>
               </span>
             </div>
           </div>
@@ -122,7 +124,7 @@
             <!-- Modal content -->
             <div class="modal-content">
               <span class="close" data-action="click->modal-reveal#toggleWindow">&times;</span>
-              <h4>Upload a picture of the back of your sailing licence</h4><br/>
+              <h3 class="form-title">Upload a picture of the back of your sailing licence</h4><br/>
               <%= simple_form_for([@user], data: {turbo: false}) do |f| %>
                 <%= f.input :license_verso, label: false %>
                 <div class="flex-link-container">
@@ -154,7 +156,8 @@
             </div>
             <div class="right-box" style="text-align: right">
               <span class="edit-target" data-action="click->modal-reveal#toggleWindow">
-                edit <i class="fa-solid fa-pen-to-square"></i>
+                <i class="fa-solid fa-pen-clip"></i>
+                  <span> edit</span>
               </span>
             </div>
           </div>
@@ -163,7 +166,7 @@
             <!-- Modal content -->
             <div class="modal-content">
               <span class="close" data-action="click->modal-reveal#toggleWindow">&times;</span>
-              <h4>Upload a picture of your VHF certificate</h4><br/>
+              <h3 class="form-title">Upload a picture of your VHF certificate</h4><br/>
               <%= simple_form_for([@user], data: {turbo: false}) do |f| %>
                 <%= f.input :vhf_certificate, label: false %>
                 <div class="flex-link-container">
@@ -195,7 +198,8 @@
             </div>
             <div class="right-box" style="text-align: right">
               <span class="edit-target" data-action="click->modal-reveal#toggleWindow">
-                edit <i class="fa-solid fa-pen-to-square"></i>
+                <i class="fa-solid fa-pen-clip"></i>
+                  <span> edit</span>
               </span>
             </div>
           </div>
@@ -204,7 +208,7 @@
             <!-- Modal content -->
             <div class="modal-content">
               <span class="close" data-action="click->modal-reveal#toggleWindow">&times;</span>
-              <h4>Upload a picture of your passport's information page</h4><br/>
+              <h3 class="form-title">Upload a picture of your passport's information page</h4><br/>
               <%= simple_form_for([@user], data: {turbo: false}) do |f| %>
                 <%= f.input :passport_photo, label: false %>
                 <div class="flex-link-container">
@@ -238,7 +242,7 @@
             <!-- Modal content -->
             <div class="modal-content">
               <span class="close" data-action="click->modal-reveal#toggleWindow">&times;</span>
-              <h4>Add a new sailing experience</h4><br/>
+              <h3 class="form-title">Add a new sailing experience</h4><br/>
               <%= simple_form_for([@user, @experience]) do |f| %>
                 <%= f.input :country, collection: Mate.countries, required: true%>
                 <div class = dates-container>
@@ -281,8 +285,10 @@
                 <div class="right-box" style="text-align: right">
                   <span>
                     <span class="edit-target" data-action="click->modal-reveal#toggleWindow">
-                      edit <i class="fa-solid fa-pen-to-square"></i>
-                    </span><br/><br/>
+                      <i class="fa-solid fa-pen-clip"></i>
+                        <span> edit</span>
+                    </span>
+                    </span>
                     <span class="delete-target">
                       <%= link_to user_experience_path(@user, experience.id), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
                         delete <i class="fa-solid fa-trash"></i>
@@ -297,7 +303,7 @@
                 <!-- Modal content -->
                 <div class="modal-content">
                   <span class="close" data-action="click->modal-reveal#toggleWindow">&times;</span>
-                  <h4>Update a sailing experience</h4><br/>
+                  <h3 class="form-title">Update a sailing experience</h4><br/>
                   <%= simple_form_for([@user, experience]) do |f| %>
                     <%= f.input :country, collection: Mate.countries %>
                     <%= f.input :start_date %>

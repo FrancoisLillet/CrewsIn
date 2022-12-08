@@ -2,10 +2,24 @@
 
   <h1 class="mate-title text-center">My Mates</h1>
   <br/>
-  <p class="text-center">You can add a Mate's information to a trip without them having an account.</p>
+  <p><i class="fa-solid fa-circle-info"></i>
+    Once someone is registered as a mate, you can add them to the crew list of any trip they will acompany you to as crew members.
+  </p>
+  <!-- <p><i class="fa-solid fa-circle-info"></i>
+    However, if you want someone to be registered as skipper of a specific trip, you need to share them
+    the trip. They will receive an email to create an account and fill in their nautical CV on CrewsIn.com
+  </p> -->
   <% if @mates == nil || @mates.length == 0 %>
     <p>You have no mates yet.</p>
   <% end %>
+  <br/>
+
+  <%= link_to new_user_mate_path(is_user: false) do %>
+    <div class="addition-button" data-action="click->modal-reveal#toggleWindow">
+      <i class="fa-solid fa-circle-plus"></i> Add a new mate
+    </div>
+  <% end %>
+
 
 
   <% @mates.each do |mate| %>
@@ -30,14 +44,18 @@
           <!-- <%= link_to "Edit", edit_user_mate_path(@user.id, mate.id), class: "button-main" %> -->
           <div class="link-invisible-div">
           <%= link_to edit_user_mate_path(@user.id, mate.id, is_user: false) do %>
+            <span class="edit-target">
             <i class="fa-solid fa-pen-clip"></i>
-              <span> edit</span>
+               Edit this mate
             <% end %>
+          </span>
           </div>
           <div class="link-invisible-div">
             <%= link_to mate_path(mate), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
-              <i class="fa-solid fa-trash"></i>
-              <span> delete </span>
+              <span class="delete-target">
+                <i class="fa-solid fa-trash"></i>
+                Delete this mate
+              </span>
             <% end %>
           </div>
         </div>
@@ -45,8 +63,6 @@
     </div>
   <% end %>
   <br>
-  <%= link_to "+ Add a new mate", new_user_mate_path(is_user: false), class: "button-main"%>
-
 </div>
 
 

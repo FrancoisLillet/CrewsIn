@@ -1,11 +1,11 @@
 <div class = "page-container">
   <div class = "central-container">
-    <div class = "text-center">
-      <h1>Create your New Trip</h1>
-    </div>
-
+    <div class="account-card">
+      <div class = "text-center">
+        <h1 class="form-title">Create your new sailing Trip</h1>
+      </div>
       <%= simple_form_for([@user, @trip], data: {turbo: false}) do |f| %>
-          <%= f.input :country, as: :string %>
+          <%= f.input :country, collection: Mate.countries %>
           <div class = dates-container>
             <div class = date>
               <%= f.input :start_date, as: :date, html5: true, required: true, format: 'yyyy-mm-dd' %>
@@ -16,10 +16,11 @@
           </div>
           <%= f.input :starting_point %>
           <%= f.input :max_capacity, as: :integer %>
-          <%= f.input :photo %>
+          <%= f.input :photo, label: "Photo"%>
           <div class = "text-center">
-            <%= f.submit "Create", class: "button-main"%>
+            <%= f.submit "Create", value: "Let's go!", class: "button-main"%>
           </div>
       <% end %>
+    </div>
   </div>
 </div>

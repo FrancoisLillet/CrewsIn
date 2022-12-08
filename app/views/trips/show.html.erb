@@ -56,29 +56,16 @@
           </div>
         </div>
 
-            <!-- Modal for invitation  -->
-            <div id="myModal" class="modal-window display-none" data-modal-reveal-target="modalWindow">
-              <!-- Modal content -->
-              <div class="modal-content">
-                <span class="close" data-action="click->modal-reveal#toggleWindow">&times;</span>
-                <h4>Share this trip to a friend</h4><br/>
-                <p>They will be able to add themselves and their mates (children, partner, etc...) to the trip.</p>
-                <%= simple_form_for [@user, @trip, @invitation] do |f| %>
-
-                  <%= f.input :receiver_email, label: "Please enter their email" %>
-
-                  <div class="flex-link-container">
-                  <%= f.submit "Send invitation", class: "button-main" %>
-                  </div>
-                <% end %>
-              </div>
-            </div>
+        <!-- Modal for invitation  -->
+        <div id="myModal" class="modal-window display-none" data-modal-reveal-target="modalWindow">
+          <!-- Modal content -->
+          <%= render "shared/invitation_modal" %>
+        </div>
 
       </div>
 
       <!-- Mates (crew list) -->
       <div id="crew-list-container">
-        <h2 class="text-center">Crew List (<%= count %>)</h2>
           <!-- Div where we enroll crew members or add new mates -->
           <div class="profile-container-mates" data-controller="dropdown-reveal">
             <div class="results-header dropdown-header add-crew-member-button" data-action="click->dropdown-reveal#revealContent">
@@ -115,6 +102,8 @@
                           </div>
                           <% end %>
                         <% end %>
+                        <p><i class="skipper-icon fa-sharp fa-solid fa-dharmachakra"></i> If you wish to register someone as skipper, you should share them the trip (option 3) so they create an account and
+                        fill in their nautical CV themself.</p>
                     </div>
                   </div>
                   <div class="case-container"><!-- Case 2 : Create a mate -->
@@ -158,6 +147,7 @@
               </div>
             </div>
           </div>
+        <h2 class="text-center" style="margin: 32px 0">Crew List (<%= count %>)</h2>
 
 
           <div name="invisible-div-to-add-crew-members">

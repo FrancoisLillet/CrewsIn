@@ -1,0 +1,13 @@
+<div class="modal-content">
+  <span class="close" data-action="click->modal-reveal#toggleWindow">&times;</span>
+  <h3 class="text-center">Share this trip to a friend</h3><br/>
+  <p>Send an invitation to someone so they will be able to add themselves and their mates (children, partner, etc...) to the trip.</p>
+  <%= simple_form_for [@user, @trip, @invitation] do |f| %>
+
+    <%= f.input :receiver_email, label: "Please enter their email" %>
+
+    <div class="flex-link-container">
+    <%= f.submit "Send invitation", class: "button-main" %>
+    </div>
+  <% end %>
+</div>
