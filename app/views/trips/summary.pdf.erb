@@ -56,7 +56,9 @@
       </tr>
     </table>
   </div>
-  <h1>Skipper Documentation</h1>
+  <% if skipper_user.license_recto.attached? || skipper_user.license_verso.attached? || skipper_user.vhf_certificate.attached? || skipper_user.passport_photo.attached? %>
+    <h1>Skipper Documentation</h1>
+  <% end %>
   <div class="skipper-info">
     <div class="waben">
       <table>
