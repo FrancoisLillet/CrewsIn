@@ -37,7 +37,7 @@
           </div>
           <div>
             <div class="share-button sending-invitation-button" data-action="click->modal-reveal#toggleWindow">
-              <span><i class="fa-solid fa-share-from-square"></i> "Validate" this trip </span>
+              <span><i class="fa-solid fa-envelope"></i> &nbsp; Send documentation</span>
             </div>
             <div style="text-align: right; padding: 0 32px">
               <span class="edit-target">
@@ -134,10 +134,15 @@
                         <p class="text-center"><em>Your list of available mates is empty. You first need to create them.</em></p>
                       <% end %>
                         <% @available_mates.each do |mate| %>
+                          <% unless mate.is_user && mate.user == current_user %>
+                            <% display_name = "#{mate.first_name} #{mate.last_name}" %>
+                          <% else %>
+                            <% display_name = "Me (#{mate.first_name} #{mate.last_name})" %>
+                          <% end %>
                           <%= simple_form_for([@user, @trip, @enrollment], data: {turbo: false}) do |f| %>
                           <%= f.input :mate_id, as: :hidden, input_html: { value: mate.id } %>
                           <div class="text-center">
-                            <%= f.submit "#{mate.first_name} #{mate.last_name}", class: "crew-member-button" %>
+                            <%= f.submit "#{display_name}", class: "crew-member-button" %>
                           </div>
                           <% end %>
                         <% end %>

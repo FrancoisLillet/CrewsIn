@@ -1,0 +1,4 @@
+<p>Dear charter agency,</p>
+<br/>
+<p>Your client <%= "#{@user.mates.where(is_user: true).first.first_name} #{@user.mates.where(is_user: true).first.last_name}" %> filled
+in the documentation for their upcoming charter in <%= @trip.country %>. You will find attached the summary document.</p>
