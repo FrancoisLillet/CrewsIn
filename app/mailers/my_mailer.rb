@@ -13,15 +13,19 @@ class MyMailer < ActionMailer::Base
     mail(to: @invitation.receiver_email, subject: "You're invited to a trip!")
   end
 
-  def send_summary_pdf(recipient)
-    @user = params[:user]
-    attachments['summary.pdf']
-    mail(to: recipient, subject: 'Summary PDF', cc: @user.email)
+  def send_summary_pdf
+    recipient = params[:recipient]
+    @user = User.find(params[:user])
+    @trip = Trip.find(params[:trip])
+    attachments['summary.pdf'] = WickedPdf.new.pdf_from_string(
+      render_to_string(template: 'trips/summary', pdf: 'summary')
+    )
+    mail(to: recipient, subject: 'Summary PDF', cc: @user.email) do |format|
+      format.html
+    end
   end
+
 end
-
-
-
 
 # def invitation_email(form_params, invite_url)
 

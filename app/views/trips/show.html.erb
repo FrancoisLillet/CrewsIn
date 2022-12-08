@@ -78,6 +78,19 @@
 
       <!-- Mates (crew list) -->
       <div id="crew-list-container">
+
+        <% count = 0 %>
+        <% unless @trip.mates == nil %>
+          <% count = @trip.mates.length %>
+        <% end %>
+        
+         <%# Backend code for validating trip %>
+        <%= form_with url: submit_summary_path, method: :post do |form| %>
+          <%= form.hidden_field :trip, :value => @trip.id %>
+          <%= form.text_field :recipient %>
+          <%= form.submit "submit" %>
+        <% end %>
+
         <h2 class="text-center">Crew List (<%= count %>)</h2>
           <!-- Div where we enroll crew members or add new mates -->
           <div class="profile-container-mates" data-controller="dropdown-reveal">
