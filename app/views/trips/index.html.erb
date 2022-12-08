@@ -30,8 +30,14 @@
                 <h2><%= trip.country %></h2>
               <% end %>
               <p><%= trip.start_date.strftime("%a, %d %b %Y") %> → <%= trip.end_date.strftime("%a, %d %b %Y") %></p>
-              <% trip.mates.length == 1 ? word = "mate" : word = "mates" %>
-              <p> <%= "#{trip.mates.length} #{word}"%></p>
+              <% count = 0 %>
+              <% unless trip.mates == nil %>
+                <% count = trip.mates.length %>
+              <% end %>
+              <% count == 1 ? participant_word = "participant" : participant_word = "participants" %>
+              <p>
+                <%= "#{count} #{participant_word} (max #{trip.max_capacity})" %>
+              </p>
               <% unless skipper == nil %>
                 <p><i class="skipper-icon fa-sharp fa-solid fa-dharmachakra"></i>&nbsp;Skipper:&nbsp;<%= "#{skipper.first_name} #{skipper.last_name}" %></p>
               <% end %>
@@ -80,8 +86,14 @@
                     <h2><%= trip.country %></h2>
                   <% end %>
                   <p><%= trip.start_date.strftime("%a, %d %b %Y") %> → <%= trip.end_date.strftime("%a, %d %b %Y") %></p>
-                  <% trip.mates.length == 1 ? word = "mate" : word = "mates" %>
-                  <p> <%= "#{trip.mates.length} #{word}"%></p>
+                  <% count = 0 %>
+                  <% unless trip.mates == nil %>
+                    <% count = trip.mates.length %>
+                  <% end %>
+                  <% count == 1 ? participant_word = "participant" : participant_word = "participants" %>
+                  <p>
+                    <%= "#{count} #{participant_word} (max #{trip.max_capacity})" %>
+                  </p>
                   <% unless skipper == nil %>
                     <p><i class="skipper-icon fa-sharp fa-solid fa-dharmachakra"></i>&nbsp;Skipper:&nbsp;<%= "#{skipper.first_name} #{skipper.last_name}" %></p>
                   <% end %>
