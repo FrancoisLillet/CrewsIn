@@ -80,6 +80,7 @@ class TripsController < ApplicationController
       recipient = params[:recipient]
       @trip = Trip.find(params[:trip])
       MyMailer.with(recipient: recipient, user: @user.id, trip: @trip.id).send_summary_pdf.deliver_now
+      redirect_to trip_path(@trip.id)
     end
 
 
