@@ -69,7 +69,9 @@ class TripsController < ApplicationController
       format.pdf do
         render pdf: "summary"
       end
+      MyMailer.with(trip: @trip).send_summary_pdf(recipient).deliver_now
     end
+
   end
 
   private
