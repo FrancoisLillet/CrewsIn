@@ -4,13 +4,12 @@ class UsersController < ApplicationController
   def show
     @user = current_user
     @user_as_mate = @user.mates.where("mates.is_user = true").first
-
   end
 
   def update
     @user = User.find(params[:id])
     @user.update(user_params)
-    redirect_to user_nautical_cv_path(@user)
+    redirect_to user_path(@user)
   end
 
   def nautical_cv
@@ -19,14 +18,12 @@ class UsersController < ApplicationController
     @experience = Experience.new
   end
 
+  private
 
-private
-
-def user_params
-  params.require(:user).permit(
-    :photo, :nautical_bio, :license_recto, :license_verso,
-    :vhf_certificate, :passport_photo
-  )
-end
-
+  def user_params
+    params.require(:user).permit(
+      :photo, :nautical_bio, :license_recto, :license_verso,
+      :vhf_certificate, :passport_photo
+    )
+  end
 end

@@ -11,6 +11,8 @@
   <div class="invisible-div" data-dropdown-reveal-target="content">
     <% unless @upcoming_trips == nil
       @upcoming_trips.each do |trip| %>
+      <!-- Define skipper if any -->
+      <% skipper = trip.skipper.mates.where("is_user = true").first unless trip.skipper == nil %>
       <!-- Trip card -->
         <div class="trip-card">
           <div class="left-box">
@@ -19,7 +21,7 @@
               <% if trip.photo.attached? %>
                 <%= cl_image_tag(trip.photo.key, class: "mini-trip-photo") %>
               <% else %>
-                <%= image_tag asset_path("default_trip_photo.jpeg"), class: "mini-trip-photo" %>
+                <%= image_tag asset_path("default_trip_photo.jpg"), class: "mini-trip-photo" %>
               <% end %>
             </div>
             <% end %>
@@ -28,8 +30,17 @@
                 <h2><%= trip.country %></h2>
               <% end %>
               <p><%= trip.start_date.strftime("%a, %d %b %Y") %> → <%= trip.end_date.strftime("%a, %d %b %Y") %></p>
-              <% trip.mates.length == 1 ? word = "mate" : word = "mates" %>
-              <p> <%= "#{trip.mates.length} #{word}"%></p>
+              <% count = 0 %>
+              <% unless trip.mates == nil %>
+                <% count = trip.mates.length %>
+              <% end %>
+              <% count == 1 ? participant_word = "participant" : participant_word = "participants" %>
+              <p>
+                <%= "#{count} #{participant_word} (max #{trip.max_capacity})" %>
+              </p>
+              <% unless skipper == nil %>
+                <p><i class="skipper-icon fa-sharp fa-solid fa-dharmachakra"></i>&nbsp;Skipper:&nbsp;<%= "#{skipper.first_name} #{skipper.last_name}" %></p>
+              <% end %>
             </div>
           </div>
           <div class="right-box">
@@ -56,6 +67,8 @@
     <div class="invisible-div" data-dropdown-reveal-target="content">
       <% unless @past_trips == nil
         @past_trips.each do |trip| %>
+          <!-- Define skipper if any -->
+          <% skipper = trip.skipper.mates.where("is_user = true").first unless trip.skipper == nil %>
           <!-- Trip card -->
             <div class="trip-card">
               <div class="left-box">
@@ -64,7 +77,7 @@
                     <% if trip.photo.attached? %>
                       <%= cl_image_tag(trip.photo.key, class: "mini-trip-photo") %>
                     <% else %>
-                      <%= image_tag asset_path("default_trip_photo.jpeg"), class: "mini-trip-photo" %>
+                      <%= image_tag asset_path("default_trip_photo.jpg"), class: "mini-trip-photo" %>
                     <% end %>
                   </div>
                 <% end %>
@@ -73,15 +86,45 @@
                     <h2><%= trip.country %></h2>
                   <% end %>
                   <p><%= trip.start_date.strftime("%a, %d %b %Y") %> → <%= trip.end_date.strftime("%a, %d %b %Y") %></p>
-                  <% trip.mates.length == 1 ? word = "mate" : word = "mates" %>
-                  <p> <%= "#{trip.mates.length} #{word}"%></p>
+                  <% count = 0 %>
+                  <% unless trip.mates == nil %>
+                    <% count = trip.mates.length %>
+                  <% end %>
+                  <% count == 1 ? participant_word = "participant" : participant_word = "participants" %>
+                  <p>
+                    <%= "#{count} #{participant_word} (max #{trip.max_capacity})" %>
+                  </p>
+                  <% unless skipper == nil %>
+                    <p><i class="skipper-icon fa-sharp fa-solid fa-dharmachakra"></i>&nbsp;Skipper:&nbsp;<%= "#{skipper.first_name} #{skipper.last_name}" %></p>
+                  <% end %>
                 </div>
               </div>
-              <div class="right-box" style="text-align: right">
+              <div class="right-box">
                 <% origin = trip.creator == current_user ?  "me" : trip.creator.nickname %>
-                <span> Created by<br/>
-                <strong><%= origin %></strong>
-                </span>
+                <div style="text-align: right; padding: 0 32px">
+                  <span> Created by<br/>
+                  <strong><%= origin %></strong>
+                  </span>
+                </div>
+                <div>
+                  <div class="share-button sending-invitation-button" data-action="click->modal-reveal#toggleWindow">
+                    <span><i class="fa-solid fa-share-from-square"></i> Share this trip </span>
+                  </div>
+                  <div style="text-align: right; padding: 0 32px">
+                    <span class="edit-target">
+                      <%= link_to edit_user_trip_path(@user, trip) do %>
+                        <i class="fa-solid fa-pen-clip"></i>
+                        Edit the trip
+                      <% end %>
+                    </span><br>
+                    <span class="delete-target">
+                      <%=link_to [@user, trip], data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
+                        <i class="fa-solid fa-trash"></i>
+                        Delete the trip
+                      <% end %>
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
       <% end %>

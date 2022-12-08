@@ -1,38 +1,34 @@
 <div class = prof-container>
-  <h1>Welcome, <%= @user.nickname.capitalize %></h1>
-
-
-<div class = prof-pic-container>
+  <h1><%= @user.nickname.capitalize %>'s Profile</h1>
+  <div class = prof-pic-container>
     <% if @user.photo.attached? %>
       <%= cl_image_tag @user.photo.key, gravity: :face, class:"profile-pic"%>
     <% else %>
       <%= image_tag asset_path("blank-prof.jpg"), class:"profile-pic"%>
     <% end %>
-
-      <label class="add-button">
-        <i class="fa-solid fa-plus center"></i>
-    <div data-controller="profile-form">
+    <label class="add-button">
+      <i class="fa-solid fa-plus center"></i>
+      <div data-controller="profile-form">
         <span style="display:none;">
-            <%= simple_form_for @user, html: {class: "d-none", data: { profile_form_target: "form" }} do |f| %>
-              <%= f.input :photo, as: :file, input_html: { data: {action: "change->profile-form#submitForm"} } %>
-              <%= f.submit %>
+          <%= simple_form_for @user, html: {class: "d-none", data: { profile_form_target: "form" }} do |f| %>
+            <%= f.input :photo, as: :file, input_html: { data: {action: "change->profile-form#submitForm"} } %>
+            <%= f.submit %>
           <% end %>
         </span>
-      </label>
-    </div>
+      </div>
+    </label>
   </div>
 </div>
 <div class = buttons-container>
-
-<% if @user_as_mate == nil %>
-<!-- When the user does not have is corresponding mate and needs to create it -->
-  <%= link_to "My Info", new_user_mate_path(@user.id, is_user: true), class: "button-main" %>
-<% else %>
-<!-- When the user already has is corresponding mate -->
-  <%= link_to "My Info", user_mate_path(@user.id, @user_as_mate.id, is_user: true), class: "button-main" %>
-<% end %>
-<br>
-<%= link_to "My Trips", user_trips_path(@user.id), class: "button-main" %>
+  <% if @user_as_mate == nil %>
+    <!-- When the user does not have is corresponding mate and needs to create it -->
+    <%= link_to "My Info", new_user_mate_path(@user.id, is_user: true), class: "button-main" %>
+  <% else %>
+    <!-- When the user already has is corresponding mate -->
+    <%= link_to "My Info", user_mate_path(@user.id, @user_as_mate.id, is_user: true), class: "button-main" %>
+  <% end %>
+  <br>
+  <%= link_to "My Trips", user_trips_path(@user.id), class: "button-main" %>
   <br>
   <%= link_to "My Mates", user_mates_path(@user.id), class: "button-main" %>
   <br>

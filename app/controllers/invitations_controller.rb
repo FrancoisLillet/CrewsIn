@@ -1,9 +1,10 @@
 class InvitationsController < ApplicationController
-
   def index
     @user = current_user
-    @pending_invitations = Invitation.where(receiver_email: @user.email).select { |invitation| invitation.receiver_id == nil }
-    @invited_trips = @pending_invitations.map{ |pending_invitation| pending_invitation.trip }
+    @pending_invitations = Invitation.where(receiver_email: @user.email).select do |invitation|
+      invitation.receiver_id.nil?
+    end
+    @invited_trips = @pending_invitations.map { |pending_invitation| pending_invitation.trip }
   end
 
   def create
@@ -40,5 +41,4 @@ class InvitationsController < ApplicationController
   def invitation_params
     params.require(:invitation).permit(:sender_id, :receiver_id, :receiver_email, :trip_id)
   end
-
 end
