@@ -7,22 +7,22 @@
 <div>
   <h1>Trip</h1>
   <table class="table-1" cellpadding=5>
-  <tr>
-  <td class="left-side">
-    <B>Country:</B><br>
-    <B>Start date:</B><br>
-    <B>End date:</B><br>
-    <B>Starting point:</B><br>
-    <B>Maximum capacity:</B><br>
-  </td>
-  <td>
-    <%=@trip.country%><br>
-    <%=@trip.start_date%><br>
-    <%=@trip.end_date%><br>
-    <%=@trip.starting_point%><br>
-    <%=@trip.max_capacity%><br>
-  </td>
-  </tr>
+    <tr>
+      <td class="left-side">
+        <B>Country:</B><br>
+        <B>Start date:</B><br>
+        <B>End date:</B><br>
+        <B>Starting point:</B><br>
+        <B>Maximum capacity:</B><br>
+      </td>
+      <td>
+        <%=@trip.country%><br>
+        <%=@trip.start_date%><br>
+        <%=@trip.end_date%><br>
+        <%=@trip.starting_point%><br>
+        <%=@trip.max_capacity%><br>
+      </td>
+    </tr>
   </table>
 </div>
 <% if @trip.skipper_id %>
@@ -32,34 +32,34 @@
   <div>
     <B><font size=5><center><%= skipper_mate.first_name %></center></font></B><br>
     <table class="table-1" cellpadding=5>
-    <tr>
-    <td class="left-side">
-      <B>Name:</B><br>
-      <B>Date of birth:</B><br>
-      <B>Phone number:</B><br>
-      <B>Nationality:</B><br>
-      <B>Country of Residence:</B><br>
-      <B>Adress:</B><br>
-      <B>Passport number:</B><br>
-      <B>Expiration Date:</B><br>
-    </td>
-    <td>
-      <%= "#{skipper_mate.first_name} #{skipper_mate.last_name}"%><br>
-      <%= skipper_mate.date_of_birth.strftime("%d %b %Y")%><br>
-      <%= skipper_mate.phone_number%><br>
-      <%= skipper_mate.nationality%><br>
-      <%= skipper_mate.country_of_residence%><br>
-      <%= skipper_mate.address%><br>
-      <%= skipper_mate.passport_number%><br>
-      <%= skipper_mate.expiration_date.strftime("%d %b %Y")%><br>
-    </td>
-    </tr>
+      <tr>
+        <td class="left-side">
+          <B>Name:</B><br>
+          <B>Date of birth:</B><br>
+          <B>Phone number:</B><br>
+          <B>Nationality:</B><br>
+          <B>Country of Residence:</B><br>
+          <B>Adress:</B><br>
+          <B>Passport number:</B><br>
+          <B>Expiration Date:</B><br>
+        </td>
+        <td>
+          <%= "#{skipper_mate.first_name} #{skipper_mate.last_name}"%><br>
+          <%= skipper_mate.date_of_birth.strftime("%d %b %Y")%><br>
+          <%= skipper_mate.phone_number%><br>
+          <%= skipper_mate.nationality%><br>
+          <%= skipper_mate.country_of_residence%><br>
+          <%= skipper_mate.address%><br>
+          <%= skipper_mate.passport_number%><br>
+          <%= skipper_mate.expiration_date.strftime("%d %b %Y")%><br>
+        </td>
+      </tr>
     </table>
   </div>
   <h1>Skipper Documentation</h1>
   <div class="skipper-info">
-    <table>
-      <div class="waben">
+    <div class="waben">
+      <table>
         <td>
           <% if skipper_user.license_recto.attached? %>
             <div>
@@ -70,19 +70,18 @@
             </div>
           <% end %>
         </td>
-      </div>
-    </table>
-
+      </table>
+    </div>
     <% if skipper_user.license_verso.attached? %>
-      <div>
-        <h3>Back of sailing license</h3>
+      <div class="waben">
+        <div class="top-left"><h3>Back of sailing license</h3></div>
         <a href="https://res.cloudinary.com/dmz2vmnno/image/upload/v1/development/<%=skipper_user.license_verso.key%>" target="_blank">
           <%= cl_image_tag skipper_user.license_verso.key, class: "document-photo" %>
         </a>
       </div>
     <% end %>
     <% if skipper_user.vhf_certificate.attached? %>
-      <div>
+      <div class="waben">
         <h3>VHF certificate</h3>
         <a href="https://res.cloudinary.com/dmz2vmnno/image/upload/v1/development/<%=skipper_user.vhf_certificate.key%>" target="_blank">
           <%= cl_image_tag skipper_user.vhf_certificate.key, class: "document-photo" %>
@@ -90,7 +89,7 @@
       </div>
     <% end %>
     <% if skipper_user.passport_photo.attached? %>
-      <div>
+      <div class="waben">
         <h3>Passport information page</h3>
         <a href="https://res.cloudinary.com/dmz2vmnno/image/upload/v1/development/<%=skipper_user.passport_photo.key%>" target="_blank">
           <%= cl_image_tag skipper_user.passport_photo.key, class: "document-photo" %>
@@ -98,72 +97,76 @@
       </div>
     <% end %>
   </div>
-  <h1>Skipper Experiences</h1>
-  <% experiences = Experience.where(user_id: @trip.skipper_id)%>
-  <% experiences.each do |experience|%>
-    <div>
-    <B><font size=5><center><%= experience.country %></center></font></B><br>
-    <table class="table-1" cellpadding=5>
-    <tr>
-    <td class="left-side">
-      <B>Country:</B><br>
-      <B>Sailing area:</B><br>
-      <B>Start_date:</B><br>
-      <B>End date:</B><br>
-      <B>Role:</B><br>
-      <B>Number of miles:</B><br>
-      <B>Boat type:</B><br>
-      <B>Boat length:</B><br>
-      <B>Boat model:</B><br>
-      <B>Boat owner:</B><br>
-    </td>
-    <td>
-      <%= experience.country%><br>
-      <%= experience.sailing_area%><br>
-      <%= experience.start_date%><br>
-      <%= experience.end_date%><br>
-      <%= experience.role%><br>
-      <%= experience.number_of_miles%><br>
-      <%= experience.boat_type%><br>
-      <%= experience.boat_length%><br>
-      <%= experience.boat_model%><br>
-      <%= experience.boat_owner%><br>
-    </td>
-    </tr>
-    </table>
-  </div>
-  <% end %>
-<% end %>
-<h1>Crew Members</h1>
-<% mates_not_skipper = @trip.mates.reject { |mate| mate == skipper_mate } %>
-<% mates_not_skipper.each do |mate|%>
   <div>
-    <B><font size=5><center><%= mate.first_name %></center></font></B><br>
-    <table class="table-1" cellpadding=5>
-    <tr>
-    <td class="left-side">
-      <B>Name:</B><br>
-      <B>Date of birth:</B><br>
-      <B>Phone number:</B><br>
-      <B>Nationality:</B><br>
-      <B>Country of Residence:</B><br>
-      <B>Adress:</B><br>
-      <B>Passport number:</B><br>
-      <B>Expiration Date:</B><br>
-    </td>
-    <td>
-      <%= "#{mate.first_name} #{mate.last_name}"%><br>
-      <%= mate.date_of_birth.strftime("%d %b %Y")%><br>
-      <%= mate.phone_number%><br>
-      <%= mate.nationality%><br>
-      <%= mate.country_of_residence%><br>
-      <%= mate.address%><br>
-      <%= mate.passport_number%><br>
-      <%= mate.expiration_date.strftime("%d %b %Y")%><br>
-    </td>
-    </tr>
-    </table>
+    <h1>Skipper Experiences</h1>
+    <% experiences = Experience.where(user_id: @trip.skipper_id)%>
+    <% experiences.each do |experience|%>
+      <div class="wabenew">
+        <B><font size=5><center><%= experience.country %></center></font></B><br>
+        <table class="table-1" cellpadding=5>
+          <tr>
+            <td class="left-side">
+              <B>Country:</B><br>
+              <B>Sailing area:</B><br>
+              <B>Start_date:</B><br>
+              <B>End date:</B><br>
+              <B>Role:</B><br>
+              <B>Number of miles:</B><br>
+              <B>Boat type:</B><br>
+              <B>Boat length:</B><br>
+              <B>Boat model:</B><br>
+              <B>Boat owner:</B><br>
+            </td>
+            <td>
+              <%= experience.country%><br>
+              <%= experience.sailing_area%><br>
+              <%= experience.start_date%><br>
+              <%= experience.end_date%><br>
+              <%= experience.role%><br>
+              <%= experience.number_of_miles%><br>
+              <%= experience.boat_type%><br>
+              <%= experience.boat_length%><br>
+              <%= experience.boat_model%><br>
+              <%= experience.boat_owner%><br>
+            </td>
+          </tr>
+        </table>
+      </div>
+    <% end %>
   </div>
 <% end %>
+<div>
+  <h1>Crew Members</h1>
+  <% mates_not_skipper = @trip.mates.reject { |mate| mate == skipper_mate } %>
+  <% mates_not_skipper.each do |mate|%>
+    <div class="wabenew">
+      <B><font size=5><center><%= mate.first_name %></center></font></B><br>
+      <table class="table-1" cellpadding=5>
+        <tr>
+          <td class="left-side">
+            <B>Name:</B><br>
+            <B>Date of birth:</B><br>
+            <B>Phone number:</B><br>
+            <B>Nationality:</B><br>
+            <B>Country of Residence:</B><br>
+            <B>Adress:</B><br>
+            <B>Passport number:</B><br>
+            <B>Expiration Date:</B><br>
+          </td>
+          <td>
+            <%= "#{mate.first_name} #{mate.last_name}"%><br>
+            <%= mate.date_of_birth.strftime("%d %b %Y")%><br>
+            <%= mate.phone_number%><br>
+            <%= mate.nationality%><br>
+            <%= mate.country_of_residence%><br>
+            <%= mate.address%><br>
+            <%= mate.passport_number%><br>
+            <%= mate.expiration_date.strftime("%d %b %Y")%><br>
+          </td>
+        </tr>
+      </table>
+    </div>
+  <% end %>
+</div>
 </body>
 </html>

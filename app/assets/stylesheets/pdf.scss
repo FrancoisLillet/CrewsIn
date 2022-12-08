@@ -38,28 +38,11 @@ body {
 }
 
 .waben{
-  position: relative;
+  position: sticky;
   display: inline-block;
 }
 
-// .grid-container {
-//   margin: 16px 16px;
-//   padding: 0px 16px;
-//   // border: 1px solid #BBBBBB;
-//   border-radius: 8px;
-//   display: grid;
-//   grid-template-columns: 1fr 2fr;
-//   align-items: center;
-
-//   // background-color: #2D66C8;
-//   // color: #FFFFFF;
-// }
-
-// .left-column {
-//   grid-column: 1 / 2;
-//   padding: 8px 0px;
-// }
-
-// .right-column {
-//   grid-column: 2 / 3 ;
-// }
+.wabenew{
+  position: sticky;
+  display: block;
+}
