@@ -17,6 +17,7 @@ class TripsController < ApplicationController
   def show
     set_trip
     @invited_users = Invitation.where("trip_id = ? AND receiver_id IS NOT null", @trip.id).pluck(:receiver_id)
+    @skipper = @trip.skipper.mates.where("is_user = true").first unless @trip.skipper == nil
     @enrollment = Enrollment.new
     @user = current_user
     @invitation = Invitation.new
@@ -45,9 +46,10 @@ class TripsController < ApplicationController
 
   def update
     @user = current_user
-  set_trip
+    set_trip
+
     if @trip.update(trip_params)
-      redirect_to user_trips_path(@user)
+      redirect_to trip_path(@trip)
     else
       render :edit
     end
@@ -61,7 +63,9 @@ class TripsController < ApplicationController
   end
 
   def summary
-    set_trip
+    params.permit(:user, :trip, :recipient)
+    @user = User.find(params[:user_id])
+    @trip = set_trip
     respond_to do |format|
       format.html
       format.pdf do
@@ -70,6 +74,15 @@ class TripsController < ApplicationController
     end
   end
 
+    def summary_send
+      @user = current_user
+      recipient = params[:recipient]
+      @trip = Trip.find(params[:trip])
+      MyMailer.with(recipient: recipient, user: @user.id, trip: @trip.id).send_summary_pdf.deliver_now
+    end
+
+
+
   private
 
   def set_trip
@@ -77,6 +90,9 @@ class TripsController < ApplicationController
   end
 
   def trip_params
-    params.require(:trip).permit(:country, :start_date, :end_date, :starting_point, :max_capacity, :creator_id, :skipper_id, :photo)
+    params.require(:trip).permit(:country, :start_date, :end_date, :starting_point, :max_capacity, :creator_id,
+    :skipper_id, :photo)
   end
+
+
 end

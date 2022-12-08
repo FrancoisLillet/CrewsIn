@@ -1,5 +1,4 @@
 class ExperiencesController < ApplicationController
-
   def create
     @user = current_user
     @experience = Experience.new(experience_params)
@@ -34,6 +33,6 @@ class ExperiencesController < ApplicationController
 
   def experience_params
     params.require(:experience).permit(:country, :sailing_area, :start_date, :end_date, :role, :boat_model,
-     :boat_length, :boat_type, :boat_owner, :number_of_miles, :comment)
+                                       :boat_length, :boat_type, :boat_owner, :number_of_miles, :comment)
   end
 end

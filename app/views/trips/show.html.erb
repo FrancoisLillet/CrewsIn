@@ -9,14 +9,23 @@
             <% if @trip.photo.attached? %>
               <%= cl_image_tag(@trip.photo.key, class: "mini-trip-photo") %>
             <% else %>
-              <%= image_tag asset_path("default_trip_photo.jpeg"), class: "mini-trip-photo" %>
+              <%= image_tag asset_path("default_trip_photo.jpg"), class: "mini-trip-photo" %>
             <% end %>
           </div>
           <div class="trip-summary-box">
             <h2><%= @trip.country %></h2>
             <p><%= @trip.start_date.strftime("%a, %d %b %Y") %> → <%= @trip.end_date.strftime("%a, %d %b %Y") %></p>
-            <% @trip.mates.length == 1 ? word = "mate" : word = "mates" %>
-            <p> <%= "#{@trip.mates.length} #{word}"%></p>
+            <% count = 0 %>
+            <% unless @trip.mates == nil %>
+              <% count = @trip.mates.length %>
+            <% end %>
+            <% count == 1 ? participant_word = "participant" : participant_word = "participants" %>
+            <p>
+              <%= "#{count} #{participant_word} (max #{@trip.max_capacity})" %>
+            </p>
+            <% unless @skipper == nil %>
+              <p><i class="skipper-icon fa-sharp fa-solid fa-dharmachakra"></i>&nbsp;Skipper:&nbsp;<%= "#{@skipper.first_name} #{@skipper.last_name}" %></p>
+            <% end %>
           </div>
         </div>
         <div class="right-box">
@@ -29,6 +38,20 @@
           <div>
             <div class="share-button sending-invitation-button" data-action="click->modal-reveal#toggleWindow">
               <span><i class="fa-solid fa-share-from-square"></i> Share this trip </span>
+            </div>
+            <div style="text-align: right; padding: 0 32px">
+              <span class="edit-target">
+                <%= link_to edit_user_trip_path(@trip) do %>
+                  <i class="fa-solid fa-pen-clip"></i>
+                  Edit the trip
+                <% end %>
+              </span><br>
+              <span class="delete-target">
+                <%=link_to [@user, @trip], data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
+                  <i class="fa-solid fa-trash"></i>
+                  Delete the trip
+                <% end %>
+              </span>
             </div>
           </div>
         </div>
@@ -52,83 +75,99 @@
             </div>
 
       </div>
-      <div class="text-center">
-        <span>
-          <%= link_to edit_user_trip_path(@trip) do %>
-            <i class="fa-solid fa-pen-to-square"></i>
-            Edit the trip
-          <% end %>
-        </span>
-        <span>
-          <%=link_to [@user, @trip], data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
-            <i class="fa-solid fa-pen-to-square"></i>
-            Delete the trip
-          <% end %>
-        </span>
-      </div>
 
       <!-- Mates (crew list) -->
       <div id="crew-list-container">
+
         <% count = 0 %>
         <% unless @trip.mates == nil %>
           <% count = @trip.mates.length %>
         <% end %>
-        <h2 class="text-center">Current participants (<%= count %>)</h2>
+        
+         <%# Backend code for validating trip %>
+        <%= form_with url: submit_summary_path, method: :post do |form| %>
+          <%= form.hidden_field :trip, :value => @trip.id %>
+          <%= form.text_field :recipient %>
+          <%= form.submit "submit" %>
+        <% end %>
+
+        <h2 class="text-center">Crew List (<%= count %>)</h2>
           <!-- Div where we enroll crew members or add new mates -->
           <div class="profile-container-mates" data-controller="dropdown-reveal">
             <div class="results-header dropdown-header add-crew-member-button" data-action="click->dropdown-reveal#revealContent">
-              <h3 style="display: inline"><i class="fa-solid fa-circle-plus"></i> Add a participant </h3>
+              <h3 style="display: inline"><i class="fa-solid fa-circle-plus"></i> Add a crew member </h3>
                 <i class="caret-down fa-solid fa-angle-down"></i>
             </div>
 
             <div class="invisible-div display-none" data-dropdown-reveal-target="content">
               <div class="multi-case-container">
-                <div class="case-container"><!-- Case 1 : Select one of your available mates -->
-                  <div >
-                    <h4 class="text-center"><i class="fa-solid fa-clipboard-check"></i>&nbsp; <strong>Case 1</strong></h4>
-                    <% @available_mates = @user.mates - @trip.mates %>
-                      <p>Choose a participant among the list of your available mates (those that are already part of the crew list
-                      do not appear in the list):</p>
-                    <% if @available_mates.empty? %>
-                      <p class="text-center"><em>Your list of available mates is empty. You first need to create them.</em></p>
-                    <% end %>
-                      <% @available_mates.each do |mate| %>
-                        <%= simple_form_for([@user, @trip, @enrollment], data: {turbo: false}) do |f| %>
-                        <%= f.input :mate_id, as: :hidden, input_html: { value: mate.id } %>
-                        <div class="text-center">
-                          <%= f.submit "#{mate.first_name} #{mate.last_name}", class: "crew-member-button" %>
-                        </div>
-                        <% end %>
-                      <% end %>
-                  </div>
-                </div>
-                <div class="case-container"><!-- Case 2 : Create a mate -->
-                  <div>
-                    <h4 class="text-center"><i class="fa-solid fa-user-plus"></i>&nbsp; <strong>Case 2</strong></h4>
-                    <p>
-                      The participant you want to add to the trip is not in the list of your mates,
-                      but you know their personal information. Create them as a new mate, so you can add them to any trip you want.
-                    </p>
-                    <%= link_to new_user_mate_path(@user) do %>
-                      <div class="addition-button" style="font-size: 18px" data-action="click->dropdown-reveal#revealContent">
-                        <i class="fa-solid fa-circle-plus"></i> Create a new mate
-                      </div>
-                    <% end %>
-                  </div>
-                </div>
-                <div class="case-container"><!-- Case 3 : Invite someone -->
-                  <div>
-                    <h4 class="text-center"><i class="fa-solid fa-share-from-square"></i>&nbsp; <strong>Case 3</strong></h4>
-                    <p>
-                      If you want to add some participants but do not know their informations,
-                      send them an invitation to collaborate on the crew list. Like so, they will be able to add themselves as
-                      participants, or add their children / family members whose they already know all personal details.
-                    </p>
-                    <div class="share-button sending-invitation-button" data-action="click->modal-reveal#toggleWindow">
-                      <span><i class="fa-solid fa-share-from-square"></i> Share this trip </span>
+
+                <% if count >= @trip.max_capacity %>
+                  <div class="case-container negative-button"><!-- Case 0 : Max capacity reached -->
+                    <div >
+                      <h4 class="text-center"><i class="fa-solid fa-triangle-exclamation"></i>&nbsp; <strong>Maximum capacity reached</strong></h4>
+                      <% @available_mates = @user.mates - @trip.mates %>
+                        <p>You have reached the maximum capacity that was set for this trip. If you want to
+                        add a new crew member, you have to remove someone else or to increase the maximum capacity of the trip.</p>
                     </div>
                   </div>
-                </div>
+                <% else %>
+                  <div class="case-container"><!-- Case 1 : Select one of your available mates -->
+                    <div >
+                      <h4 class="text-center"><i class="fa-solid fa-clipboard-check"></i>&nbsp; <strong>Option 1</strong></h4>
+                      <% @available_mates = @user.mates - @trip.mates %>
+                        <p>Choose a crew member from the list of your available mates</p>
+                      <% if @available_mates.empty? %>
+                        <p class="text-center"><em>Your list of available mates is empty. You first need to create them.</em></p>
+                      <% end %>
+                        <% @available_mates.each do |mate| %>
+                          <%= simple_form_for([@user, @trip, @enrollment], data: {turbo: false}) do |f| %>
+                          <%= f.input :mate_id, as: :hidden, input_html: { value: mate.id } %>
+                          <div class="text-center">
+                            <%= f.submit "#{mate.first_name} #{mate.last_name}", class: "crew-member-button" %>
+                          </div>
+                          <% end %>
+                        <% end %>
+                    </div>
+                  </div>
+                  <div class="case-container"><!-- Case 2 : Create a mate -->
+                    <div>
+                      <h4 class="text-center"><i class="fa-solid fa-user-plus"></i>&nbsp;<strong>Option 2</strong>
+                      </h4>
+                      <!-- If the current user did not register himself as mate -->
+                      <% if @user.mates.find{ |mate| mate.is_user } == nil %>
+                      <p>
+                        If you want to add yourself to the trip, first you have to register your personal information.
+                        <%= link_to new_user_mate_path(@user, is_user: true, origin_page: trip_path(@trip.id)) do %>
+                          <div class="addition-button" style="font-size: 18px" data-action="click->dropdown-reveal#revealContent">
+                            <i class="fa-solid fa-circle-plus"></i> Fill in my info
+                          </div>
+                        <% end %>
+                      </p>
+                      <% end %>
+                      <p>
+                        Add a crew member with their personal info! They don't need to have an account or be in your existing list of mates.
+                      </p>
+                      <%= link_to new_user_mate_path(@user, origin_page: trip_path(@trip.id)) do %>
+                        <div class="addition-button" style="font-size: 18px" data-action="click->dropdown-reveal#revealContent">
+                          <i class="fa-solid fa-circle-plus"></i> Create a new mate
+                        </div>
+                      <% end %>
+                    </div>
+                  </div>
+                  <div class="case-container"><!-- Case 3 : Invite someone -->
+                    <div>
+                      <h4 class="text-center"><i class="fa-solid fa-share-from-square"></i>&nbsp; <strong>Option 3</strong></h4>
+                      <p>
+                        Invite anybody to collaborate on the trip! They will be able to add themselves or their friends/family members to the trip, just like you.
+                      </p>
+                      <div class="share-button sending-invitation-button" data-action="click->modal-reveal#toggleWindow">
+                        <span><i class="fa-solid fa-share-from-square"></i> Share this trip </span>
+                      </div>
+                    </div>
+                  </div>
+                <% end %>
+
               </div>
             </div>
           </div>
@@ -142,7 +181,17 @@
           <% @trip.mates.each do |mate|%>
             <div class="profile-container-mates" data-controller="dropdown-reveal">
               <div class="results-header dropdown-header" data-action="click->dropdown-reveal#revealContent">
-                <h3 style="display: inline"><%= "#{mate.first_name} #{mate.last_name} #{mate.is_user && mate.user_id == current_user.id ? '(me)' : ''}" %> </h3>
+                <h3 class="skipper-name" style="display: inline">
+                  <% if mate.is_user && mate.user_id == current_user.id %>
+                    Me
+                  <% else %>
+                    <%= "#{mate.first_name} #{mate.last_name}" %>
+                  <% end %>
+                  <% if @trip.skipper_id == mate.user_id && mate.is_user %>
+                      <em>- skipper&nbsp;</em>
+                      <i class="skipper-icon fa-sharp fa-solid fa-dharmachakra"></i>
+                  <% end %>
+                </h3>
                   <i class="caret-down fa-solid fa-angle-down"></i>
               </div>
               <div class="invisible-div display-none" data-dropdown-reveal-target="content">
@@ -159,17 +208,47 @@
                 </div>
                 <div class="flex-link-container">
                   <!-- <%= link_to "Edit", edit_user_mate_path(@user.id, mate.id), class: "button-main" %> -->
-                  <div class="link-invisible-div">
-                    <%= link_to edit_user_mate_path(@user.id, mate.id, is_user: mate.is_user) do %>
-                      <i class="fa-solid fa-pen-to-square"></i>
-                        <span> edit</span>
+                  <div class="link-invisible-div text-center">
+                    <% if mate.is_user %>
+                      <div class="switch-container" >
+                        <% if @trip.skipper_id == mate.user_id %>
+                          <%= simple_form_for([@user, @trip], data: {turbo: false}) do |f| %>
+                          <%= f.input :skipper_id, as: :hidden, input_html: { value: nil } %>
+                            <div class="text-center" style="margin: 32px 16px">
+                              <%= button_tag type: 'submit' , class: "crew-member-button negative-button" do %>
+                                <i class="skipper-icon fa-sharp fa-solid fa-dharmachakra"></i>&nbsp; <%= "Remove #{mate.first_name}'s role as skipper" %>
+                              <% end %>
+                            </div>
+                          <% end %>
+                        <% else %>
+                          <!-- <input type="checkbox" id="switch" /><label for="switch"></label> -->
+                          <%= simple_form_for([@user, @trip], data: {turbo: false}) do |f| %>
+                          <%= f.input :skipper_id, as: :hidden, input_html: { value: mate.user_id } %>
+                          <div class="text-center" style="margin: 32px 16px">
+                            <%= button_tag type: 'submit' , class: "crew-member-button" do %>
+                              <i class="skipper-icon fa-sharp fa-solid fa-dharmachakra"></i>&nbsp; <%= "Set #{mate.first_name} as skipper" %>
+                            <% end %>
+                          </div>
+                          <% end %>
+                        <% end %>
+                      </div>
                     <% end %>
+                    <span class="edit-target">
+                      <%= link_to edit_user_mate_path(@user.id, mate.id, is_user: mate.is_user, origin_page: trip_path(@trip.id)) do %>
+                        <i class="fa-solid fa-pen-clip"></i>
+                          <span> edit info</span>
+                      <% end %>
+                      &nbsp;
+                    </span>
+                    <span class="delete-target">
+                      &nbsp;
+                      <% enrollment = Enrollment.find_by(mate: mate, trip: @trip) %>
+                      <%= link_to enrollment_path(enrollment), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
+                        <i class="fa-solid fa-trash"></i>
+                          <span> Remove from this trip&nbsp;</span>
+                      <% end %>
+                    </span>
                   </div>
-                  <% enrollment = Enrollment.find_by(mate: mate, trip: @trip) %>
-                  <i class="fa-solid fa-trash"></i><%= link_to "Remove Enrollment",
-                    enrollment_path(enrollment),
-                    data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
-                  %></p>
 
                 </div>
               </div>

@@ -23,4 +23,5 @@ Rails.application.routes.draw do
   resources :trips, only: %i[show]
   resources :enrollments, only: %i[destroy]
   resources :invitations, only: %i[update destroy]
+  post "/submit-summary", to: "trips#summary_send"
 end
