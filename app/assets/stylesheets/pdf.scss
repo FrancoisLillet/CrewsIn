@@ -1,0 +1,50 @@
+// Graphical variables
+@import "config/fonts";
+@import "config/colors";
+// @import "config/bootstrap_variables";
+
+// External libraries
+// @import "bootstrap/scss/bootstrap";
+@import "font-awesome";
+
+// Your CSS partials
+@import "components/index";
+@import "pages/index";
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+.table-1 {
+  border: none;
+  font-size: 15;
+  text-align: left;
+  border-bottom: 1px black;
+}
+
+.left-side {
+  column-width: 50px;
+}
+
+// .grid-container {
+//   margin: 16px 16px;
+//   padding: 0px 16px;
+//   // border: 1px solid #BBBBBB;
+//   border-radius: 8px;
+//   display: grid;
+//   grid-template-columns: 1fr 2fr;
+//   align-items: center;
+
+//   // background-color: #2D66C8;
+//   // color: #FFFFFF;
+// }
+
+// .left-column {
+//   grid-column: 1 / 2;
+//   padding: 8px 0px;
+// }
+
+// .right-column {
+//   grid-column: 2 / 3 ;
+// }
