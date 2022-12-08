@@ -32,7 +32,7 @@
   // border: 1px solid #BBBBBB;
   border-radius: 8px;
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 1fr 1fr;
   align-items: center;
 
   // background-color: #2D66C8;
@@ -41,7 +41,7 @@
 
 .left-column {
   grid-column: 1 / 2;
-  padding: 8px 0px;
+  padding: 8px;
 }
 
 .right-column {

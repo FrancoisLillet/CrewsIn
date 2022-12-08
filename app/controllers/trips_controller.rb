@@ -5,6 +5,7 @@ class TripsController < ApplicationController
     @user = current_user
     @trips = @user.created_trips
     @all_trips = []
+    @invitation = Invitation.new
     # Add all the trips where the user was invited by someone else.
     @user.invitations_received.each do |invitation|
       @all_trips << invitation.trip
