@@ -12,7 +12,15 @@ class MyMailer < ActionMailer::Base
     end
     mail(to: @invitation.receiver_email, subject: "You're invited to a trip!")
   end
+
+  def send_summary_pdf(recipient)
+    @user = params[:user]
+    attachments['summary.pdf']
+    mail(to: recipient, subject: 'Summary PDF', cc: @user.email)
+  end
 end
+
+
 
 
 # def invitation_email(form_params, invite_url)

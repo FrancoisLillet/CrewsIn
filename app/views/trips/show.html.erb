@@ -76,11 +76,11 @@
         <% unless @trip.mates == nil %>
           <% count = @trip.mates.length %>
         <% end %>
-        <h2 class="text-center">Current participants (<%= count %>)</h2>
+        <h2 class="text-center">Crew List (<%= count %>)</h2>
           <!-- Div where we enroll crew members or add new mates -->
           <div class="profile-container-mates" data-controller="dropdown-reveal">
             <div class="results-header dropdown-header add-crew-member-button" data-action="click->dropdown-reveal#revealContent">
-              <h3 style="display: inline"><i class="fa-solid fa-circle-plus"></i> Add a participant </h3>
+              <h3 style="display: inline"><i class="fa-solid fa-circle-plus"></i> Add a crew member </h3>
                 <i class="caret-down fa-solid fa-angle-down"></i>
             </div>
 
@@ -88,10 +88,9 @@
               <div class="multi-case-container">
                 <div class="case-container"><!-- Case 1 : Select one of your available mates -->
                   <div >
-                    <h4 class="text-center"><i class="fa-solid fa-clipboard-check"></i>&nbsp; <strong>Case 1</strong></h4>
+                    <h4 class="text-center"><i class="fa-solid fa-clipboard-check"></i>&nbsp; <strong>Option 1</strong></h4>
                     <% @available_mates = @user.mates - @trip.mates %>
-                      <p>Choose a participant among the list of your available mates (those that are already part of the crew list
-                      do not appear in the list):</p>
+                      <p>Choose a crew member from the list of your available mates</p>
                     <% if @available_mates.empty? %>
                       <p class="text-center"><em>Your list of available mates is empty. You first need to create them.</em></p>
                     <% end %>
@@ -107,7 +106,7 @@
                 </div>
                 <div class="case-container"><!-- Case 2 : Create a mate -->
                   <div>
-                    <h4 class="text-center"><i class="fa-solid fa-user-plus"></i>&nbsp;    <strong>Case 2</strong>
+                    <h4 class="text-center"><i class="fa-solid fa-user-plus"></i>&nbsp;<strong>Option 2</strong>
                     </h4>
                     <!-- If the current user did not register himself as mate -->
                     <% if @user.mates.find{ |mate| mate.is_user } == nil %>
@@ -121,8 +120,7 @@
                     </p>
                     <% end %>
                     <p>
-                      If you want to add someone else who is not the list of your mates,
-                      but you know their personal information. Create them as a new mate, so you can add them to any trip you want.
+                      Add a crew member with their personal info! They don't need to have an account or be in your existing list of mates.
                     </p>
                     <%= link_to new_user_mate_path(@user, origin_page: trip_path(@trip.id)) do %>
                       <div class="addition-button" style="font-size: 18px" data-action="click->dropdown-reveal#revealContent">
@@ -133,11 +131,9 @@
                 </div>
                 <div class="case-container"><!-- Case 3 : Invite someone -->
                   <div>
-                    <h4 class="text-center"><i class="fa-solid fa-share-from-square"></i>&nbsp; <strong>Case 3</strong></h4>
+                    <h4 class="text-center"><i class="fa-solid fa-share-from-square"></i>&nbsp; <strong>Option 3</strong></h4>
                     <p>
-                      If you want to add some participants but do not know their informations,
-                      send them an invitation to collaborate on the crew list. Like so, they will be able to add themselves as
-                      participants, or add their children / family members whose they already know all personal details.
+                      Invite anybody to collaborate on the trip! They will be able to add themselves or their friends/family members to the trip, just like you.
                     </p>
                     <div class="share-button sending-invitation-button" data-action="click->modal-reveal#toggleWindow">
                       <span><i class="fa-solid fa-share-from-square"></i> Share this trip </span>
