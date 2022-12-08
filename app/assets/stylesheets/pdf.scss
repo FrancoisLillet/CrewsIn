@@ -22,7 +22,7 @@ body {
   text-align: left;
   border-bottom: 1px black;
   padding: 5px;
-  margin-bottom: 5px;
+  margin-bottom: 20px;
 }
 
 .left-side {
@@ -32,7 +32,14 @@ body {
 .document-photo {
   width: 800px;
   border-radius: 4px;
-  border: 1px solid #000000;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.waben{
+  position: relative;
+  display: inline-block;
 }
 
 // .grid-container {

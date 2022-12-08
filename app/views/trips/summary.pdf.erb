@@ -56,6 +56,48 @@
     </tr>
     </table>
   </div>
+  <h1>Skipper Documentation</h1>
+  <div class="skipper-info">
+    <table>
+      <div class="waben">
+        <td>
+          <% if skipper_user.license_recto.attached? %>
+            <div>
+              <h3>Front of sailing license</h3>
+              <a href="https://res.cloudinary.com/dmz2vmnno/image/upload/v1/development/<%=skipper_user.license_recto.key%>" target="_blank">
+                <%= cl_image_tag skipper_user.license_recto.key, class: "document-photo" %>
+              </a>
+            </div>
+          <% end %>
+        </td>
+      </div>
+    </table>
+
+    <% if skipper_user.license_verso.attached? %>
+      <div>
+        <h3>Back of sailing license</h3>
+        <a href="https://res.cloudinary.com/dmz2vmnno/image/upload/v1/development/<%=skipper_user.license_verso.key%>" target="_blank">
+          <%= cl_image_tag skipper_user.license_verso.key, class: "document-photo" %>
+        </a>
+      </div>
+    <% end %>
+    <% if skipper_user.vhf_certificate.attached? %>
+      <div>
+        <h3>VHF certificate</h3>
+        <a href="https://res.cloudinary.com/dmz2vmnno/image/upload/v1/development/<%=skipper_user.vhf_certificate.key%>" target="_blank">
+          <%= cl_image_tag skipper_user.vhf_certificate.key, class: "document-photo" %>
+        </a>
+      </div>
+    <% end %>
+    <% if skipper_user.passport_photo.attached? %>
+      <div>
+        <h3>Passport information page</h3>
+        <a href="https://res.cloudinary.com/dmz2vmnno/image/upload/v1/development/<%=skipper_user.passport_photo.key%>" target="_blank">
+          <%= cl_image_tag skipper_user.passport_photo.key, class: "document-photo" %>
+        </a>
+      </div>
+    <% end %>
+  </div>
   <h1>Skipper Experiences</h1>
   <% experiences = Experience.where(user_id: @trip.skipper_id)%>
   <% experiences.each do |experience|%>
@@ -91,41 +133,6 @@
     </table>
   </div>
   <% end %>
-  <h1>Skipper Documentation</h1>
-  <div class="skipper-info">
-    <% if skipper_user.license_recto.attached? %>
-      <div>
-        <h3>Front of sailing license</h3>
-        <a href="https://res.cloudinary.com/dmz2vmnno/image/upload/v1/development/<%=skipper_user.license_recto.key%>" target="_blank">
-          <%= cl_image_tag skipper_user.license_recto.key, class: "document-photo" %>
-        </a>
-      </div>
-    <% end %>
-    <% if skipper_user.license_verso.attached? %>
-      <div>
-        <h3>Back of sailing license</h3>
-        <a href="https://res.cloudinary.com/dmz2vmnno/image/upload/v1/development/<%=skipper_user.license_verso.key%>" target="_blank">
-          <%= cl_image_tag skipper_user.license_verso.key, class: "document-photo" %>
-        </a>
-      </div>
-    <% end %>
-    <% if skipper_user.vhf_certificate.attached? %>
-      <div>
-        <h3>VHF certificate</h3>
-        <a href="https://res.cloudinary.com/dmz2vmnno/image/upload/v1/development/<%=skipper_user.vhf_certificate.key%>" target="_blank">
-          <%= cl_image_tag skipper_user.vhf_certificate.key, class: "document-photo" %>
-        </a>
-      </div>
-    <% end %>
-    <% if skipper_user.passport_photo.attached? %>
-      <div>
-        <h3>Passport information page</h3>
-        <a href="https://res.cloudinary.com/dmz2vmnno/image/upload/v1/development/<%=skipper_user.passport_photo.key%>" target="_blank">
-          <%= cl_image_tag skipper_user.passport_photo.key, class: "document-photo" %>
-        </a>
-      </div>
-    <% end %>
-  </div>
 <% end %>
 <h1>Crew Members</h1>
 <% mates_not_skipper = @trip.mates.reject { |mate| mate == skipper_mate } %>
