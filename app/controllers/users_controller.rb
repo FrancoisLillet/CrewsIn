@@ -7,9 +7,14 @@ class UsersController < ApplicationController
   end
 
   def update
+    redirect_page = params[:user][:redirect_page]
     @user = User.find(params[:id])
     @user.update(user_params)
-    redirect_to user_nautical_cv_path(@user)
+    unless redirect_page == nil
+      redirect_to redirect_page
+    else
+      redirect_to user_nautical_cv_path(@user)
+    end
   end
 
   def nautical_cv

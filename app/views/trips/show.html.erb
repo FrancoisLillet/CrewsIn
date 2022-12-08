@@ -2,8 +2,8 @@
   <div class="page-container">
     <!-- Trip card -->
 
-    <div class="trip-show-card" data-controller="modal-reveal">
-      <div style="display: flex; flex-wrap: wrap">
+    <div class="trip-show-card" >
+      <div style="display: flex; flex-wrap: wrap" data-controller="modal-reveal">
         <div class="left-box">
           <div class="trip-photo-box">
             <% if @trip.photo.attached? %>
@@ -37,7 +37,7 @@
           </div>
           <div>
             <div class="share-button sending-invitation-button" data-action="click->modal-reveal#toggleWindow">
-              <span><i class="fa-solid fa-share-from-square"></i> "Validate" this trip </span>
+              <span><i class="fa-solid fa-envelope"></i> &nbsp; Send documentation</span>
             </div>
             <div style="text-align: right; padding: 0 32px">
               <span class="edit-target">
@@ -112,7 +112,7 @@
                 <i class="caret-down fa-solid fa-angle-down"></i>
             </div>
 
-            <div class="invisible-div display-none" data-dropdown-reveal-target="content">
+            <div class="invisible-div display-none" data-controller="modal-reveal" data-dropdown-reveal-target="content">
               <div class="multi-case-container">
 
                 <% if count >= @trip.max_capacity %>
@@ -134,10 +134,15 @@
                         <p class="text-center"><em>Your list of available mates is empty. You first need to create them.</em></p>
                       <% end %>
                         <% @available_mates.each do |mate| %>
+                          <% unless mate.is_user && mate.user == current_user %>
+                            <% display_name = "#{mate.first_name} #{mate.last_name}" %>
+                          <% else %>
+                            <% display_name = "Me (#{mate.first_name} #{mate.last_name})" %>
+                          <% end %>
                           <%= simple_form_for([@user, @trip, @enrollment], data: {turbo: false}) do |f| %>
                           <%= f.input :mate_id, as: :hidden, input_html: { value: mate.id } %>
                           <div class="text-center">
-                            <%= f.submit "#{mate.first_name} #{mate.last_name}", class: "crew-member-button" %>
+                            <%= f.submit "#{display_name}", class: "crew-member-button" %>
                           </div>
                           <% end %>
                         <% end %>
@@ -182,6 +187,22 @@
                     </div>
                   </div>
                 <% end %>
+
+              <!-- Modal for invitation  -->
+              <div id="myModal" class="modal-window display-none" data-modal-reveal-target="modalWindow">
+                <!-- Modal content -->
+              <div class="modal-content">
+                <span class="close" data-action="click->modal-reveal#toggleWindow">&times;</span>
+                <h3 class="text-center">Share this trip to a friend</h3><br/>
+                <p>Send an invitation to someone so they will be able to add themselves and their mates (children, partner, etc...) to the trip.</p>
+                <%= simple_form_for [@user, @trip, @invitation] do |f| %>
+                  <%= f.input :receiver_email, label: "Please enter their email" %>
+                  <div class="flex-link-container">
+                  <%= f.submit "Send invitation", class: "button-main" %>
+                  </div>
+                <% end %>
+              </div>
+              </div>
 
               </div>
             </div>

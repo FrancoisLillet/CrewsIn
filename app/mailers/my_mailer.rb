@@ -1,5 +1,6 @@
 class MyMailer < ActionMailer::Base
   default from: 'crewsin@example.com'
+  layout "mailer"
 
   def invitation_email
     @invitation = params[:invitation]

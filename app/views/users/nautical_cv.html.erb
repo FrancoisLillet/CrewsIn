@@ -273,13 +273,13 @@
             <div data-controller="modal-reveal">
               <div class="result-container experience-container">
                 <div class="content-container">
-                  <h3 style="display: inline"><%= "#{experience.country}" %>&nbsp;&nbsp;<span><%= "#{experience.start_date.strftime("%B %Y")}" %></span></h3>
-                  <div><p><%= experience.start_date.strftime("%d %b %Y") %> → <%= experience.end_date.strftime("%d %b %Y") %></p></div>
-                  <div><p><%= experience.role %> on <%= experience.boat_model %> (<%= experience.boat_model %>
+                  <h3 style="display: inline; margin-bottom: 4px"><%= "#{experience.country}" %>&nbsp;&nbsp;<span><%= "#{experience.start_date.strftime("%B %Y")}" %></span></h3>
+                  <div class="experience-item"><p><i class="fa-solid fa-calendar-days"></i>&nbsp; <%= experience.start_date.strftime("%d %b %Y") %> → <%= experience.end_date.strftime("%d %b %Y") %></p></div>
+                  <div class="experience-item"><p><i class="fa-sharp fa-solid fa-sailboat"></i>&nbsp; <%= experience.role %> on <%= experience.boat_model %> (<%= experience.boat_model %>
                   <%= experience.boat_length %>-feet-<%= experience.boat_type %>)</p></div>
-                  <div><p>Shipowner: <%= experience.boat_owner %></p></div>
+                  <div class="experience-item"><p><i class="fa-solid fa-hand"></i>&nbsp; Shipowner: <%= experience.boat_owner %></p></div>
                   <% unless experience.number_of_miles == nil %>
-                    <div><p><%= experience.number_of_miles %> miles</p></div>
+                    <div class="experience-item"><p><i class="fa-solid fa-route"></i>&nbsp; <%= experience.number_of_miles %> miles</p></div>
                   <% end %>
                 </div>
                 <div class="right-box" style="text-align: right">
