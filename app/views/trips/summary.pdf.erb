@@ -29,7 +29,33 @@
   <h1>Skipper Information</h1>
   <% skipper_mate = Mate.find_by(user_id: @trip.skipper_id, is_user: true) %>
   <% skipper_user = User.find(@trip.skipper_id) %>
-  <h3><%= skipper_mate.first_name %> <%= skipper_mate.last_name %></h3>
+  <div>
+    <B><font size=5><center><%= skipper_mate.first_name %></center></font></B><br>
+    <table class="table-1" cellpadding=5>
+    <tr>
+    <td class="left-side">
+      <B>Name:</B><br>
+      <B>Date of birth:</B><br>
+      <B>Phone number:</B><br>
+      <B>Nationality:</B><br>
+      <B>Country of Residence:</B><br>
+      <B>Adress:</B><br>
+      <B>Passport number:</B><br>
+      <B>Expiration Date:</B><br>
+    </td>
+    <td>
+      <%= "#{skipper_mate.first_name} #{skipper_mate.last_name}"%><br>
+      <%= skipper_mate.date_of_birth.strftime("%d %b %Y")%><br>
+      <%= skipper_mate.phone_number%><br>
+      <%= skipper_mate.nationality%><br>
+      <%= skipper_mate.country_of_residence%><br>
+      <%= skipper_mate.address%><br>
+      <%= skipper_mate.passport_number%><br>
+      <%= skipper_mate.expiration_date.strftime("%d %b %Y")%><br>
+    </td>
+    </tr>
+    </table>
+  </div>
   <% experiences = Experience.where(user_id: @trip.skipper_id)%>
   <% experiences.each do |experience|%>
     <div>
@@ -66,10 +92,10 @@
   <% end %>
   <div class="skipper-info">
     <% if skipper_user.license_recto.attached? %>
-      <p>Front of sailing license</p>
       <div>
+        <h3>Front of sailing license</h3>
         <a href="https://res.cloudinary.com/dmz2vmnno/image/upload/v1/development/<%=skipper_user.license_recto.key%>" target="_blank">
-          <%= cl_image_tag skipper_user.license_recto.key, class: "mini-document-photo" %>
+          <%= cl_image_tag skipper_user.license_recto.key, class: "document-photo" %>
         </a>
       </div>
     <% else %>
@@ -78,10 +104,10 @@
       </div>
     <% end %>
     <% if skipper_user.license_verso.attached? %>
-    <p>Back of sailing license</p>
       <div>
+        <h3>Back of sailing license</h3>
         <a href="https://res.cloudinary.com/dmz2vmnno/image/upload/v1/development/<%=skipper_user.license_verso.key%>" target="_blank">
-          <%= cl_image_tag skipper_user.license_verso.key, class: "mini-document-photo" %>
+          <%= cl_image_tag skipper_user.license_verso.key, class: "document-photo" %>
         </a>
       </div>
     <% else %>
@@ -90,10 +116,10 @@
       </div>
     <% end %>
     <% if skipper_user.vhf_certificate.attached? %>
-    <p>VHF certificate</p>
       <div>
+        <h3>VHF certificate</h3>
         <a href="https://res.cloudinary.com/dmz2vmnno/image/upload/v1/development/<%=skipper_user.vhf_certificate.key%>" target="_blank">
-          <%= cl_image_tag skipper_user.vhf_certificate.key, class: "mini-document-photo" %>
+          <%= cl_image_tag skipper_user.vhf_certificate.key, class: "document-photo" %>
         </a>
       </div>
     <% else %>
@@ -102,10 +128,10 @@
       </div>
     <% end %>
     <% if skipper_user.passport_photo.attached? %>
-    <p>Passport information page</p>
       <div>
+        <h3>Passport information page</h3>
         <a href="https://res.cloudinary.com/dmz2vmnno/image/upload/v1/development/<%=skipper_user.passport_photo.key%>" target="_blank">
-          <%= cl_image_tag skipper_user.passport_photo.key, class: "mini-document-photo" %>
+          <%= cl_image_tag skipper_user.passport_photo.key, class: "document-photo" %>
         </a>
       </div>
     <% else %>
@@ -116,7 +142,8 @@
   </div>
 <% end %>
 <h1>Crew Members</h1>
-<% @trip.mates.each do |mate|%>
+<% mates_not_skipper = @trip.mates.reject { |mate| mate == skipper_mate } %>
+<% mates_not_skipper.each do |mate|%>
   <div>
     <B><font size=5><center><%= mate.first_name %></center></font></B><br>
     <table class="table-1" cellpadding=5>

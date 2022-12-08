@@ -21,10 +21,18 @@ body {
   font-size: 15;
   text-align: left;
   border-bottom: 1px black;
+  padding: 5px;
+  margin-bottom: 5px;
 }
 
 .left-side {
   column-width: 50px;
+}
+
+.document-photo {
+  width: 800px;
+  border-radius: 4px;
+  border: 1px solid #000000;
 }
 
 // .grid-container {
