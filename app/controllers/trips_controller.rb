@@ -5,6 +5,7 @@ class TripsController < ApplicationController
     @user = current_user
     @trips = @user.created_trips
     @all_trips = []
+    @invitation = Invitation.new
     # Add all the trips where the user was invited by someone else.
     @user.invitations_received.each do |invitation|
       @all_trips << invitation.trip
@@ -17,6 +18,7 @@ class TripsController < ApplicationController
   def show
     set_trip
     @invited_users = Invitation.where("trip_id = ? AND receiver_id IS NOT null", @trip.id).pluck(:receiver_id)
+    @skipper = @trip.skipper.mates.where("is_user = true").first unless @trip.skipper == nil
     @enrollment = Enrollment.new
     @user = current_user
     @invitation = Invitation.new
@@ -48,7 +50,7 @@ class TripsController < ApplicationController
     set_trip
 
     if @trip.update(trip_params)
-      redirect_to user_trips_path(@user)
+      redirect_to trip_path(@trip)
     else
       render :edit
     end
@@ -62,6 +64,8 @@ class TripsController < ApplicationController
   end
 
   def summary
+    params.permit(:user, :trip, :recipient)
+    @user = User.find(params[:user_id])
     @trip = set_trip
     respond_to do |format|
       format.html
@@ -71,6 +75,16 @@ class TripsController < ApplicationController
     end
   end
 
+    def summary_send
+      @user = current_user
+      recipient = params[:recipient]
+      @trip = Trip.find(params[:trip])
+      MyMailer.with(recipient: recipient, user: @user.id, trip: @trip.id).send_summary_pdf.deliver_now
+      redirect_to trip_path(@trip.id)
+    end
+
+
+
   private
 
   def set_trip
@@ -78,6 +92,9 @@ class TripsController < ApplicationController
   end
 
   def trip_params
-    params.require(:trip).permit(:country, :start_date, :end_date, :starting_point, :max_capacity, :creator_id, :skipper_id, :photo)
+    params.require(:trip).permit(:country, :start_date, :end_date, :starting_point, :max_capacity, :creator_id,
+    :skipper_id, :photo)
   end
+
+
 end

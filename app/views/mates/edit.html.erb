@@ -1,5 +1,6 @@
-<% countries = [1,2,3] %>
-<div class="page-container">
+<div class = "page-container">
+  <div class = "central-container">
+    <div class="account-card">
   <% if params[:is_user] == "true" %>
     <h1 class="text-center">My personal information</h1>
     <br/>
@@ -12,10 +13,10 @@
     a participant to a trip</p>
   <% end %>
   <br/>
-  <div class="profile-container">
     <%= simple_form_for([@user, @mate], data: {turbo: false}) do |f| %>
           <%= f.input :first_name %>
           <%= f.input :last_name %>
+          <%= f.input :redirect_page, as: :hidden, input_html: { value: "#{params[:origin_page]}" } %>
           <%= f.input :date_of_birth, as: :date, start_year: Date.today.year - 90,
                                   end_year: Date.today.year, discard_day: false,
                                   order: [:year, :month, :day] %>
@@ -29,5 +30,6 @@
           <%= f.submit "Submit", class: "button-main space-"%>
         </div>
       <% end %>
+    </div>
   </div>
 </div>

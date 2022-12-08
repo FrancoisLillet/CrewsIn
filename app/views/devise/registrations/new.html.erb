@@ -1,37 +1,41 @@
-<div class="central-container">
-
-  <div class = "text-center">
-    <h2>Sign up</h2>
-  </div>
-
-  <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), data: { turbo: :false }) do |f| %>
-    <%= f.error_notification %>
-
-    <div class="form-inputs">
-      <%= f.input :email,
+<div class="signup-banner">
+  <div class="white-container">
+    <div class="signup-logo-container">
+      <%= image_tag 'logo_text_black_2x.png', class: "signup-logo" %>
+    </div>
+    <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), data: { turbo: :false }) do |f| %>
+      <%= f.error_notification %>
+      <div class="form-inputs">
+        <%= f.input :nickname,
                   required: true,
                   autofocus: true,
-                  input_html: { autocomplete: "email" }%>
-      <%= f.input :nickname,
-                  required: true,
-                  autofocus: true,
+                  placeholder: "Nickname",
+                  label: false,
                   input_html: { autocomplete: "nickname" }%>
-      <%= f.input :password,
+        <%= f.input :email,
                   required: true,
+                  autofocus: true,
+                  placeholder: "Email",
+                  label: false,
+                  input_html: { autocomplete: "email" }%>
+        <%= f.input :password,
+                  required: true,
+                  placeholder: "Password",
+                  label: false,
                   input_html: { autocomplete: "new-password" },
                   hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
-      <%= f.input :password_confirmation,
+        <%= f.input :password_confirmation,
                   required: true,
-                  input_html: { autocomplete: "new-password" } %>
-    </div>
-
-    <div class="text-center">
-      <br/><br/>
-      <div class="form-actions">
-        <%= f.button :submit, "Sign up", class: 'button-main' %>
+                  placeholder: "Confirm Password",
+                  label: false,
+                  input_html: { autocomplete: "new-password" }%>
       </div>
-      <br/>
-      <span class="login-signup">Have an account already? <%= link_to " Log in", new_user_session_path, class: "gray", style: "font-size: 16px" %><br /></span>
-    </div>
-  <% end %>
+      <div class="text-center">
+        <div class="form-actions">
+          <%= f.button :submit, "Sign up", class: 'button-main signup-button' %>
+        </div>
+        <span class="login-signup">Have an account already? <%= link_to " Log in", new_user_session_path, class: "gray", style: "font-size: 16px" %></span>
+      </div>
+    <% end %>
+  </div>
 </div>

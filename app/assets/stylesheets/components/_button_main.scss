@@ -2,7 +2,7 @@
   appearance: none;
   backface-visibility: hidden;
   background-color: #2E69CC;
-  border-radius: 10px;
+  border-radius: 5px;
   border-style: none;
   box-shadow: none;
   box-sizing: border-box;
@@ -61,4 +61,12 @@
     padding: 14px 22px;
     width: 176px;
   }
+}
+
+.preview-button {
+  display: inline-block;
+  width: 256px;
+  padding: 12px 0;
+  border: 1px solid $sidebar-background;
+  border-radius: 8px;
 }
