@@ -21,7 +21,6 @@ class MatesController < ApplicationController
     @mate = Mate.new(mate_params)
     @user = current_user
     @mate.user = current_user
-    raise
     if @mate.save
       unless redirect_page == ""
           redirect_to redirect_page
