@@ -43,8 +43,9 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
 
-  config.action_mailer.delivery_method = :letter_opener
+  config.action_mailer.asset_host = "https://www.crewsin.me"
 
+  config.action_mailer.delivery_method = :smtp
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
@@ -83,6 +84,6 @@ Rails.application.configure do
   # This tells the local computer which domain is to be considered when opening a link.
 
   # SMTP settings for gmail
-  config.action_mailer.delivery_method = :smtp
+
 
 end
