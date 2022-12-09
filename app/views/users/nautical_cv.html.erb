@@ -59,7 +59,7 @@
             <div>
               <% if @user.license_recto.attached? %>
                 <div>
-                  <a href="https://res.cloudinary.com/dmz2vmnno/image/upload/v1/development/<%=@user.license_recto.key%>" target="_blank">
+                  <a href="https://res.cloudinary.com/dmz2vmnno/image/upload/v1/production/<%=@user.license_recto.key%>" target="_blank">
                     <%= cl_image_tag @user.license_recto.key, class: "mini-document-photo" %>
                   </a>
                 </div>
@@ -99,7 +99,7 @@
             <div>
               <% if @user.license_verso.attached? %>
                 <div>
-                  <a href="https://res.cloudinary.com/dmz2vmnno/image/upload/v1/development/<%=@user.license_verso.key%>" target="_blank">
+                  <a href="https://res.cloudinary.com/dmz2vmnno/image/upload/v1/production/<%=@user.license_verso.key%>" target="_blank">
                     <%= cl_image_tag @user.license_verso.key, class: "mini-document-photo" %>
                   </a>
                 </div>
@@ -141,7 +141,7 @@
             <div>
               <% if @user.vhf_certificate.attached? %>
                 <div>
-                  <a href="https://res.cloudinary.com/dmz2vmnno/image/upload/v1/development/<%=@user.vhf_certificate.key%>" target="_blank">
+                  <a href="https://res.cloudinary.com/dmz2vmnno/image/upload/v1/production/<%=@user.vhf_certificate.key%>" target="_blank">
                     <%= cl_image_tag @user.vhf_certificate.key, class: "mini-document-photo" %>
                   </a>
                 </div>
@@ -183,7 +183,7 @@
             <div>
               <% if @user.passport_photo.attached? %>
                 <div>
-                  <a href="https://res.cloudinary.com/dmz2vmnno/image/upload/v1/development/<%=@user.passport_photo.key%>" target="_blank">
+                  <a href="https://res.cloudinary.com/dmz2vmnno/image/upload/v1/production/<%=@user.passport_photo.key%>" target="_blank">
                     <%= cl_image_tag @user.passport_photo.key, class: "mini-document-photo" %>
                   </a>
                 </div>
