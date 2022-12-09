@@ -35,7 +35,7 @@
     <br>
     <div class= "text-center">
       <%# <div class="d-flex align-items-center"> %>
-      Unhappy?<%= link_to "Cancel your account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-link" %>
+      Unhappy?<%= link_to "Cancel your account", user_path(@user), data: { confirm: "Are you sure?", turbo_method: :delete }, class: "btn btn-link" %>
       <%# </div> %>
     </div>
   </div>
