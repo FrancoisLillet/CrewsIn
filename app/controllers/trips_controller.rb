@@ -22,6 +22,7 @@ class TripsController < ApplicationController
     @enrollment = Enrollment.new
     @user = current_user
     @invitation = Invitation.new
+    @available_mates = @user.mates - @trip.mates
   end
 
   def new
