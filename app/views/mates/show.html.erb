@@ -22,7 +22,7 @@
       <div class="left-column"><p>expiration_date</p></div class="right-column"><div><p><%= @mate.expiration_date.strftime("%d %b %Y")%></p></div>
     </div>
     <div class="flex-button-container">
-      <%= link_to "Back", user_mates_path(@user.id), class: "button-back" %>
+      <%= link_to "Back", user_path(current_user.id), class: "button-back" %>
       <%= link_to "Edit", edit_user_mate_path(@user.id, @mate.id, is_user: @mate.is_user), class: "button-main" %>
     </div>
   </div>
