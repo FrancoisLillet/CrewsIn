@@ -30,8 +30,7 @@ gem "jbuilder"
 # Seed with Faker
 gem 'faker', '~> 3.0'
 
-# For emails
-gem "letter_opener"
+
 
 # Country selector
 gem 'country_select', require: 'country_select_without_sort_alphabetical'
@@ -71,7 +70,8 @@ group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
   gem "dotenv-rails"
-
+  # For emails
+  gem "letter_opener"
 end
 
 group :production do

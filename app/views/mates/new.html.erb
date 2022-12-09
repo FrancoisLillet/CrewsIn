@@ -22,7 +22,9 @@
             <%= f.input :nationality, collection: Mate.countries %>
             <%= f.input :country_of_residence, collection: Mate.countries %>
             <%= f.input :passport_number %>
-            <%= f.input :expiration_date, order: [:day, :month, :year] %>
+            <%= f.input :expiration_date, as: :date, start_year: Date.today.year - 2,
+                                    end_year: Date.today.year + 25, discard_day: false,
+                                    order: [:day, :month, :year] %>
           <div class="flex-link-container" style="margin: 32px 0px;">
             <%= link_to "Back", request.referrer, class: "button-back" %>
             <%= f.submit "Submit", class: "button-main space-"%>
