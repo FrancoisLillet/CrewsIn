@@ -168,7 +168,7 @@
                       <p>
                         Add a crew member with their personal info! They don't need to have an account or be in your existing list of mates.
                       </p>
-                      <%= link_to new_user_mate_path(@user, origin_page: trip_path(@trip.id)) do %>
+                      <%= link_to new_user_mate_path(@user, is_user: false, origin_page: trip_path(@trip.id)) do %>
                         <div class="addition-button" style="font-size: 18px" data-action="click->dropdown-reveal#revealContent">
                           <i class="fa-solid fa-circle-plus"></i> Create a new mate
                         </div>
